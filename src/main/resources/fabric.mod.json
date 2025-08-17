@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "minepyloader",
+  "version": "${version}",
+  "name": "MinepyLoader",
+  "description": "How do you feelt by using python to edit the game? >~<",
+  "authors": [],
+  "contact": {},
+  "license": "GPL-3.0",
+  "icon": "assets/minepyloader/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "com.ffanxxy.minepyloader.client.MinepyloaderDataGenerator"
+    ],
+    "client": [
+      "com.ffanxxy.minepyloader.client.MinepyloaderClient"
+    ],
+    "main": [
+      "com.ffanxxy.minepyloader.Minepyloader"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
