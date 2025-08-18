@@ -28,6 +28,16 @@ public class Variable<T> {
         this.value = value;
     }
 
+    /**
+     * 只改变变量名，不改变值
+     * @param name 名称
+     * @param var 变量
+     * @return 更名的变量
+     */
+    public static Variable<?> createWithNewName(String name, Variable<?> var) {
+        return new Variable<>(name, var.dataType, var.value);
+    }
+
     // Void
     public static Variable<Object> VOID() {
         return new Variable<>("void", DataType.VOID);

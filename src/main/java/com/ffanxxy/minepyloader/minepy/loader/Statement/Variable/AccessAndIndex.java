@@ -3,8 +3,6 @@ package com.ffanxxy.minepyloader.minepy.loader.Statement.Variable;
 import com.ffanxxy.minepyloader.minepy.loader.ScriptPackage;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.AccessModifiers;
 
-import java.nio.file.Path;
-
 /**
  * 全局变量的作用域和索引
  */

@@ -3,6 +3,7 @@ package com.ffanxxy.minepyloader.minepy.loader.Statement;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Argument;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Parameter;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.InternalMethods;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.RunnableNode;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
@@ -15,26 +16,68 @@ public class StatementManager {
 
     public RunnableNode node;
 
-    public StatementManager(String line) {
+    private CodeType codeType;
+
+    public StatementManager(String line, Map<String, DataType> defineContext) {
 
         // 进行类型检测
         CodeType type = detectCodeType(line);
         if(type == null) throw new RuntimeException("CodeType is NULL");
+        this.codeType = type;
+
         this.node = switch (type) {
-            case METHOD_CALL -> callMethod(line);
+            case METHOD_CALL -> callMethod(line, defineContext);
+            case VARIABLE_DECLARATION -> parserVD(line);
             default -> null;
         };
     }
 
-    public static RunnableNode callMethod(String line) {
+    public CodeType getCodeType() {
+        return codeType;
+    }
+
+    /**
+     * 解析变量定义，获得变量定义节点
+     * @param line
+     * @return
+     */
+    public static VariableDeclarationNode parserVD(String line) {
+        int spi = line.indexOf("=");
+        String value = null;
+        if(spi != -1) {
+            value = line.substring(spi + 1).trim();
+            List<String> defines =  Arrays.stream(line.substring(0,spi).trim().split("\\s+")).map(String::trim).toList();
+            DataType dataType = DataType.fromName(defines.get(0));
+            String name = defines.get(1);
+
+            Object v1;
+            if(value.startsWith("\"") && value.endsWith("\"")) {
+                v1 = value.substring(1, value.length() -1);
+            } else {
+                v1 = new Object();
+            }
+
+            return new VariableDeclarationNode(dataType, name, v1);
+        } else {
+            List<String> defines =  Arrays.stream(line.trim().split("\\s+")).map(String::trim).toList();
+            DataType dataType = DataType.fromName(defines.get(0));
+            String name = defines.get(1);
+
+            return new VariableDeclarationNode(dataType, name);
+        }
+
+    }
+
+    public static RunnableNode callMethod(String line, Map<String, DataType> defineContext) {
         String who = line.substring(0, line.indexOf("("));
 
         if(!who.contains(".") || who.startsWith("mpy.")) {
             return callInternalMethods(line);
         }
 
-        return null;
+        return new MethodCallNode(who, new ParameterParser(line).parameters, defineContext);
     }
+
 
     public static RunnableNode callInternalMethods(String line) {
         String who = line.substring(0, line.indexOf("("));
@@ -44,6 +87,140 @@ public class StatementManager {
         }
 
         return InternalMethods.get(who, new ParameterParser(line).parameters);
+    }
+
+    /**
+     * 方法语句调用存储
+     */
+    public static class MethodCallNode implements RunnableNode {
+        private final String method;
+        private final List<Parameter> InParameters;
+
+        public MethodCallNode(String method, List<Parameter> InParameters, Map<String, DataType> defineContext) {
+            this.method = method;
+            this.InParameters = InParameters;
+            // 处理参数
+            for (Parameter p : InParameters) {
+                if (p.dataType == DataType.VAR) {
+                    // 从定义上下文获得变量类型
+                    p.dataType = defineContext.get(p.name);
+                }
+            }
+        }
+
+        @Override
+        public Variable<?> runWithArg(Map<Minepy.ScopeAndName, Variable<?>> variableMap) {
+            // 获得变量
+            List<Minepy.Method> methods = Minepy.METHODS.stream().filter(
+                    m -> (m.path() + "." + m.name()).equals(method) //是否为调用的方法
+            ).toList();
+
+            if(methods.isEmpty()) throw new RuntimeException("Unknown method:" + this.method);
+
+            Minepy.Method mtd = null;
+            // 具体方法判断
+            // 允许方法同名，模拟重写
+            if(methods.size() == 1) {
+                mtd = methods.get(0);
+            } else {
+                // 精确判断
+                List<Minepy.Method> detailMethods = methods.stream()
+                        .filter(
+                                m1 -> m1.parameters().size() == this.InParameters.size()
+                        ).filter(
+                                m1 -> m1.parameters().stream().allMatch(
+                                        // 参数不应该相同，因此直接判断
+                                        p -> InParameters.get(methods.indexOf(m1)).dataType.isSameTypeAs(p.dataType)
+                                )
+                        ).toList();
+                if(detailMethods.isEmpty()) throw new RuntimeException("There are no known methods that meet the parameters: " + this.method);
+                if(detailMethods.size() > 1) throw new RuntimeException("Surprising err: too more methods has same parameters: " + this.method);
+
+                mtd = detailMethods.get(0);
+            }
+            
+            // 获得形参
+            List<Parameter> parameters = mtd.parameters();
+
+            if(parameters.size() != InParameters.size()) throw new RuntimeException("The number of parameters is wrong: " + method);
+            if(parameters.isEmpty())  return mtd.run(new ArrayList<>());
+
+            List<Argument> resultRunArgs = new ArrayList<>();
+
+            // 对输入的参数进行解析
+            for (int i = 0; i < InParameters.size(); i++) {
+                var methodParameter =  parameters.get(i);
+                var inParameter = InParameters.get(i);
+
+                if(! methodParameter.dataType.isSameTypeAs(inParameter.dataType)) throw new RuntimeException("The required parameter types are not paired: when-" + method);
+
+                if(inParameter.dataType.isLiteral()) {
+                    Variable<?> variable;
+
+                    switch (inParameter.dataType) {
+                        case LITERAL_STRING -> variable = Variable.ofString(inParameter.name, inParameter.name);
+                        case LITERAL_INTEGER -> variable = Variable.ofInteger(inParameter.name, Integer.parseInt(inParameter.name));
+                        default -> variable = Variable.NULL();
+                    }
+
+                    resultRunArgs.add(
+                            new Argument(methodParameter.name, variable)
+                    );
+                } else {
+                    Variable<?> variable = Minepy.getFromSAN(inParameter.name, variableMap);
+                    if(variable == null) throw  new RuntimeException("Unknown Variable: " + inParameter.name);
+                    resultRunArgs.add(
+                            new Argument(methodParameter.name, variable)
+                    );
+                }
+            }
+
+            return mtd.run(resultRunArgs);
+        }
+    }
+
+    public static class VariableDeclarationNode implements RunnableNode {
+
+        private final DataType dataType;
+        private final String name;
+        private final Object defaultValue;
+
+        public DataType getDataType() {
+            return this.dataType;
+        }
+        public String getName() {
+            return this.name;
+        }
+
+        public VariableDeclarationNode(DataType dataType, String name) {
+            this.dataType = dataType;
+            this.name = name;
+            this.defaultValue = null;
+        }
+
+        public VariableDeclarationNode(DataType dataType, String name, Object value) {
+            this.dataType = dataType;
+            this.name = name;
+            this.defaultValue = value;
+        }
+
+        @Override
+        public Variable<?> runWithArg(Map<Minepy.ScopeAndName, Variable<?>> variableMap) {
+            // 防止错误，理论代码正确应无问题
+            String vs = "";
+
+            if(defaultValue instanceof String v) {
+                vs = v;
+            }
+
+            Variable<?> variable = switch (dataType) {
+                case STRING -> Variable.ofString(name, vs);
+                // 扩展...
+                default -> Variable.ofString(name,  (String) defaultValue);
+            };
+            variableMap.put(new Minepy.ScopeAndName(1,variable.getName()),variable);
+            return Variable.VOID();
+        }
     }
 
     public static class ParameterParser {
@@ -74,7 +251,8 @@ public class StatementManager {
                     parameterList.add(new Parameter(DataType.LITERAL_STRING, map.get(nowStr)));
                     nowStr++;
                 } else {
-                    parameterList.add(new Parameter(DataType.PARA, s));
+                    // 检索上下文
+                    parameterList.add(new Parameter(DataType.VAR, s));
                 }
             }
 
@@ -184,7 +362,7 @@ public class StatementManager {
     // 辅助方法：检测变量声明
     private static boolean isVariableDeclaration(String s) {
         // 匹配基本类型 + 变量名 [+ 初始化] + 分号
-        String regex = "^(int|double|float|char|boolean|String|byte|short|long)\\s+[a-zA-Z_]\\w*\\s*(=\\s*[^;]+)?\\s*;\\s*$";
+        String regex = "^(String|int|double|float|byte|boolean|Block|BlockEntity|BlockState|Entity|Player|Text|Item|ItemStack)\\s+[a-zA-Z_]\\w*\\s*(=\\s*[^;]+)?\\s*$";
         return s.matches(regex);
     }
 

@@ -1,1 +1,4 @@
 #package test
+public load void load():
+    String a = "变量定义测试"
+    app.init(a,"变量定义测试以及传参测试")

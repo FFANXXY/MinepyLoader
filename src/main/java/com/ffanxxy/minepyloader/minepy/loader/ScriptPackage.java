@@ -24,4 +24,9 @@ public class ScriptPackage {
     public boolean isSamePackage(String method) {
         return Objects.equals(pack, method.substring(0,method.lastIndexOf(".")));
     }
+
+    @Override
+    public String toString() {
+        return this.pack;
+    }
 }

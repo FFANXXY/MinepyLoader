@@ -1,8 +1,5 @@
 package com.ffanxxy.minepyloader.minepy.loader.Statement.type;
 
-import com.ffanxxy.minepyloader.minepy.utils.exception.UnexpectedStatementException;
-import com.ffanxxy.minepyloader.minepy.utils.exception.UnknownValueException;
-
 public enum DataType {
     OBJECT("Object"),
     STRING("String"),
@@ -14,6 +11,7 @@ public enum DataType {
     LIST("List"),
     ARRAY("Array"),
     MAP("Map"),
+    BYTE("byte"),
     // 其它数据类型
     VOID("void"),
     NULL("null"),
@@ -39,12 +37,13 @@ public enum DataType {
     CLASS("Class"),
 
     // 不可使用
-    PARA("Para"),
+    VAR("Var"),
     LITERAL_STRING("LiteralString"),
     LITERAL_INTEGER("LiteralInteger"),
     LITERAL_FLOAT("LiteralFloat"),
     LITERAL_DOUBLE("LiteralDouble"),
-    LITERAL_BOOLEAN("LiteralBoolean");
+    LITERAL_BOOLEAN("LiteralBoolean"),
+    LITERAL_NULL("LiteralNull");
 
     private final String name;
 
@@ -64,5 +63,43 @@ public enum DataType {
 
     public String getName() {
         return name;
+    }
+
+    public boolean isLiteral() {
+        return switch (this) {
+            case LITERAL_STRING , LITERAL_INTEGER, LITERAL_FLOAT , LITERAL_DOUBLE , LITERAL_BOOLEAN , LITERAL_NULL -> true;
+            default -> false;
+        };
+    }
+
+    /**
+     * 判断是否同类型，对于表面量，会判断为原始类型
+     * @param dataType 另一个数据类型
+     * @return true为相同
+     */
+    public boolean isSameTypeAs(DataType dataType) {
+        switch (this) {
+            case STRING , LITERAL_STRING -> {
+                return dataType == STRING || dataType == LITERAL_STRING;
+            }
+            case INT , LITERAL_INTEGER -> {
+                return dataType == INT || dataType == LITERAL_INTEGER;
+            }
+            case FLOAT , LITERAL_FLOAT -> {
+                return dataType == FLOAT || dataType == LITERAL_FLOAT;
+            }
+            case DOUBLE , LITERAL_DOUBLE -> {
+                return dataType == DOUBLE || dataType == LITERAL_DOUBLE;
+            }
+            case BOOLEAN , LITERAL_BOOLEAN-> {
+                return dataType == BOOLEAN || dataType == LITERAL_BOOLEAN;
+            }
+            case NULL , LITERAL_NULL -> {
+                return dataType == NULL || dataType == LITERAL_NULL;
+            }
+            default -> {
+                return this.name.equals(dataType.name);
+            }
+        }
     }
 }

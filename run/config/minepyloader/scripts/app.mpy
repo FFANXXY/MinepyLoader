@@ -1,0 +1,7 @@
+#package app
+
+public void init(String a, String b):
+    log(a,b)
+// 复写测试
+public void init(String a):
+    err("DEBUG", "意外的调用")

@@ -4,7 +4,7 @@ import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
 
 public class Parameter {
 
-    public final DataType dataType;
+    public DataType dataType;
     public final String name;
 
     public Parameter(String s) {

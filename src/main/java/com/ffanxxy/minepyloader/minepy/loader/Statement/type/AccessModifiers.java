@@ -1,5 +1,7 @@
 package com.ffanxxy.minepyloader.minepy.loader.Statement.type;
 
+import java.util.Arrays;
+
 public enum AccessModifiers {
     PUBLIC("public"),
     PRIVATE("private"),
@@ -19,6 +21,12 @@ public enum AccessModifiers {
             }
         }
         throw new IllegalArgumentException("Invalid access modifiers: " + name);
+    }
+
+    public static boolean isModifier(String name) {
+        return Arrays.stream(values()).anyMatch(
+                accessModifiers -> accessModifiers.name.equals(name)
+        );
     }
 
     public String getName() {
