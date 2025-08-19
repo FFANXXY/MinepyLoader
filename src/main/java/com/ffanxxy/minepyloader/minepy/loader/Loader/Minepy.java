@@ -6,6 +6,7 @@ import com.ffanxxy.minepyloader.minepy.loader.Statement.StatementManager;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.AccessAndIndex;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Argument;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.ReturnNode;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.RunnableNode;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.AccessModifiers;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.MethodModifiers;
@@ -14,6 +15,7 @@ import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Parameter;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
 import com.ffanxxy.minepyloader.minepy.utils.exception.UnexpectedMethodException;
 import com.ffanxxy.minepyloader.minepy.utils.exception.UnexpectedStatementException;
+import com.ffanxxy.minepyloader.minepy.utils.loader.MethodHelper;
 
 import java.util.*;
 
@@ -74,7 +76,15 @@ public class Minepy {
         }
 
         public Variable<?> run(List<Argument> arguments) {
-            return statements.runWithArg(arguments);
+            // 获得运行结果
+            Variable<?> backvar = statements.runWithArg(arguments);
+            // 类型判断
+            if(backvar.getDataType().isSameTypeAs(this.type)) {
+                return backvar;
+            } else {
+                throw new RuntimeException("Return Value is not same as its define type: " + MethodHelper.getMethodFullName(this) +
+                        " needs " + this.type + " ,in fact: " + backvar.getDataType());
+            }
         }
 
         public ScriptPackage path() {
@@ -126,8 +136,6 @@ public class Minepy {
 
         }
 
-    ;
-
     /**
      * 方法定义类
      * @param name 方法名称
@@ -160,6 +168,7 @@ public class Minepy {
     private final Script script;
 
     private ScriptPackage path = null;
+    private List<String> imports = new ArrayList<>();
 
     public Minepy(Script script) {
 
@@ -185,7 +194,7 @@ public class Minepy {
             if(line.line.startsWith("//")) continue;
 
             if(line.line.startsWith("#")) {
-                // 获得头(包声明)
+                // 获得头声明
                 String[] kv = line.line.substring(1).split("\\s+");
 
                 switch (kv[0]) {
@@ -193,9 +202,10 @@ public class Minepy {
                         if(path != null) return;
                         path = new ScriptPackage(kv[1]);
                         break;
+                    case "import":
+                        imports.add(kv[1]);
+                        break;
                     default:
-                        if(path != null) return;
-                        path = new ScriptPackage(kv[1]);
                         break;
                 }
 
@@ -210,6 +220,7 @@ public class Minepy {
                 isInMethod = false;
                 METHODS.add(DemoMethod);
                 DemoMethod = null;
+                defineVarContext = new HashMap<>();
             }
 
             // 若没有缩进，则视为方法
@@ -221,10 +232,18 @@ public class Minepy {
                 // 方法体内容判断
                 if(!isInMethod) throw new UnexpectedStatementException("atPath: " + script.getPath().toString() + "  ;atLine" + line.i);
 
-                StatementManager manager = new StatementManager(line.line, defineVarContext);
+                // 构建上下文
+                ScriptParserLineContext ctx = new ScriptParserLineContext(
+                        line.line,
+                        defineVarContext,
+                        imports
+                );
+
+                StatementManager manager = new StatementManager(ctx);
 
                 /*
                  * 监听语句是否为变量定义，并添加定义上下文
+                 * 可提取到类，作为事件处理
                  */
                 if(manager.getCodeType() == StatementManager.CodeType.VARIABLE_DECLARATION) {
                     if(manager.get() instanceof StatementManager.VariableDeclarationNode node) {
@@ -424,8 +443,8 @@ public class Minepy {
 
             for (RunnableBlock block : blocks) {
                 result = block.run(variableMap);
-                if(!result.isDataType(DataType.VOID)) {
-                    return result;
+                if(block instanceof Statement statement) {
+                    if(statement.node instanceof ReturnNode) return result;
                 }
             }
             return Variable.VOID();
@@ -436,8 +455,8 @@ public class Minepy {
             Variable<?> result;
             for (RunnableBlock block : blocks) {
                 result = block.run(variableMap);
-                if(!result.isDataType(DataType.VOID)) {
-                    return result;
+                if(block instanceof Statement statement) {
+                    if(statement.node instanceof ReturnNode) return result;
                 }
             }
             return Variable.VOID();

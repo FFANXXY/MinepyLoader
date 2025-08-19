@@ -44,7 +44,7 @@ public class LoggerNode {
                 if(v2.isDataType(DataType.STRING)) {
                     con = v2.getAsString().getValue();
                 } else {
-                    name = v2.toString();
+                    con = v2.toString();
                 }
             }
 

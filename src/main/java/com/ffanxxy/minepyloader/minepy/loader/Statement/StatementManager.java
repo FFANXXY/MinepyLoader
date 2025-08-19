@@ -1,24 +1,43 @@
 package com.ffanxxy.minepyloader.minepy.loader.Statement;
 
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy;
+import com.ffanxxy.minepyloader.minepy.loader.Loader.ScriptParserLineContext;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Argument;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Parameter;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.InternalMethods;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.ReturnNode;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.RunnableNode;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
+import com.ffanxxy.minepyloader.minepy.utils.loader.LiteralValueParser;
+import com.ffanxxy.minepyloader.minepy.utils.loader.MethodHelper;
 
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 获得语句，将语句作为一个{@link RunnableNode}传出，并设置形参的索引。
+ */
 public class StatementManager {
 
     public RunnableNode node;
 
     private CodeType codeType;
 
-    public StatementManager(String line, Map<String, DataType> defineContext) {
+    public StatementManager(ScriptParserLineContext context) {
+        String line = context.line();
+        Map<String, DataType> defineContext = context.defineVarContext();
+        List<String> imports = context.imports();
+
+        if(line.startsWith("return")) {
+            // 对于return xxx ， 获得第二项
+            String var = line.split("\\s+")[1].trim();
+
+            this.node = new ReturnNode(getVarGetterNode(var,defineContext));
+
+            return;
+        }
 
         // 进行类型检测
         CodeType type = detectCodeType(line);
@@ -26,8 +45,10 @@ public class StatementManager {
         this.codeType = type;
 
         this.node = switch (type) {
-            case METHOD_CALL -> callMethod(line, defineContext);
-            case VARIABLE_DECLARATION -> parserVD(line);
+            // 方法调用
+            case METHOD_CALL -> parserMethod(context);
+            // 变量声明
+            case VARIABLE_DECLARATION -> parserVD(line, defineContext);
             default -> null;
         };
     }
@@ -38,10 +59,10 @@ public class StatementManager {
 
     /**
      * 解析变量定义，获得变量定义节点
-     * @param line
-     * @return
+     * @param line 行
+     * @return 定义节点
      */
-    public static VariableDeclarationNode parserVD(String line) {
+    public static VariableDeclarationNode parserVD(String line, Map<String, DataType> defineContext) {
         int spi = line.indexOf("=");
         String value = null;
         if(spi != -1) {
@@ -49,37 +70,77 @@ public class StatementManager {
             List<String> defines =  Arrays.stream(line.substring(0,spi).trim().split("\\s+")).map(String::trim).toList();
             DataType dataType = DataType.fromName(defines.get(0));
             String name = defines.get(1);
-
-            Object v1;
-            if(value.startsWith("\"") && value.endsWith("\"")) {
-                v1 = value.substring(1, value.length() -1);
-            } else {
-                v1 = new Object();
-            }
+            // 初始化
+            VarGetterNode v1 = getVarGetterNode(value, defineContext);
 
             return new VariableDeclarationNode(dataType, name, v1);
         } else {
+            // 无初始化定义
             List<String> defines =  Arrays.stream(line.trim().split("\\s+")).map(String::trim).toList();
             DataType dataType = DataType.fromName(defines.get(0));
             String name = defines.get(1);
 
             return new VariableDeclarationNode(dataType, name);
         }
-
     }
 
-    public static RunnableNode callMethod(String line, Map<String, DataType> defineContext) {
+    /**
+     * 获得变量赋值节点
+     * @param value 值
+     * @return 节点
+     */
+    public static VarGetterNode getVarGetterNode(String value, Map<String, DataType> defineContext) {
+        // 以 “" 包围的字面量
+        if (value.startsWith("\"") && value.endsWith("\"")) {
+            // Type is String, get context as String to create VIN
+            return new VarGetterNode(VarGetterNode.InitType.LIT_STRING, value.substring(1, value.length() - 1), defineContext);
+        } else if (value.equals("true")) {
+            // if value equals true
+            return new VarGetterNode(VarGetterNode.InitType.LIT_BOOLEAN, "true", defineContext);
+        } else if (value.equals("false")) {
+            // equals false
+            return new VarGetterNode(VarGetterNode.InitType.LIT_BOOLEAN, "false", defineContext);
+        } else if (value.equals("null")) {
+            /// isNull
+            return new VarGetterNode(VarGetterNode.InitType.LIT_NULL, "null", defineContext);
+        } else if (LiteralValueParser.getNumberType(value) == LiteralValueParser.Type.INT) {
+            // get NumberType if it is int
+            return new VarGetterNode(VarGetterNode.InitType.LIT_INT, value, defineContext);
+        } else if (LiteralValueParser.getNumberType(value) == LiteralValueParser.Type.DOUBLE) {
+            // if it is double
+            return new VarGetterNode(VarGetterNode.InitType.LIT_DOUBLE, value, defineContext);
+        } else if (detectCodeType(value) == CodeType.METHOD_CALL) {
+            // 方法调用，例如Entity.new()
+            return new VarGetterNode(VarGetterNode.InitType.METHOD, value, defineContext);
+        } else if (value.matches("[a-zA-Z_][a-zA-Z0-9_]*")) {
+            // 选自变量
+            return new VarGetterNode(VarGetterNode.InitType.VAR, value, defineContext);
+        } else {
+            // else it may be Operation
+            return new VarGetterNode(VarGetterNode.InitType.OPERATION, value, defineContext);
+        }
+    }
+
+
+    public static RunnableNode parserMethod(ScriptParserLineContext context) {
+        String line = context.line();
+        var defineContext = context.defineVarContext();
+        // 检查导入
+        var ims = context.imports();
+        // test.abc
+
         String who = line.substring(0, line.indexOf("("));
+//        String methodName = who.substring(who.lastIndexOf("."));
 
         if(!who.contains(".") || who.startsWith("mpy.")) {
-            return callInternalMethods(line);
+            return parserInternalMethods(line);
         }
 
         return new MethodCallNode(who, new ParameterParser(line).parameters, defineContext);
     }
 
 
-    public static RunnableNode callInternalMethods(String line) {
+    public static RunnableNode parserInternalMethods(String line) {
         String who = line.substring(0, line.indexOf("("));
 
         if(!who.contains(".")) {
@@ -87,6 +148,55 @@ public class StatementManager {
         }
 
         return InternalMethods.get(who, new ParameterParser(line).parameters);
+    }
+
+    /**
+     * 变量获值
+     */
+    public static class VarGetterNode implements RunnableNode {
+
+        private InitType type;
+        private String var;
+
+        private MethodCallNode methodCallNode;
+
+        // 初始化类型，值，名称
+        public VarGetterNode(InitType type, String var, Map<String, DataType> defineContext) {
+            this.type =type;
+            this.var = var;
+
+            if(type == InitType.METHOD) {
+                this.methodCallNode = new MethodCallNode(var.substring(0, var.indexOf("(")), new ParameterParser(var).getParameters(), defineContext);
+            }
+        }
+
+        @Override
+        public Variable<?> runWithArg(Map<Minepy.ScopeAndName, Variable<?>> variableMap) {
+             return switch (type) {
+                case LIT_STRING -> Variable.ofString("%LIT", var);
+                case LIT_BOOLEAN -> Variable.ofBoolean("%LIT", Boolean.parseBoolean(var));
+                 case LIT_INT ->  Variable.ofInteger("%LIT", Integer.parseInt(var));
+                 case LIT_DOUBLE -> Variable.ofDouble("%LIT", Double.parseDouble(var));
+                 case LIT_NULL -> Variable.NULL();
+                 case METHOD -> methodCallNode.runWithArg(variableMap);
+                 case OPERATION -> {
+                     // ... skip
+                     yield Variable.VOID();
+                 }
+                 case VAR -> Minepy.getFromSAN(var, variableMap);
+            };
+        }
+
+        public enum InitType {
+            METHOD,
+            VAR, // 已有的变量
+            OPERATION, // 计算
+            LIT_STRING,
+            LIT_INT,
+            LIT_DOUBLE,
+            LIT_BOOLEAN,
+            LIT_NULL;
+        }
     }
 
     /**
@@ -108,36 +218,11 @@ public class StatementManager {
             }
         }
 
+
         @Override
         public Variable<?> runWithArg(Map<Minepy.ScopeAndName, Variable<?>> variableMap) {
-            // 获得变量
-            List<Minepy.Method> methods = Minepy.METHODS.stream().filter(
-                    m -> (m.path() + "." + m.name()).equals(method) //是否为调用的方法
-            ).toList();
-
-            if(methods.isEmpty()) throw new RuntimeException("Unknown method:" + this.method);
-
-            Minepy.Method mtd = null;
-            // 具体方法判断
-            // 允许方法同名，模拟重写
-            if(methods.size() == 1) {
-                mtd = methods.get(0);
-            } else {
-                // 精确判断
-                List<Minepy.Method> detailMethods = methods.stream()
-                        .filter(
-                                m1 -> m1.parameters().size() == this.InParameters.size()
-                        ).filter(
-                                m1 -> m1.parameters().stream().allMatch(
-                                        // 参数不应该相同，因此直接判断
-                                        p -> InParameters.get(methods.indexOf(m1)).dataType.isSameTypeAs(p.dataType)
-                                )
-                        ).toList();
-                if(detailMethods.isEmpty()) throw new RuntimeException("There are no known methods that meet the parameters: " + this.method);
-                if(detailMethods.size() > 1) throw new RuntimeException("Surprising err: too more methods has same parameters: " + this.method);
-
-                mtd = detailMethods.get(0);
-            }
+            // 获得方法
+            Minepy.Method mtd = MethodHelper.getMethod(this.method, this.InParameters);
             
             // 获得形参
             List<Parameter> parameters = mtd.parameters();
@@ -183,7 +268,7 @@ public class StatementManager {
 
         private final DataType dataType;
         private final String name;
-        private final Object defaultValue;
+        private final VarGetterNode node;
 
         public DataType getDataType() {
             return this.dataType;
@@ -195,29 +280,26 @@ public class StatementManager {
         public VariableDeclarationNode(DataType dataType, String name) {
             this.dataType = dataType;
             this.name = name;
-            this.defaultValue = null;
+            this.node = null;
         }
 
-        public VariableDeclarationNode(DataType dataType, String name, Object value) {
+        public VariableDeclarationNode(DataType dataType, String name, VarGetterNode value) {
             this.dataType = dataType;
             this.name = name;
-            this.defaultValue = value;
+            this.node = value;
         }
 
         @Override
         public Variable<?> runWithArg(Map<Minepy.ScopeAndName, Variable<?>> variableMap) {
-            // 防止错误，理论代码正确应无问题
-            String vs = "";
+            Variable<?> variable = Variable.createWithNewName(this.name, node.runWithArg(variableMap));
 
-            if(defaultValue instanceof String v) {
-                vs = v;
+            // Double转Float
+            // 对象转换处理
+            if((variable.isDataType(DataType.DOUBLE) || variable.isDataType(DataType.LITERAL_DOUBLE)) &&
+                dataType == DataType.FLOAT) {
+                variable = variable.toFloat();
             }
 
-            Variable<?> variable = switch (dataType) {
-                case STRING -> Variable.ofString(name, vs);
-                // 扩展...
-                default -> Variable.ofString(name,  (String) defaultValue);
-            };
             variableMap.put(new Minepy.ScopeAndName(1,variable.getName()),variable);
             return Variable.VOID();
         }
@@ -247,11 +329,23 @@ public class StatementManager {
             List<Parameter> parameterList = new ArrayList<>();
 
             for(String s : argList) {
-                if(s.equals("\"\"")) {
+                LiteralValueParser.Type type = LiteralValueParser.parser(s);
+
+                // 解析参数
+                if(type == LiteralValueParser.Type.STRING) {
+                    // 如果是字符串，设置类型为 字面字符串，当检测到为字面字符串，将它的名字设置为字符串内容
                     parameterList.add(new Parameter(DataType.LITERAL_STRING, map.get(nowStr)));
                     nowStr++;
+                } else if(type == LiteralValueParser.Type.BOOLEAN) {
+                    parameterList.add(new Parameter(DataType.LITERAL_BOOLEAN,s));
+                }else if(type == LiteralValueParser.Type.INT) {
+                    parameterList.add(new Parameter(DataType.LITERAL_INTEGER,s));
+                }else if(type == LiteralValueParser.Type.DOUBLE) {
+                    parameterList.add(new Parameter(DataType.LITERAL_DOUBLE, s));
+                }else if(type == LiteralValueParser.Type.NULL) {
+                    parameterList.add(new Parameter(DataType.LITERAL_NULL,s));
                 } else {
-                    // 检索上下文
+                    // 暂时无法确定变量类型，通过运行时的定义上下文重获得DataType
                     parameterList.add(new Parameter(DataType.VAR, s));
                 }
             }

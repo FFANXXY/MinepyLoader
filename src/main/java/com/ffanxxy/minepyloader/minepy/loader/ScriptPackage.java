@@ -2,6 +2,9 @@ package com.ffanxxy.minepyloader.minepy.loader;
 
 import java.util.Objects;
 
+/**
+ * 目录包类，通过 {@code .mpy}的 {@code #package xxx}来定义
+ */
 public class ScriptPackage {
     private final String pack;
 

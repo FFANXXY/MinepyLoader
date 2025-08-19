@@ -92,6 +92,30 @@ public class Variable<T> {
         throw new UnexpectedDataTypeException();
     }
 
+    //Double
+    public static Variable<Double> ofDouble(String name) {
+        return new Variable<>(name, DataType.STRING);
+    }
+    public static Variable<Double> ofDouble(String name,Double  val) {
+        return new Variable<>(name,DataType.DOUBLE,val);
+    }
+    public Variable<Double> getAsDouble() {
+        if(this.dataType == DataType.DOUBLE) return (Variable<Double>) this;
+        throw new UnexpectedDataTypeException();
+    }
+
+    //Boolean
+    public static Variable<Boolean> ofBoolean(String name) {
+        return new Variable<>(name, DataType.STRING);
+    }
+    public static Variable<Boolean> ofBoolean(String name,Boolean  val) {
+        return new Variable<>(name,DataType.BOOLEAN,val);
+    }
+    public Variable<Boolean> getAsBoolean() {
+        if(this.dataType == DataType.BOOLEAN) return (Variable<Boolean>) this;
+        throw new UnexpectedDataTypeException();
+    }
+
 
 
     public DataType getDataType() {
@@ -107,6 +131,7 @@ public class Variable<T> {
 
     @Override
     public String toString() {
+        if(value == null) return null;
         return value.toString();
     }
 
@@ -120,6 +145,15 @@ public class Variable<T> {
             return this.getAsString().getValue();
         } else {
             throw new UnexpectedDataTypeException(e);
+        }
+    }
+
+    // 字面double转Float
+    public Variable<Float> toFloat() {
+        if(isDataType(DataType.LITERAL_DOUBLE) || isDataType(DataType.DOUBLE)) {
+             return ofFloat(name, getAsDouble().getValue().floatValue());
+        } else {
+            return ofFloat(name, Float.parseFloat(toString()));
         }
     }
 }

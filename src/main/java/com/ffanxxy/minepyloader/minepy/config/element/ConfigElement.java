@@ -99,6 +99,33 @@ public class ConfigElement<T> {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    public String getString() {
+        if(this.type == String.class) {
+            return ( (ConfigElement<String>) this).getValueOrDefault("null");
+        } else {
+            throw new UnexpectedConfigDataTypeException("\"" + this.id + "\"" + " needs String, but \"" + this.type + "\" in fact");
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public int getInteger() {
+        if(this.type == Integer.class) {
+            return ( (ConfigElement<Integer>) this).getValueOrDefault(-1);
+        } else {
+            throw new UnexpectedConfigDataTypeException("\"" + this.id + "\"" + " needs Integer, but \"" + this.type + "\" in fact");
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public float getFloat() {
+        if(this.type == Float.class) {
+            return ( (ConfigElement<Float>) this).getValueOrDefault(-1f);
+        } else {
+            throw new UnexpectedConfigDataTypeException("\"" + this.id + "\"" + " needs Float, but \"" + this.type + "\" in fact");
+        }
+    }
+
     public T getValueOrDefault(T _default) {
         if(value == null) return _default;
         return this.value;

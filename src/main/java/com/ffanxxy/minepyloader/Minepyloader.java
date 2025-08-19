@@ -56,6 +56,7 @@ public class Minepyloader implements ModInitializer {
 
         /*
          * 是否初始化时需要执行
+         * 默认运行，运行时请调用runAllStatic，或者写上基本参数
          */
         if(run_when_initialization) {
             LOGGER.info("initialize all code:");

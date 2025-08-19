@@ -1,4 +1,8 @@
 #package test
 public load void load():
-    String a = "变量定义测试"
-    app.init(a,"变量定义测试以及传参测试")
+    String a = "123"
+    String b = "456"
+    app.init(a,b)
+    // 注释测试
+    boolean c = app.get()
+    log("赋值测试", c)

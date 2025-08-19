@@ -1,0 +1,12 @@
+package com.ffanxxy.minepyloader.minepy.loader.Loader;
+
+import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
+
+import java.util.List;
+import java.util.Map;
+
+public record ScriptParserLineContext(
+        String line,
+        Map<String, DataType> defineVarContext,
+        List<String> imports
+) { }
