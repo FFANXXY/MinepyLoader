@@ -1,19 +1,19 @@
 package com.ffanxxy.minepyloader.minepy.loader.Loader;
 
 import com.ffanxxy.minepyloader.Minepyloader;
+import com.ffanxxy.minepyloader.minepy.loader.Loader.Runnable.Statement;
+import com.ffanxxy.minepyloader.minepy.loader.Loader.Runnable.Statements;
+import com.ffanxxy.minepyloader.minepy.loader.Parser.MethodParser;
 import com.ffanxxy.minepyloader.minepy.loader.ScriptPackage;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.StatementManager;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.AccessAndIndex;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Argument;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Parameter;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.ReturnNode;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.RunnableNode;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.VariableDeclarationNode;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.AccessModifiers;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.MethodModifiers;
 import com.ffanxxy.minepyloader.minepy.loader.scriptObject.Script;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Parameter;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
-import com.ffanxxy.minepyloader.minepy.utils.exception.UnexpectedMethodException;
 import com.ffanxxy.minepyloader.minepy.utils.exception.UnexpectedStatementException;
 import com.ffanxxy.minepyloader.minepy.utils.loader.MethodHelper;
 
@@ -212,8 +212,8 @@ public class Minepy {
                 continue;
             }
 
-            // 不处在方法中，且行为空，则继续
-            if(line.line.isEmpty() && !isInMethod) continue;
+            // 行为空，则继续
+            if(line.line.isEmpty()) continue;
 
             // 处于方法中，如果行为空，或无缩进，则视作方法结束
             if( ( line.i == 0 || line.line.isEmpty() ) && isInMethod) {
@@ -228,6 +228,10 @@ public class Minepy {
                 MethodParser methodParser = new MethodParser(line.line);
                     DemoMethod = methodParser.method.toMethod(path);
                     isInMethod = true;
+                    // 创建定义上下文
+                    for(Parameter p : methodParser.getParameterParser().getParameters()) {
+                        defineVarContext.put(p.name, p.dataType);
+                    }
             } else {
                 // 方法体内容判断
                 if(!isInMethod) throw new UnexpectedStatementException("atPath: " + script.getPath().toString() + "  ;atLine" + line.i);
@@ -246,7 +250,7 @@ public class Minepy {
                  * 可提取到类，作为事件处理
                  */
                 if(manager.getCodeType() == StatementManager.CodeType.VARIABLE_DECLARATION) {
-                    if(manager.get() instanceof StatementManager.VariableDeclarationNode node) {
+                    if(manager.get() instanceof VariableDeclarationNode node) {
                         defineVarContext.put(node.getName(), node.getDataType());
                     }
                 }
@@ -291,175 +295,5 @@ public class Minepy {
         return Variable.VOID();
     }
 
-    static interface Parser<T> {
-        T get(int i);
-    }
-
-    /**
-     * 方法解析器
-     */
-    public static class MethodParser implements Parser<MethodDefiner> {
-
-        private final MethodDefiner method;
-        private final ParameterParser parameterParser;
-
-        public MethodParser(String string) {
-
-            parameterParser = new ParameterParser(string.substring(
-                    string.indexOf("(") + 1,
-                    string.lastIndexOf(")")
-            ));
-
-            // 截取方法定义
-            String methodDefine = string.substring(0, string.indexOf("(")).trim();
-
-            List<String> words = new ArrayList<>(Arrays.stream(methodDefine.split("\\s+")).toList());
-            
-            Collections.reverse(words);
-
-
-            if(words.size() < 2) throw new RuntimeException("There are too few middle keywords in the method definition: " + string);
-            String name = words.get(0);
-            DataType returnDatatype = DataType.fromName(words.get(1));
-            AccessModifiers accessModifiers;
-            // 是否有访问修饰符
-            boolean hasAccessModifier = AccessModifiers.isModifier(words.get(words.size() -1));
-            if(hasAccessModifier) {
-                accessModifiers = AccessModifiers.fromName(words.get(words.size() -1));
-            } else {
-                accessModifiers = AccessModifiers.DEFAULT;
-            }
-
-            // 判断方法修饰符
-            words.remove(0);
-            words.remove(0);
-            words.remove(words.size() -1);
-            List<MethodModifiers> modifiers = new ArrayList<>();
-
-            if(!words.isEmpty()) {
-                for (String word : words) {
-                    modifiers.add(MethodModifiers.fromName(word));
-                }
-            }
-
-            method = new MethodDefiner(
-                    accessModifiers,
-                    modifiers,
-                    name,
-                    returnDatatype,
-                    parameterParser.parameters
-            );
-        }
-
-        /**
-         * 获得方法
-         *
-         * @param i 无用参数
-         * @return 解析出的方法
-         */
-        @Override
-        public MethodDefiner get(int i) {
-            return method;
-        }
-
-        public ParameterParser getParameterParser() {
-            return parameterParser;
-        }
-    }
-
-    public static class ParameterParser implements Parser<Parameter> {
-
-        private final List<Parameter> parameters;
-        
-        public ParameterParser(String string) {
-            String newStr = string.trim();
-            if(newStr.isEmpty()) {
-                parameters = new ArrayList<>();
-                return;
-            }
-            parameters = Arrays.stream(newStr.split(",")).map(Parameter::new).toList();
-        }
-
-        @Override
-        public Parameter get(int i) {
-            return parameters.get(i);
-        }
-
-        public List<Parameter> getParameters() {
-            return parameters;
-        }
-    }
-
-    public static interface RunnableBlock {
-        Variable<?> run(Map<ScopeAndName, Variable<?>> variableMap);
-    }
-
     record Line(int i, String line) {}
-
-    public static class Statement implements RunnableBlock {
-
-        private RunnableNode node;
-
-        public Statement(RunnableNode node) {
-            this.node = node;
-        }
-
-        @Override
-        public Variable<?> run(Map<ScopeAndName, Variable<?>> variableMap) {
-            return node.runWithArg(variableMap);
-        }
-    }
-
-    public static class Statements implements RunnableBlock {
-        List<RunnableBlock> blocks = new ArrayList<>();
-
-        Statements() {
-
-        }
-
-        public void join(RunnableBlock block) {
-            blocks.add(block);
-        }
-
-        public void join(Statements statements) {
-            blocks.addAll(statements.blocks);
-        }
-
-        /**
-         * 对于语句组里的所有语句运行，运行初始化参数
-         * @param arguments 实参
-         * @return 返回值
-         */
-        public Variable<?> runWithArg(List<Argument> arguments) {
-            Map<ScopeAndName, Variable<?>> variableMap = new HashMap<>();
-            arguments.forEach(
-                    argument -> variableMap.put(
-                            new ScopeAndName(0, argument.getVariable().getName()),
-                            argument.getVariable()
-                    )
-            );
-
-            Variable<?> result;
-
-            for (RunnableBlock block : blocks) {
-                result = block.run(variableMap);
-                if(block instanceof Statement statement) {
-                    if(statement.node instanceof ReturnNode) return result;
-                }
-            }
-            return Variable.VOID();
-        }
-
-        @Override
-        public Variable<?> run(Map<ScopeAndName, Variable<?>> variableMap) {
-            Variable<?> result;
-            for (RunnableBlock block : blocks) {
-                result = block.run(variableMap);
-                if(block instanceof Statement statement) {
-                    if(statement.node instanceof ReturnNode) return result;
-                }
-            }
-            return Variable.VOID();
-        }
-    }
 }

@@ -2,6 +2,7 @@ package com.ffanxxy.minepyloader.minepy.utils.loader;
 
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Parameter;
+import net.minecraft.entity.ai.brain.task.PacifyTask;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -123,16 +124,29 @@ public class MethodHelper {
         return saveGetMethod(name , new ArrayList<>());
     }
 
+    /**
+     * 解析导入的方法
+     * @param list 导入组
+     * @return 方法组
+     */
     public static List<Minepy.Method> parserImports(List<String> list) {
         var methods = Minepy.METHODS;
         List<Minepy.Method> resultMethod = new ArrayList<>();
 
         for(String i : list) {
-            resultMethod.addAll (
-                    methods.stream().filter(
-                            m -> Objects.equals(m.path() + "." + m.name(), i)
-                    ).toList()
-            );
+            if(i.trim().endsWith("*")) {
+                resultMethod.addAll(
+                        methods.stream().filter(
+                                m -> m.path().isSamePackage(i)
+                        ).toList()
+                );
+            } else {
+                resultMethod.addAll(
+                        methods.stream().filter(
+                                m -> Objects.equals(m.path() + "." + m.name(), i.trim())
+                        ).toList()
+                );
+            }
         }
 
         return resultMethod;
@@ -192,12 +206,20 @@ public class MethodHelper {
         return mtd;
     }
 
-
+    /**
+     * 获得方法的全名，其格式为{@code package.method(Type, Type)}，其需要接受一个方法作为参数。
+     * @param method 方法
+     * @return 全名
+     */
     public static String getMethodFullName(Minepy.Method method) {
         StringBuilder paras = new StringBuilder();
         var paraList = method.parameters();
-        for(Parameter parameter : paraList) {
-            paras.append(parameter.dataType.getName()).append(", ");
+
+        for (int i = 0; i < paraList.size(); i++) {
+            paras.append(paraList.get(i).dataType.getName());
+            if (i != paraList.size() - 1) {
+                paras.append(", ");
+            }
         }
         return method.path() + "." + method.name() + "(" + paras + ")";
     }

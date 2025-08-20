@@ -4,7 +4,8 @@ import java.util.Arrays;
 
 public enum MethodModifiers {
 
-    LOAD("load");
+    LOAD("load"),
+    INGAME("ingame");
 
     private final String name;
 

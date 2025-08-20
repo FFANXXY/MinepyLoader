@@ -34,6 +34,8 @@ public enum DataType {
 
     TEXT("Text"),
 
+    WORLD("World"),
+
     CLASS("Class"),
 
     // 不可使用
@@ -78,6 +80,8 @@ public enum DataType {
      * @return true为相同
      */
     public boolean isSameTypeAs(DataType dataType) {
+        if(this == OBJECT) return true;
+
         switch (this) {
             case STRING , LITERAL_STRING -> {
                 return dataType == STRING || dataType == LITERAL_STRING;
@@ -98,7 +102,7 @@ public enum DataType {
                 return dataType == NULL || dataType == LITERAL_NULL;
             }
             default -> {
-                return this.name.equals(dataType.name);
+                return this == dataType;
             }
         }
     }

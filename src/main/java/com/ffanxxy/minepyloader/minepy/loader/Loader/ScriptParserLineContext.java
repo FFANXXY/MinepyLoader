@@ -9,4 +9,8 @@ public record ScriptParserLineContext(
         String line,
         Map<String, DataType> defineVarContext,
         List<String> imports
-) { }
+) {
+    public static ScriptParserLineContext createWithNewLine(ScriptParserLineContext context, String newLine) {
+        return new ScriptParserLineContext(newLine, context.defineVarContext, context.imports);
+    }
+}

@@ -1,7 +1,7 @@
 #package app
 
-public boolean init(String a, String b):
-    log(a,b)
+public boolean init(Object a, Object b):
+    Logger.log(a,b)
     return true
 public boolean get():
     return true

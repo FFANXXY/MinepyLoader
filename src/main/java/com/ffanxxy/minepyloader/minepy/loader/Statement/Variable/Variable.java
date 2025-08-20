@@ -2,6 +2,8 @@ package com.ffanxxy.minepyloader.minepy.loader.Statement.Variable;
 
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
 import com.ffanxxy.minepyloader.minepy.utils.exception.UnexpectedDataTypeException;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -70,7 +72,7 @@ public class Variable<T> {
 
     //Integer
     public static Variable<Integer> ofInteger(String name) {
-        return new Variable<>(name, DataType.STRING);
+        return new Variable<>(name, DataType.INT);
     }
     public static Variable<Integer> ofInteger(String name,Integer  val) {
         return new Variable<>(name,DataType.INT,val);
@@ -82,7 +84,7 @@ public class Variable<T> {
 
     //Float
     public static Variable<Float> ofFloat(String name) {
-        return new Variable<>(name, DataType.STRING);
+        return new Variable<>(name, DataType.FLOAT);
     }
     public static Variable<Float> ofFloat(String name,Float  val) {
         return new Variable<>(name,DataType.FLOAT,val);
@@ -94,7 +96,7 @@ public class Variable<T> {
 
     //Double
     public static Variable<Double> ofDouble(String name) {
-        return new Variable<>(name, DataType.STRING);
+        return new Variable<>(name, DataType.DOUBLE);
     }
     public static Variable<Double> ofDouble(String name,Double  val) {
         return new Variable<>(name,DataType.DOUBLE,val);
@@ -106,13 +108,37 @@ public class Variable<T> {
 
     //Boolean
     public static Variable<Boolean> ofBoolean(String name) {
-        return new Variable<>(name, DataType.STRING);
+        return new Variable<>(name, DataType.BOOLEAN);
     }
     public static Variable<Boolean> ofBoolean(String name,Boolean  val) {
         return new Variable<>(name,DataType.BOOLEAN,val);
     }
     public Variable<Boolean> getAsBoolean() {
         if(this.dataType == DataType.BOOLEAN) return (Variable<Boolean>) this;
+        throw new UnexpectedDataTypeException();
+    }
+
+    // Player
+    public static Variable<PlayerEntity> ofPlayer(String name) {
+        return new Variable<>(name, DataType.PLAYER);
+    }
+    public static Variable<PlayerEntity> ofPlayer(String name,PlayerEntity  val) {
+        return new Variable<>(name,DataType.PLAYER,val);
+    }
+    public Variable<PlayerEntity> getAsPlayer() {
+        if(this.dataType == DataType.PLAYER) return (Variable<PlayerEntity>) this;
+        throw new UnexpectedDataTypeException();
+    }
+
+    // World
+    public static Variable<World> ofWorld(String name) {
+        return new Variable<>(name, DataType.WORLD);
+    }
+    public static Variable<World> ofWorld(String name, World  val) {
+        return new Variable<>(name,DataType.WORLD,val);
+    }
+    public Variable<World> getAsWorld() {
+        if(this.dataType == DataType.WORLD) return (Variable<World>) this;
         throw new UnexpectedDataTypeException();
     }
 

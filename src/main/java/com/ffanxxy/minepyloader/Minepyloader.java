@@ -7,7 +7,10 @@ import com.ffanxxy.minepyloader.minepy.loader.scriptObject.Scripts;
 import com.ffanxxy.minepyloader.minepy.utils.MpyVersion;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.server.MinecraftServer;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +28,8 @@ public class Minepyloader implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("MinepyLoader");
 
     public static final MpyVersion LOADER_VERSION = new MpyVersion(1);
+
+    public static MinecraftServer serverInstance;
 
     @Override
     public void onInitialize() {
@@ -65,5 +70,12 @@ public class Minepyloader implements ModInitializer {
 
         // 注册命令
         CommandRegistrationCallback.EVENT.register(MpyCommand::register);
+        ServerLifecycleEvents.SERVER_STARTED.register(
+                minecraftServer -> serverInstance = minecraftServer
+        );
+
+        ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
+            serverInstance = null;
+        });
     }
 }

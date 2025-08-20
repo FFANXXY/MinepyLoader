@@ -22,5 +22,4 @@ public class Argument {
         return new Argument(variable);
     }
 
-
 }
