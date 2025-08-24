@@ -21,9 +21,35 @@
   - [x] *指令支持  <sub>  于ALPHA-0.0.2 半完成 </sub>
   - [ ] *游戏接口对接  <sub>  Demo 于ALPHA-half-0.0.3测试完成 </sub>
   - [ ] **面向对象**编程
-  - [ ] *逻辑代码
+  - [x] 逻辑代码 <sub>  于ALPHA-0.0.3 </sub>
   - [ ] 资源文件与数据包支持
   - [ ] 外置包
   - [ ] !正式版!
 ### 3).语言文档  
    详见 https://github.com/FFANXXY/Minepy-Grammar/tree/main
+
+
+## B. English Version
+
+### 1). About the Project
+  1. This project implements code parsing for `.mpy` <sub> (text files, the supported file format for this project) </sub> files. The goal is to use a project-internal definition of a language similar to the Python programming language in syntax and format, to quickly add game elements in Minecraft, replace vanilla commands, extend the logic of vanilla commands, or enhance the effects of vanilla data packs.
+  2. With extensibility, language convenience, and comprehensiveness as its ultimate goals, this project aims to achieve effects comparable to using a mod loader directly, through external packages.
+
+### 2). Current Project Progress
+  - Current Latest Version: ALPHA-half-0.0.3 Internal Beta || Last Updated 2025.8.20
+  - __This project is still in its internal beta phase. There may still be many bugs, and even major changes to the basic syntax are possible.__ The `Loader Version` configuration item does not currently support internal beta content. This configuration item is planned to be enabled *after the official version is completed*.
+  - Completed content, semi-completed content, and content not yet completed (* Content scheduled for completion in the next version):
+    -----------------------------------
+  - [x] Method and Script Parsing <sub> Since Beta </sub>
+  - [x] Basic Variable Definition <sub> Since ALPHA-0.0.2 </sub>
+  - [x] Method Referencing <sub> Since ALPHA-test-0.0.2 </sub> <sup><ins> Reset in ALPHA-half-0.0.3</ins></sup>
+  - [x] *Command Support <sub> Semi-completed in ALPHA-0.0.2 </sub>
+  - [ ] *Game Interface Integration <sub> Demo tested in ALPHA-half-0.0.3 </sub>
+  - [ ] **Object-Oriented** Programming
+  - [x] Control Flow Code <sub> Since ALPHA-0.0.3 </sub>
+  - [ ] Resource File and Data Pack Support
+  - [ ] External Packages
+  - [ ] !Official Release!
+
+### 3). Language Documentation
+   For details, see https://github.com/FFANXXY/Minepy-Grammar/tree/main
