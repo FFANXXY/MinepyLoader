@@ -7,4 +7,7 @@ import java.util.Map;
 
 public interface RunnableBlock {
     Variable<?> run(Map<Minepy.ScopeAndName, Variable<?>> variableMap);
+    ControlReturnResult runInControl(Map<Minepy.ScopeAndName, Variable<?>> variableMap);
+
+    public record ControlReturnResult(boolean CallBack, Variable<?> variable) {};
 }

@@ -5,6 +5,7 @@ import com.ffanxxy.minepyloader.minepy.utils.exception.UnexpectedDataTypeExcepti
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,8 +37,13 @@ public class Variable<T> {
      * @param var 变量
      * @return 更名的变量
      */
-    public static Variable<?> createWithNewName(String name, Variable<?> var) {
+    public static Variable<?> create(String name, Variable<?> var) {
         return new Variable<>(name, var.dataType, var.value);
+    }
+
+
+    public static Variable<?> create(String name, DataType dataType) {
+        return new Variable<>(name, dataType);
     }
 
     // Void
@@ -67,6 +73,18 @@ public class Variable<T> {
     }
     public Variable<String> getAsString() {
         if(this.dataType == DataType.STRING) return (Variable<String>) this;
+        throw new UnexpectedDataTypeException();
+    }
+
+    //Char
+    public static Variable<Character> ofChar(String name) {
+        return new Variable<>(name, DataType.CHAR);
+    }
+    public static Variable<Character> ofChar(String name, Character val) {
+        return new Variable<>(name,DataType.CHAR, val);
+    }
+    public Variable<Character> getAsChar() {
+        if(this.dataType == DataType.CHAR) return (Variable<Character>) this;
         throw new UnexpectedDataTypeException();
     }
 
@@ -147,13 +165,18 @@ public class Variable<T> {
     public DataType getDataType() {
         return this.dataType;
     }
-    public boolean isDataType(DataType dataType) {
-        return this.dataType == dataType;
+    public boolean isSameDataType(DataType dataType) {
+        return dataType.isSameTypeAs(dataType);
+    }
+
+    public boolean isSameDataType(Variable<?> variable) {
+        return dataType.isSameTypeAs(variable.dataType);
     }
 
     public T getValue() {
         return value;
     }
+
 
     @Override
     public String toString() {
@@ -167,19 +190,165 @@ public class Variable<T> {
 
     // 便捷方法
     public String getString(String e) {
-        if(this.isDataType(DataType.STRING)) {
+        if(this.isSameDataType(DataType.STRING)) {
             return this.getAsString().getValue();
         } else {
             throw new UnexpectedDataTypeException(e);
         }
     }
 
+    /**
+     * 直接设置Value
+     * @param value 值
+     */
+    public void setValue(Object value) {
+        this.value = (T) value;
+    }
+
     // 字面double转Float
     public Variable<Float> toFloat() {
-        if(isDataType(DataType.LITERAL_DOUBLE) || isDataType(DataType.DOUBLE)) {
+        if(isSameDataType(DataType.LITERAL_DOUBLE) || isSameDataType(DataType.DOUBLE)) {
              return ofFloat(name, getAsDouble().getValue().floatValue());
         } else {
             return ofFloat(name, Float.parseFloat(toString()));
         }
+    }
+
+
+    // 计算
+    public Variable<?> sum(Variable<?> variable) {
+        if(this.dataType.isNumber() && variable.dataType.isNumber()) {
+            BigDecimal b1 = new BigDecimal(this.value.toString());
+            BigDecimal b2 = new BigDecimal(variable.value.toString());
+
+            return switch (this.dataType) {
+                case INT, LITERAL_INTEGER -> ofInteger("%TEMP", b1.add(b2).intValue());
+                case FLOAT, LITERAL_FLOAT -> ofFloat("%TEMP", b1.add(b2).floatValue());
+                case DOUBLE, LITERAL_DOUBLE -> ofDouble("%TEMP", b1.add(b2).doubleValue());
+                default -> throw new RuntimeException("Unknown Error: can't opera:" + b1.doubleValue() + b2.doubleValue());
+            };
+
+        } else if(this.dataType.isString() || variable.dataType.isString()) {
+            return ofString("%TEMP", this.toString() + variable.toString());
+        }
+        return VOID();
+    }
+
+    public Variable<?> sub(Variable<?> variable) {
+        if(this.dataType.isNumber() && variable.dataType.isNumber()) {
+            BigDecimal b1 = new BigDecimal(this.value.toString());
+            BigDecimal b2 = new BigDecimal(variable.value.toString());
+
+            return switch (this.dataType) {
+                case INT, LITERAL_INTEGER -> ofInteger("%TEMP", b1.subtract(b2).intValue());
+                case FLOAT, LITERAL_FLOAT -> ofFloat("%TEMP", b1.subtract(b2).floatValue());
+                case DOUBLE, LITERAL_DOUBLE -> ofDouble("%TEMP", b1.subtract(b2).doubleValue());
+                default -> throw new RuntimeException("Unknown Error: can't opera:" + b1.doubleValue() + b2.doubleValue());
+            };
+        }
+        return VOID();
+    }
+
+    public Variable<?> mul(Variable<?> variable) {
+        if(this.dataType.isNumber() && variable.dataType.isNumber()) {
+            BigDecimal b1 = new BigDecimal(this.value.toString());
+            BigDecimal b2 = new BigDecimal(variable.value.toString());
+
+            return switch (this.dataType) {
+                case INT, LITERAL_INTEGER -> ofInteger("%TEMP", b1.multiply(b2).intValue());
+                case FLOAT, LITERAL_FLOAT -> ofFloat("%TEMP", b1.multiply(b2).floatValue());
+                case DOUBLE, LITERAL_DOUBLE -> ofDouble("%TEMP", b1.multiply(b2).doubleValue());
+                default -> throw new RuntimeException("Unknown Error: can't opera:" + b1.doubleValue() + b2.doubleValue());
+            };
+        }
+        return VOID();
+    }
+
+    public Variable<?> div(Variable<?> variable) {
+        if(this.dataType.isNumber() && variable.dataType.isNumber()) {
+            BigDecimal b1 = new BigDecimal(this.value.toString());
+            BigDecimal b2 = new BigDecimal(variable.value.toString());
+
+            return switch (this.dataType) {
+                case INT, LITERAL_INTEGER -> ofInteger("%TEMP", b1.divide(b2).intValue());
+                case FLOAT, LITERAL_FLOAT -> ofFloat("%TEMP", b1.divide(b2).floatValue());
+                case DOUBLE, LITERAL_DOUBLE -> ofDouble("%TEMP", b1.divide(b2).doubleValue());
+                default -> throw new RuntimeException("Unknown Error: can't opera:" + b1.doubleValue() + b2.doubleValue());
+            };
+        }
+        return VOID();
+    }
+
+    public int compareTo(Variable<?> variable) {
+        if(this.dataType.isNumber() && variable.dataType.isNumber()) {
+            BigDecimal b1 = new BigDecimal(this.value.toString());
+            BigDecimal b2 = new BigDecimal(variable.value.toString());
+
+            return b1.compareTo(b2);
+        }
+        return 101;
+    }
+
+    public Variable<Boolean> isMoreThan(Variable<?> variable) {
+        int result = compareTo(variable);
+
+        return switch (result) {
+            case 1 -> ofBoolean("%TEMP",true);
+            case 0,-1 -> ofBoolean("%TEMP",false);
+            default -> throw new RuntimeException("Can't compare " + this.toString() + " and " + variable.toString());
+        };
+    }
+
+    public Variable<Boolean> isMoreThanOrEqual(Variable<?> variable) {
+        int result = compareTo(variable);
+
+        return switch (result) {
+            case 1,0 -> ofBoolean("%TEMP",true);
+            case -1 -> ofBoolean("%TEMP",false);
+            default -> throw new RuntimeException("Can't compare " + this.toString() + " and " + variable.toString());
+        };
+    }
+
+    public Variable<Boolean> isLessThan(Variable<?> variable) {
+        int result = compareTo(variable);
+
+        return switch (result) {
+            case -1 -> ofBoolean("%TEMP",true);
+            case 0,1 -> ofBoolean("%TEMP",false);
+            default -> throw new RuntimeException("Can't compare " + this.toString() + " and " + variable.toString());
+        };
+    }
+
+    public Variable<Boolean> isLessThanOrEqual(Variable<?> variable) {
+        int result = compareTo(variable);
+
+        return switch (result) {
+            case -1,0 -> ofBoolean("%TEMP",true);
+            case 1 -> ofBoolean("%TEMP",false);
+            default -> throw new RuntimeException("Can't compare " + this.toString() + " and " + variable.toString());
+        };
+    }
+
+    public Variable<Boolean> isEqual(Variable<?> variable) {
+        int result = compareTo(variable);
+
+        return switch (result) {
+            case 0 -> ofBoolean("%TEMP",true);
+            case 1,-1 -> ofBoolean("%TEMP",false);
+            default -> throw new RuntimeException("Can't compare " + this.toString() + " and " + variable.toString());
+        };
+    }
+
+
+    public Variable<?> or(Variable<?> variable) {
+        return Variable.ofBoolean("%TEMP", this.getAsBoolean().getValue() || variable.getAsBoolean().getValue());
+    }
+
+    public Variable<?> and(Variable<?> variable) {
+        return Variable.ofBoolean("%TEMP", this.getAsBoolean().getValue() && variable.getAsBoolean().getValue());
+    }
+
+    public double getNumber() {
+        return Double.parseDouble(this.value.toString());
     }
 }

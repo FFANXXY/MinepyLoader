@@ -15,6 +15,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MpyCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher,
@@ -56,7 +57,7 @@ public class MpyCommand {
             );
             return 0;
         }
-        method.run(new ArrayList<>());
+        method.run(new HashMap<>());
 
         return 1;
     }

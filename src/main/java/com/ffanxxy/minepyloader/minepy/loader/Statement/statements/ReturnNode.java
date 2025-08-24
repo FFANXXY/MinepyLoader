@@ -2,6 +2,7 @@ package com.ffanxxy.minepyloader.minepy.loader.Statement.statements;
 
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.var.VarGetterNode;
 
 import java.util.Map;
 
@@ -14,8 +15,13 @@ public class ReturnNode implements RunnableNode{
         node = getterNode;
     }
 
+    public ReturnNode() {
+        node = null;
+    }
+
     @Override
     public Variable<?> runWithArg(Map<Minepy.ScopeAndName, Variable<?>> variableMap) {
+        if(node == null) return Variable.VOID();
         return node.runWithArg(variableMap);
     }
 }

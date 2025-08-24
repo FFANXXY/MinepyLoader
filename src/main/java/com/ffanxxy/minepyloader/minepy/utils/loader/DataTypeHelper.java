@@ -19,4 +19,9 @@ public class DataTypeHelper {
             return defineContext.get(parameter.name);
         }
     }
+
+    public static DataType getDataTypeFromDefines(String name, Map<String, DataType> defineContext) {
+        // 备选DataType.VAR，防止无法检测到上下文中的变量
+        return defineContext.getOrDefault(name, DataType.VAR);
+    }
 }

@@ -41,6 +41,7 @@ public enum DataType {
     // 不可使用
     VAR("Var"),
     LITERAL_STRING("LiteralString"),
+    LITERAL_CHAR("LiteralChar"),
     LITERAL_INTEGER("LiteralInteger"),
     LITERAL_FLOAT("LiteralFloat"),
     LITERAL_DOUBLE("LiteralDouble"),
@@ -69,7 +70,7 @@ public enum DataType {
 
     public boolean isLiteral() {
         return switch (this) {
-            case LITERAL_STRING , LITERAL_INTEGER, LITERAL_FLOAT , LITERAL_DOUBLE , LITERAL_BOOLEAN , LITERAL_NULL -> true;
+            case LITERAL_STRING , LITERAL_INTEGER, LITERAL_FLOAT , LITERAL_DOUBLE , LITERAL_BOOLEAN , LITERAL_NULL, LITERAL_CHAR -> true;
             default -> false;
         };
     }
@@ -85,6 +86,9 @@ public enum DataType {
         switch (this) {
             case STRING , LITERAL_STRING -> {
                 return dataType == STRING || dataType == LITERAL_STRING;
+            }
+            case CHAR , LITERAL_CHAR -> {
+                return dataType == CHAR || dataType == LITERAL_CHAR;
             }
             case INT , LITERAL_INTEGER -> {
                 return dataType == INT || dataType == LITERAL_INTEGER;
@@ -105,5 +109,19 @@ public enum DataType {
                 return this == dataType;
             }
         }
+    }
+
+    public boolean isNumber() {
+        return switch (this) {
+            case INT, FLOAT, DOUBLE, LITERAL_DOUBLE, LITERAL_FLOAT, LITERAL_INTEGER -> true;
+            default -> false;
+        };
+    }
+
+    public boolean isString() {
+        return switch (this) {
+            case STRING, LITERAL_STRING, CHAR, LITERAL_CHAR -> true;
+            default -> false;
+        };
     }
 }

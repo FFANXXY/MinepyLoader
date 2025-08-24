@@ -8,7 +8,6 @@ import com.ffanxxy.minepyloader.minepy.utils.MpyVersion;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
 import org.apache.commons.io.FilenameUtils;
@@ -17,15 +16,18 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class Minepyloader implements ModInitializer {
 
     public static final String MOD_ID = "minepyloader";
 
     public static final Logger LOGGER = LoggerFactory.getLogger("MinepyLoader");
+
+    public static Path reportsPath = FabricLoader.getInstance().getConfigDir().resolve("minepyloader").resolve("reports");
+
+    public static final SimpleDateFormat reportDataFormat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
 
     public static final MpyVersion LOADER_VERSION = new MpyVersion(1);
 
@@ -46,6 +48,9 @@ public class Minepyloader implements ModInitializer {
 
         LOGGER.info("Minepy Loader Version: {}", LoaderConfig.GlobalConfig.version.toString());
         boolean run_when_initialization = LoaderConfig.GlobalConfig.getElements().get("run_when_initialization").getBoolean();
+
+        // 生成错误报告目录
+        Mpyio.createDir(reportsPath);
 
         // 生成脚本目录
         Mpyio.createDir(scriptsPath);

@@ -1,7 +1,0 @@
-#package app
-
-public boolean init(Object a, Object b):
-    Logger.log(a,b)
-    return true
-public boolean get():
-    return true

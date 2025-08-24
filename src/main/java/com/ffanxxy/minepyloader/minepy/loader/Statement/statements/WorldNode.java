@@ -4,16 +4,15 @@ import com.ffanxxy.minepyloader.Minepyloader;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.ScriptParserLineContext;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Parameter;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.method.MethodNode;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
 import com.ffanxxy.minepyloader.minepy.utils.builder.MethodParametersBuilder;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class WorldNode extends MethodNode{
+public class WorldNode extends MethodNode {
     public WorldNode(List<Parameter> inputParameters, ScriptParserLineContext context, String method) {
         super(inputParameters, context, method);
     }

@@ -6,10 +6,10 @@ import com.ffanxxy.minepyloader.minepy.loader.Loader.Runnable.Statements;
 import com.ffanxxy.minepyloader.minepy.loader.Parser.MethodParser;
 import com.ffanxxy.minepyloader.minepy.loader.ScriptPackage;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.StatementManager;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Argument;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Parameter;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.VariableDeclarationNode;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.ControlNode;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.var.VariableDeclarationNode;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.AccessModifiers;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.MethodModifiers;
@@ -71,17 +71,27 @@ public class Minepy {
 
         public void runStatic() {
             if(parameters.isEmpty()) {
-                this.statements.runWithArg(new ArrayList<>());
+                this.statements.run(new HashMap<>());
             }
         }
 
-        public Variable<?> run(List<Argument> arguments) {
+        public Variable<?> run(Map<Minepy.ScopeAndName, Variable<?>> variableMap) {
             // 获得运行结果
-            Variable<?> backvar = statements.runWithArg(arguments);
+            Variable<?> backvar = statements.run(variableMap);
             // 类型判断
             if(backvar.getDataType().isSameTypeAs(this.type)) {
                 return backvar;
             } else {
+
+                // 模拟继承关系
+                if(this.type == DataType.OBJECT) {
+                    return backvar;
+                } else if ((backvar.isSameDataType(DataType.FLOAT) || backvar.isSameDataType(DataType.INT)) && this.type == DataType.DOUBLE ) {
+                    return Variable.ofDouble("%TEMP", Double.parseDouble(backvar.toString()));
+                } else if ( backvar.isSameDataType(DataType.INT) && this.type == DataType.FLOAT) {
+                    return Variable.ofFloat("%TEMP", Float.parseFloat(backvar.toString()));
+                }
+
                 throw new RuntimeException("Return Value is not same as its define type: " + MethodHelper.getMethodFullName(this) +
                         " needs " + this.type + " ,in fact: " + backvar.getDataType());
             }
@@ -188,6 +198,8 @@ public class Minepy {
         // 获得定义上下文
         Map<String, DataType> defineVarContext = new HashMap<>();
 
+        List<ControlNode> controlNodesPlans = new ArrayList<>();
+
         // 变为Method
         for(Line line : readLines) {
             // 注释的优先级最高
@@ -215,8 +227,8 @@ public class Minepy {
             // 行为空，则继续
             if(line.line.isEmpty()) continue;
 
-            // 处于方法中，如果行为空，或无缩进，则视作方法结束
-            if( ( line.i == 0 || line.line.isEmpty() ) && isInMethod) {
+            // 如果没有缩进，则视为您一个方法
+            if( ( line.i == 0 ) && isInMethod) {
                 isInMethod = false;
                 METHODS.add(DemoMethod);
                 DemoMethod = null;
@@ -233,6 +245,12 @@ public class Minepy {
                         defineVarContext.put(p.name, p.dataType);
                     }
             } else {
+
+                int retraction = line.i;
+                // 向上取整为层数
+                int level = retraction / 4 + (retraction %4 == 0 ? 0 : 1);
+                // 应该处于level1
+
                 // 方法体内容判断
                 if(!isInMethod) throw new UnexpectedStatementException("atPath: " + script.getPath().toString() + "  ;atLine" + line.i);
 
@@ -253,8 +271,45 @@ public class Minepy {
                     if(manager.get() instanceof VariableDeclarationNode node) {
                         defineVarContext.put(node.getName(), node.getDataType());
                     }
+                } else if(manager.getCodeType() == StatementManager.CodeType.CONTROL_STATEMENT) {
+                    controlNodesPlans.add((ControlNode) manager.get());
                 }
 
+                // when it has no plans , use DEFAULT ADD
+                // MUSTN't ADD ( ... || manager.getCodeType() == StatementManager.CodeType.CONTROL_STATEMENT) There,
+                // Or the inside control statement won't be added inside
+                if(controlNodesPlans.isEmpty()) {
+                    DemoMethod.addStatement(new Statement(manager.get()));
+                    continue;
+                }
+
+                if(level == 1 && manager.getCodeType() == StatementManager.CodeType.CONTROL_STATEMENT) {
+                    // 为了防止方法中底层添加时出现问题，检测到为控制语句时执行一般返回
+                     DemoMethod.addStatement(new Statement(manager.get()));
+                     continue;
+                }
+
+                ControlNode controlNode = controlNodesPlans.get(controlNodesPlans.size() - 1);
+
+                // 为当前层数
+                if(controlNodesPlans.size() == level - 1) {
+                    controlNode.addStatement(manager.get());
+                    continue;
+                } else if(controlNodesPlans.size() == level && manager.getCodeType() == StatementManager.CodeType.CONTROL_STATEMENT) {
+                    // 如果等于，并且是控制语句，则认为是嵌套
+                    controlNodesPlans.get(controlNodesPlans.size() - 2).addStatement(manager.get());
+                    continue;
+                } else if(level != 1) {
+                    for (int i = 0; i < level - 1; i++) {
+                        controlNodesPlans.remove(controlNodesPlans.size() - 1);
+                    }
+                    controlNode.addStatement(manager.get());
+                    continue;
+                }
+
+                // 运行到这，说明plans不为空，而level == 1
+
+                controlNodesPlans = new ArrayList<>();
                 DemoMethod.addStatement(new Statement(manager.get()));
 
             }

@@ -1,6 +1,8 @@
 package com.ffanxxy.minepyloader.minepy.utils.loader;
 
+import com.ffanxxy.minepyloader.minepy.loader.Loader.ScriptParserLineContext;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.StatementManager;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.var.VarGetterNode;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
 
 import javax.xml.crypto.Data;
@@ -14,6 +16,8 @@ public class LiteralValueParser {
     public static Type parser(String value) {
         if(value.equals("\"\"")) {
             return Type.STRING;
+        } else if(value.equals("''")) {
+            return Type.CHAR;
         } else if(value.equals("null")) {
             return Type.NULL;
         } else if(value.equals("true") || value.equals("false")) {
@@ -29,6 +33,7 @@ public class LiteralValueParser {
 
     public enum Type {
         STRING,
+        CHAR,
         NULL,
         DOUBLE,
         INT,

@@ -4,6 +4,10 @@ import com.ffanxxy.minepyloader.minepy.loader.Loader.ScriptParserLineContext;
 import com.ffanxxy.minepyloader.minepy.loader.PackageStructure;
 import com.ffanxxy.minepyloader.minepy.loader.Parser.ArgumentTypeParser;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.*;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.method.CallMethodNode;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.var.AssignmentNode;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.var.VarGetterNode;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.var.VariableDeclarationNode;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
 import com.ffanxxy.minepyloader.minepy.utils.loader.LiteralValueParser;
 
@@ -26,12 +30,30 @@ public class StatementManager {
         List<String> imports = context.imports();
 
         if(line.startsWith("return")) {
+
+            // 没有空格
+            if(!line.contains(" ")) {
+                this.node = new ReturnNode();
+                return;
+            }
+
             // 对于return xxx ， 获得第二项
-            String var = line.split("\\s+")[1].trim();
+            String var = line.substring(line.indexOf(" ")).trim();
+
+            // 后为空
+            if(var.isEmpty()) {
+                this.node = new ReturnNode();
+                return;
+            }
 
             this.node = new ReturnNode(getVarGetterNode(var,context));
-
             return;
+
+        } else if(line.startsWith("break")) {
+
+            this.node = new BreakNode();
+            return;
+
         }
 
         // 进行类型检测
@@ -41,10 +63,11 @@ public class StatementManager {
 
         this.node = switch (type) {
             // 方法调用
-            case METHOD_CALL -> parserMethod(context);
+            case METHOD_CALL -> parseMethod(context);
             // 变量声明
-            case VARIABLE_DECLARATION -> parserVariableDeclaration(context);
-            default -> null;
+            case VARIABLE_DECLARATION -> parseVariableDeclaration(context);
+            case VARIABLE_OPERATION -> parseVarOperation(context);
+            case CONTROL_STATEMENT -> parseControlNode(context);
         };
     }
 
@@ -52,11 +75,43 @@ public class StatementManager {
         return codeType;
     }
 
+    public static RunnableNode parseControlNode(ScriptParserLineContext context) {
+        String line = context.line().trim();
+
+        String substring = line.substring(
+                line.indexOf("(") + 1,
+                line.lastIndexOf(")")
+        );
+
+        if(line.startsWith("if")) {
+            return new IfNode(substring, context);
+        } else if(line.startsWith("while")) {
+            return new WhileNode(substring, context);
+        } else {
+            throw new RuntimeException();
+        }
+
+    }
+
+
+    public static AssignmentNode parseVarOperation(ScriptParserLineContext context) {
+        String line = context.line();
+
+        int spi = line.indexOf("=");
+
+        if(spi == -1) throw new RuntimeException(line + " is not any statement");
+
+        String value = line.substring(spi + 1).trim();
+        String name = line.substring(0,spi).trim();
+
+        return new AssignmentNode(name, getVarGetterNode(value, context));
+    }
+
     /**
      * 解析变量定义，获得变量定义节点
      * @return 定义节点
      */
-    public static VariableDeclarationNode parserVariableDeclaration(ScriptParserLineContext context) {
+    public static VariableDeclarationNode parseVariableDeclaration(ScriptParserLineContext context) {
         String line = context.line();
         Map<String, DataType> defineContext = context.defineVarContext();
 
@@ -91,6 +146,8 @@ public class StatementManager {
         if (value.startsWith("\"") && value.endsWith("\"")) {
             // Type is String, get context as String to create VIN
             return new VarGetterNode(VarGetterNode.InitType.LIT_STRING, value.substring(1, value.length() - 1), context);
+        } else if (value.startsWith("'") && value.endsWith("'")) {
+            return new VarGetterNode(VarGetterNode.InitType.LIT_CHAR, value.substring(1,2), context);
         } else if (value.equals("true")) {
             // if value equals true
             return new VarGetterNode(VarGetterNode.InitType.LIT_BOOLEAN, "true", context);
@@ -118,7 +175,7 @@ public class StatementManager {
         }
     }
 
-    public static RunnableNode parserMethod(ScriptParserLineContext context) {
+    public static RunnableNode parseMethod(ScriptParserLineContext context) {
         String line = context.line();
         var defineContext = context.defineVarContext();
         // 检查导入
@@ -139,7 +196,7 @@ public class StatementManager {
             return parserInternalMethods(line, context);
         }
 
-        return new CallMethodNode(who, new ArgumentTypeParser(line).getParameters(), defineContext);
+        return new CallMethodNode(who, new ArgumentTypeParser(context).getParameters(), defineContext);
     }
 
 
@@ -151,7 +208,7 @@ public class StatementManager {
             who = "mpy." + who;
         }
 
-        return InternalMethods.get(who, new ArgumentTypeParser(line).getParameters(), context);
+        return InternalMethods.get(who, new ArgumentTypeParser(context).getParameters(), context);
     }
 
 
@@ -170,7 +227,7 @@ public class StatementManager {
 
         // 2. 检测控制语句：if/while/for 开头的逻辑判断
         if (isControlStatement(trimmed)) {
-            return CodeType.LOGICAL_EXPRESSION;
+            return CodeType.CONTROL_STATEMENT;
         }
 
         // 3. 检测方法调用：方法名后跟括号
@@ -178,26 +235,21 @@ public class StatementManager {
             return CodeType.METHOD_CALL;
         }
 
-        // 4. 检测逻辑表达式：包含逻辑/比较运算符
-        if (hasLogicalOperators(trimmed)) {
-            return CodeType.LOGICAL_EXPRESSION;
-        }
-
-        // 5. 默认归类为变量运算
+        // 4. 默认归类为变量运算
         return CodeType.VARIABLE_OPERATION;
     }
 
     public enum CodeType {
         VARIABLE_DECLARATION,
-        LOGICAL_EXPRESSION,
+        CONTROL_STATEMENT,
         METHOD_CALL,
         VARIABLE_OPERATION
     }
 
     // 辅助方法：检测变量声明
     private static boolean isVariableDeclaration(String s) {
-        // 匹配基本类型 + 变量名 [+ 初始化] + 分号
-        String regex = "^(String|int|double|float|byte|boolean|Block|BlockEntity|BlockState|Entity|Player|Text|Item|ItemStack|World)\\s+[a-zA-Z_]\\w*\\s*(=\\s*[^;]+)?\\s*$";
+        // 匹配基本类型 + 变量名 [+ 初始化]
+        String regex = "^(String|int|double|float|byte|boolean|Block|BlockEntity|BlockState|Entity|Player|Text|Item|ItemStack|World|char)\\s+[a-zA-Z_]\\w*\\s*(=\\s*[^;]+)?\\s*$";
         return s.matches(regex);
     }
 
@@ -215,12 +267,5 @@ public class StatementManager {
         // 匹配 [对象.]方法名(参数) [+ 分号]
         String regex = "^\\s*\\w+(\\.\\w+)*\\s*\\(.*\\)\\s*;?\\s*$";
         return s.matches(regex);
-    }
-
-    // 辅助方法：检测逻辑运算符
-    private static boolean hasLogicalOperators(String s) {
-        Pattern pattern = Pattern.compile("&&|\\|\\||==|!=|>=|<=|>|<|!");
-        Matcher matcher = pattern.matcher(s);
-        return matcher.find();
     }
 }
