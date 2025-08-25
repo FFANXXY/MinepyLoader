@@ -1,5 +1,6 @@
 package com.ffanxxy.minepyloader.minepy.loader.Statement.statements.method;
 
+import com.ffanxxy.minepyloader.minepy.loader.Loader.Method;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Parameter;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
@@ -8,7 +9,6 @@ import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
 import com.ffanxxy.minepyloader.minepy.utils.loader.MethodHelper;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,10 +36,10 @@ public class CallMethodNode implements RunnableNode {
     @Override
     public Variable<?> runWithArg(Map<Minepy.ScopeAndName, Variable<?>> variableMap) {
         // 获得方法
-        Minepy.Method mtd = MethodHelper.getMethod(this.method, this.InParameters);
+        Method mtd = MethodHelper.getMethod(this.method, this.InParameters);
 
         // 获得形参
-        List<Parameter> parameters = mtd.parameters();
+        List<Parameter> parameters = mtd.getParameters();
 
         if (parameters.size() != InParameters.size())
             throw new RuntimeException("The number of parameters is wrong: " + method);

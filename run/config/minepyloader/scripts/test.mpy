@@ -1,11 +1,17 @@
 #package test
 
 public load void load():
-    int a = 1
-    int b = 2
+    String a = "Hello World"
+    int index = 0
+    char nowChar
 
-    while(a < 3):
-        Logger.log("text",a)
-        a = a + 1
+    while(index < String.lengthOf(a) ):
+        nowChar = String.charAt(a, index)
+        if(nowChar != ' '):
+            Logger.log("text",nowChar)
+        index = index + 1
 
     Logger.log("Test",c)
+
+public ingame void test(String a):
+    Logger.log("ingame", a)

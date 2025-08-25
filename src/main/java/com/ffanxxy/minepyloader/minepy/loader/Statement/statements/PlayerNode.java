@@ -19,7 +19,7 @@ public class PlayerNode extends MethodNode {
 
     @Override
     public @NotNull MethodParametersBuilder getPlansBuilder(MethodParametersBuilder builder) {
-        builder.add("new", DataType.WORLD);
+        builder.add("new", DataType.WORLD, DataType.INT);
         builder.add("kill", DataType.PLAYER);
         return builder;
     }
@@ -30,7 +30,7 @@ public class PlayerNode extends MethodNode {
             case "new" -> {
                 World world = variables.get(0).getAsWorld().getValue();
                 if(world.getPlayers().isEmpty()) yield Variable.ofPlayer("%temp", null);
-                yield Variable.ofPlayer("%temp", world.getPlayers().get(0));
+                yield Variable.ofPlayer("%temp", world.getPlayers().get(variables.get(1).getAsInt().getValue()));
             }
             case "kill" -> {
                 PlayerEntity player = variables.get(0).getAsPlayer().getValue();

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="57f5ea7d-a34f-4860-a829-8a8076f2192d" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Loader/Method.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/loom-cache/launch.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/loom-cache/launch.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/loom-cache/log4j.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/loom-cache/log4j.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/MinepyLoader.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/MinepyLoader.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Data_Generation.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Client.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/Minepyloader.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/Minepyloader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/commands/MpyCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/commands/MpyCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/io/Mpyio.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/io/Mpyio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/config/element/ConfigElement.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/config/element/ConfigElement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/config/element/ConfigElements.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/config/element/ConfigElements.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy$Line.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy$Line.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy$Method.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy$MethodDefiner.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy$MethodDefiner.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy$ScopeAndName.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy$ScopeAndName.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Runnable/RunnableBlock$ControlReturnResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Runnable/RunnableBlock$ControlReturnResult.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/ScriptParserLineContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/ScriptParserLineContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/PackageStructure.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/PackageStructure.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Parser/ArgumentTypeParser$ProcessResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Parser/ArgumentTypeParser$ProcessResult.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Parser/ArgumentTypeParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Parser/ArgumentTypeParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Parser/MethodParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Parser/MethodParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Parser/ParameterParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Parser/ParameterParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/StatementManager$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/StatementManager$CodeType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/StatementManager$CodeType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/StatementManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/StatementManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/Variable/Variable$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/Variable/Variable$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/Variable/Variable.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/Variable/Variable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/InternalMethods.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/InternalMethods.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/PlayerNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/PlayerNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/StringNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/StringNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/WorldNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/WorldNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/CallMethodNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/CallMethodNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/MethodNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/MethodNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/var/AssignmentNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/var/AssignmentNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/var/VarGetterNode$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/var/VarGetterNode$InitType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/var/VarGetterNode$InitType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/var/VarGetterNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/var/VarGetterNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/var/VarOperationNode$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/var/VarOperationNode$Expression$Operation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/var/VarOperationNode$Expression$Operation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/var/VarOperationNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/var/VarOperationNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/AccessModifiers.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/AccessModifiers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/DataType$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/DataType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/DataType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/MethodModifiers.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/MethodModifiers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/scriptObject/Scripts.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/scriptObject/Scripts.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/MpyVersion.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/MpyVersion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/Results/ConfigWith.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/Results/ConfigWith.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/builder/ConfigElementsBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/builder/ConfigElementsBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/loader/LiteralValueParser$Type.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/loader/LiteralValueParser$Type.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/loader/MethodHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/loader/MethodHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/loader/ValueGetter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/loader/ValueGetter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/fabric.mod.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/fabric.mod.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VarGetterNode$1.class.uniqueId6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VarGetterNode$InitType.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VarGetterNode.class.uniqueId2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VarOperationNode$1.class.uniqueId4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VarOperationNode$Expression$Operation.class.uniqueId3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VarOperationNode$Expression.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VarOperationNode.class.uniqueId5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/config/fabric/indigo-renderer.properties" beforeDir="false" afterPath="$PROJECT_DIR$/run/config/fabric/indigo-renderer.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/config/minepyloader/scripts/test.mpy" beforeDir="false" afterPath="$PROJECT_DIR$/run/config/minepyloader/scripts/test.mpy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/debug-1.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-1.log.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/debug-2.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-2.log.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/debug-3.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-3.log.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/debug-4.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-4.log.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/debug-5.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-5.log.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/latest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/options.txt" beforeDir="false" afterPath="$PROJECT_DIR$/run/options.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/DIM-1/data/raids.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/DIM-1/data/raids.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/DIM1/data/raids_end.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/DIM1/data/raids_end.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/data/raids.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/data/raids.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/data/random_sequences.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/data/random_sequences.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/entities/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/entities/r.-1.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/entities/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/entities/r.-1.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/entities/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/entities/r.0.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/entities/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/entities/r.0.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/level.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/level.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/level.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/level.dat_old" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.-1.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.-1.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.0.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.0.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/session.lock" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/session.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/usercache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usercache.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/commands/MpyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/commands/MpyCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/Variable/Variable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/Variable/Variable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/PlayerNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/PlayerNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/StringNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/StringNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/CallMethodNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/CallMethodNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/var/VarOperationNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/var/VarOperationNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/utils/loader/MethodHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/utils/loader/MethodHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/utils/loader/ValueGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/utils/loader/ValueGetter.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="MinepyLoader" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="MinepyLoader" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Fabric1.20.1" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="31mJSohQz4CPVBcm15zTyTjgG9J" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.MinepyLoader [:net.fabricmc.devlaunchinjector.Main.main()].executor": "Run",
+    "Gradle.下载源代码.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Fabric1.20.1"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveInnerDialog.RECENTS_KEY">
+      <recent name="com.ffanxxy.minepyloader.minepy.loader.Loader" />
+    </key>
+  </component>
+  <component name="RunManager" selected="应用程序.Minecraft Client">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="MinepyLoader" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="MinepyLoader" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="57f5ea7d-a34f-4860-a829-8a8076f2192d" name="更改" comment="" />
+      <created>1756123318139</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1756123318139</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.mpy" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Fabric1.20.1" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/var/VarOperationNode.java</url>
+          <line>93</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/commands/MpyCommand.java</url>
+          <line>82</line>
+          <properties class="com.ffanxxy.minepyloader.commands.MpyCommand" method="runMethodWith">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy$Line" memberName="retraction" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="GradleRunConfiguration">
+        <watch expression="line.line" language="JAVA" />
+        <watch expression="line.line" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>

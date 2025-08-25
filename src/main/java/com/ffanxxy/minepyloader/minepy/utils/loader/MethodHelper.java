@@ -1,8 +1,9 @@
 package com.ffanxxy.minepyloader.minepy.utils.loader;
 
+import com.ffanxxy.minepyloader.minepy.loader.Loader.Method;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Parameter;
-import net.minecraft.entity.ai.brain.task.PacifyTask;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,15 +18,15 @@ public class MethodHelper {
      * @param parameters 方法参数
      * @return 方法
      */
-    public static @NotNull Minepy.Method getMethod(String pathAndName, List<Parameter> parameters) {
+    public static @NotNull Method getMethod(String pathAndName, List<Parameter> parameters) {
         // 获得变量
-        List<Minepy.Method> methods = Minepy.METHODS.stream().filter(
-                m -> (m.path() + "." + m.name()).equals(pathAndName) //是否为调用的方法
+        List<Method> methods = Minepy.METHODS.stream().filter(
+                m -> (m.getPath() + "." + m.getName()).equals(pathAndName) //是否为调用的方法
         ).toList();
 
         if(methods.isEmpty()) throw new RuntimeException("Unknown method:" + pathAndName);
 
-        Minepy.Method mtd = null;
+        Method mtd = null;
 
         // 具体方法判断
         // 允许方法同名，模拟重写
@@ -34,19 +35,19 @@ public class MethodHelper {
         } else {
             // 获得精确列表
 
-            List<Minepy.Method> detailMethods;
+            List<Method> detailMethods;
             if(parameters.isEmpty()) {
                 detailMethods = methods.stream()
                         .filter(
-                                m1 -> m1.parameters().isEmpty()
+                                m1 -> m1.getParameters().isEmpty()
                         ).toList();
             } else {
                 // 精确判断
                 detailMethods = methods.stream()
                         .filter(
-                                m1 -> m1.parameters().size() == parameters.size()
+                                m1 -> m1.getParameters().size() == parameters.size()
                         ).filter(
-                                m1 -> m1.parameters().stream().allMatch(
+                                m1 -> m1.getParameters().stream().allMatch(
                                         // 参数不应该相同，因此直接判断
                                         p -> parameters.get(methods.indexOf(m1)).dataType.isSameTypeAs(p.dataType)
                                 )
@@ -62,20 +63,32 @@ public class MethodHelper {
     }
 
     /**
+     * 通过变量的一组类型获得方法
+     * @see #saveGetMethod(String, List)
+     */
+    public static @Nullable Method saveGetMethodFromVar(String pathAndName, List<Variable<?>> variables) {
+        List<Parameter> parameters = new ArrayList<>();
+        variables.forEach(
+                variable ->  parameters.add(new Parameter(variable.getDataType(), "%TEMP"))
+        );
+        return saveGetMethod(pathAndName, parameters);
+    }
+
+    /**
      * 安全地自推断方法，不会有报错，无法找到时会返回nullable
      * @param pathAndName 方法完整路径
      * @param parameters 方法参数
      * @return 方法
      */
-    public static @Nullable Minepy.Method saveGetMethod(String pathAndName, List<Parameter> parameters) {
+    public static @Nullable Method saveGetMethod(String pathAndName, List<Parameter> parameters) {
         // 获得变量
-        List<Minepy.Method> methods = Minepy.METHODS.stream().filter(
-                m -> (m.path() + "." + m.name()).equals(pathAndName) //是否为调用的方法
+        List<Method> methods = Minepy.METHODS.stream().filter(
+                m -> (m.getPath() + "." + m.getName()).equals(pathAndName) //是否为调用的方法
         ).toList();
 
         if(methods.isEmpty()) return null;
 
-        Minepy.Method mtd = null;
+        Method mtd = null;
 
         // 具体方法判断
         // 允许方法同名，模拟重写
@@ -84,19 +97,19 @@ public class MethodHelper {
         } else {
             // 获得精确列表
 
-            List<Minepy.Method> detailMethods;
+            List<Method> detailMethods;
             if(parameters.isEmpty()) {
                 detailMethods = methods.stream()
                         .filter(
-                                m1 -> m1.parameters().isEmpty()
+                                m1 -> m1.getParameters().isEmpty()
                         ).toList();
             } else {
                 // 精确判断
                 detailMethods = methods.stream()
                         .filter(
-                                m1 -> m1.parameters().size() == parameters.size()
+                                m1 -> m1.getParameters().size() == parameters.size()
                         ).filter(
-                                m1 -> m1.parameters().stream().allMatch(
+                                m1 -> m1.getParameters().stream().allMatch(
                                         // 参数不应该相同，因此直接判断
                                         p -> parameters.get(methods.indexOf(m1)).dataType.isSameTypeAs(p.dataType)
                                 )
@@ -116,11 +129,11 @@ public class MethodHelper {
      * @return 方法
      * @see #getMethod(String, List)
      */
-    public static @NotNull Minepy.Method getMethod(String name) {
+    public static @NotNull Method getMethod(String name) {
         return getMethod(name , new ArrayList<>());
     }
 
-    public static @Nullable Minepy.Method saveGetMethod(String name) {
+    public static @Nullable Method saveGetMethod(String name) {
         return saveGetMethod(name , new ArrayList<>());
     }
 
@@ -129,21 +142,21 @@ public class MethodHelper {
      * @param list 导入组
      * @return 方法组
      */
-    public static List<Minepy.Method> parserImports(List<String> list) {
+    public static List<Method> parserImports(List<String> list) {
         var methods = Minepy.METHODS;
-        List<Minepy.Method> resultMethod = new ArrayList<>();
+        List<Method> resultMethod = new ArrayList<>();
 
         for(String i : list) {
             if(i.trim().endsWith("*")) {
                 resultMethod.addAll(
                         methods.stream().filter(
-                                m -> m.path().isSamePackage(i)
+                                m -> m.getPath().isSamePackage(i)
                         ).toList()
                 );
             } else {
                 resultMethod.addAll(
                         methods.stream().filter(
-                                m -> Objects.equals(m.path() + "." + m.name(), i.trim())
+                                m -> Objects.equals(m.getPath() + "." + m.getName(), i.trim())
                         ).toList()
                 );
             }
@@ -160,17 +173,17 @@ public class MethodHelper {
      * @param parameters 形参
      * @return 方法
      */
-    public static Minepy.Method getMethodFromImports(List<String> list, String name, List<Parameter> parameters) {
+    public static Method getMethodFromImports(List<String> list, String name, List<Parameter> parameters) {
         var Methods = parserImports(list);
 
         // 获得变量
-        List<Minepy.Method> methods = Methods.stream().filter(
-                m -> m.name().equals(name) //是否为调用的方法
+        List<Method> methods = Methods.stream().filter(
+                m -> m.getName().equals(name) //是否为调用的方法
         ).toList();
 
         if(methods.isEmpty()) throw new RuntimeException("Unknown method:" + name);
 
-        Minepy.Method mtd = null;
+        Method mtd = null;
 
         // 具体方法判断
         // 允许方法同名，模拟重写
@@ -179,19 +192,19 @@ public class MethodHelper {
         } else {
             // 获得精确列表
 
-            List<Minepy.Method> detailMethods;
+            List<Method> detailMethods;
             if(parameters.isEmpty()) {
                 detailMethods = methods.stream()
                         .filter(
-                                m1 -> m1.parameters().isEmpty()
+                                m1 -> m1.getParameters().isEmpty()
                         ).toList();
             } else {
                 // 精确判断
                 detailMethods = methods.stream()
                         .filter(
-                                m1 -> m1.parameters().size() == parameters.size()
+                                m1 -> m1.getParameters().size() == parameters.size()
                         ).filter(
-                                m1 -> m1.parameters().stream().allMatch(
+                                m1 -> m1.getParameters().stream().allMatch(
                                         // 参数不应该相同，因此直接判断
                                         p -> parameters.get(methods.indexOf(m1)).dataType.isSameTypeAs(p.dataType)
                                 )
@@ -211,9 +224,9 @@ public class MethodHelper {
      * @param method 方法
      * @return 全名
      */
-    public static String getMethodFullName(Minepy.Method method) {
+    public static String getMethodFullName(Method method) {
         StringBuilder paras = new StringBuilder();
-        var paraList = method.parameters();
+        var paraList = method.getParameters();
 
         for (int i = 0; i < paraList.size(); i++) {
             paras.append(paraList.get(i).dataType.getName());
@@ -221,6 +234,6 @@ public class MethodHelper {
                 paras.append(", ");
             }
         }
-        return method.path() + "." + method.name() + "(" + paras + ")";
+        return method.getPath() + "." + method.getName() + "(" + paras + ")";
     }
 }

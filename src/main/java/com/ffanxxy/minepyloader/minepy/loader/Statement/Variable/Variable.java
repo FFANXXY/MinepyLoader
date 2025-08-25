@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @SuppressWarnings("unchecked")
 public class Variable<T> {
@@ -181,6 +182,7 @@ public class Variable<T> {
     @Override
     public String toString() {
         if(value == null) return null;
+        if(value instanceof Character c) return Character.toString(c);
         return value.toString();
     }
 
@@ -212,6 +214,13 @@ public class Variable<T> {
         } else {
             return ofFloat(name, Float.parseFloat(toString()));
         }
+    }
+
+    public Variable<Boolean> InvertBoolean() {
+        if(this.isSameDataType(DataType.BOOLEAN)) {
+            this.getAsBoolean().value = !this.getAsBoolean().getValue();
+        }
+        return this.getAsBoolean();
     }
 
 
@@ -331,6 +340,16 @@ public class Variable<T> {
 
     public Variable<Boolean> isEqual(Variable<?> variable) {
         int result = compareTo(variable);
+
+        if(result == 101) {
+            if(!variable.isSameDataType(variable)) {
+                if(this.dataType.isString() && variable.dataType.isString()) {
+                    return ofBoolean("%TEMP", Objects.equals(this.toString(), variable.toString()));
+                }
+            } else if(this.isSameDataType(DataType.STRING)) {
+                return ofBoolean("%TEMP", Objects.equals(this.toString(), variable.toString()));
+            }
+        }
 
         return switch (result) {
             case 0 -> ofBoolean("%TEMP",true);

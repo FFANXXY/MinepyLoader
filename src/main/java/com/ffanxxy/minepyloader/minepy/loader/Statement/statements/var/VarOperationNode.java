@@ -60,6 +60,7 @@ public class VarOperationNode implements RunnableNode {
             MORE(">"),
             LESS("<"),
             EQUAL("=="),
+            NOT_EQUAL("!="),
             AND("&&"),
             OR("\\|\\|");
 
@@ -89,6 +90,7 @@ public class VarOperationNode implements RunnableNode {
             case MORE_OR_EQUAL -> left.isMoreThanOrEqual(right);
             case LESS_OR_EQUAL -> left.isLessThanOrEqual(right);
             case EQUAL -> left.isEqual(right);
+            case NOT_EQUAL -> left.isEqual(right).InvertBoolean();
             case AND ->  left.and(right);
         };
     }

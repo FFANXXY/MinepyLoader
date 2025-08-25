@@ -18,13 +18,18 @@ public class StringNode extends MethodNode {
     @Override
     public @NotNull MethodParametersBuilder getPlansBuilder(MethodParametersBuilder builder) {
         builder.add("new", DataType.STRING);
+        builder.add("of", DataType.OBJECT);
+        builder.add("lengthOf",DataType.STRING);
+        builder.add("charAt", DataType.STRING, DataType.INT);
         return builder;
     }
 
     @Override
     public @NotNull Variable<?> run(String plan, List<Variable<?>> variables) {
         return switch (plan) {
-            case "new" -> Variable.ofString("%Temp", variables.get(0).toString());
+            case "new", "of" -> Variable.ofString("%Temp", variables.get(0).toString());
+            case "lengthOf" -> Variable.ofInteger("%Temp", variables.get(0).toString().length());
+            case "charAt" -> Variable.ofChar("%Temp", variables.get(0).toString().charAt(variables.get(1).getAsInt().getValue()));
             default -> Variable.VOID();
         };
     }
