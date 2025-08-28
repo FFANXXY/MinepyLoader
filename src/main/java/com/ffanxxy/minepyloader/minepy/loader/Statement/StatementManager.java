@@ -2,8 +2,11 @@ package com.ffanxxy.minepyloader.minepy.loader.Statement;
 
 import com.ffanxxy.minepyloader.minepy.loader.Loader.ScriptParserLineContext;
 import com.ffanxxy.minepyloader.minepy.loader.PackageStructure;
-import com.ffanxxy.minepyloader.minepy.loader.Parser.ArgumentTypeParser;
+import com.ffanxxy.minepyloader.minepy.loader.Parser.ArgumentParser;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.*;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.control.ForNode;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.control.IfNode;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.control.WhileNode;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.method.CallMethodNode;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.var.AssignmentNode;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.var.VarGetterNode;
@@ -12,8 +15,6 @@ import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
 import com.ffanxxy.minepyloader.minepy.utils.loader.LiteralValueParser;
 
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * 获得语句，将语句作为一个{@link RunnableNode}传出，并设置形参的索引。
@@ -66,7 +67,7 @@ public class StatementManager {
             case METHOD_CALL -> parseMethod(context);
             // 变量声明
             case VARIABLE_DECLARATION -> parseVariableDeclaration(context);
-            case VARIABLE_OPERATION -> parseVarOperation(context);
+            case VARIABLE_OPERATION -> parseVarAssignment(context);
             case CONTROL_STATEMENT -> parseControlNode(context);
         };
     }
@@ -87,6 +88,8 @@ public class StatementManager {
             return new IfNode(substring, context);
         } else if(line.startsWith("while")) {
             return new WhileNode(substring, context);
+        } else if(line.startsWith("for")) {
+           return new ForNode(substring, context);
         } else {
             throw new RuntimeException();
         }
@@ -94,15 +97,33 @@ public class StatementManager {
     }
 
 
-    public static AssignmentNode parseVarOperation(ScriptParserLineContext context) {
-        String line = context.line();
+    public static AssignmentNode parseVarAssignment(ScriptParserLineContext context) {
+        String line = context.line().trim();
+        if(line.length() < 3) throw  new RuntimeException("Are you serious ?? : " + line);
 
         int spi = line.indexOf("=");
 
-        if(spi == -1) throw new RuntimeException(line + " is not any statement");
+        if(spi == -1) {
+            String factName = line.substring(0, line.length() - 2).trim();
+            if(line.endsWith("++")) {
+                return new AssignmentNode(factName, getVarGetterNode(factName + "+1", context));
+            } else if(line.endsWith("--")) {
+                return new AssignmentNode(factName, getVarGetterNode(factName + "-1", context));
+            } else {
+                throw new RuntimeException("Unknown Operation: " + line);
+            }
+        }
 
         String value = line.substring(spi + 1).trim();
         String name = line.substring(0,spi).trim();
+
+
+        // 是否为?=
+        if(name.matches("[\\w_]+(\\s)*[+\\-*/]")) {
+            char operation = name.charAt(name.length() - 1);
+            name = name.substring(0,name.length() - 1).trim();
+            value = value + operation + name;
+        }
 
         return new AssignmentNode(name, getVarGetterNode(value, context));
     }
@@ -120,7 +141,16 @@ public class StatementManager {
         if(spi != -1) {
             value = line.substring(spi + 1).trim();
             List<String> defines =  Arrays.stream(line.substring(0,spi).trim().split("\\s+")).map(String::trim).toList();
-            DataType dataType = DataType.fromName(defines.get(0));
+            String inputDataType = defines.get(0).trim();
+
+            DataType dataType;
+
+            if(inputDataType.endsWith("[]")) {
+                dataType = DataType.LIST;
+                dataType.setChild(DataType.fromName(inputDataType.substring(0, inputDataType.length() - 2)));
+            } else {
+                dataType = DataType.fromName(inputDataType);
+            }
             String name = defines.get(1);
             // 初始化
             VarGetterNode v1 = getVarGetterNode(value, context);
@@ -137,26 +167,31 @@ public class StatementManager {
     }
 
     /**
-     * 获得变量赋值节点
+     * 通过一个参数，获得变量赋值节点
      * @param value 值
      * @return 节点
      */
     public static VarGetterNode getVarGetterNode(String value, ScriptParserLineContext context) {
+        if(value.startsWith("[") && value.endsWith("]")) {
+            return new VarGetterNode(VarGetterNode.InitType.LIST, value.substring(1, value.length() - 1), context);
+        }
+
+        if(value.endsWith("]")) {
+            String valueName = value.substring(0, value.indexOf("["));
+            String index = value.substring(value.indexOf("[") + 1,value.lastIndexOf("]"));
+
+           return new VarGetterNode(VarGetterNode.InitType.METHOD, "mpy.List.get(" + valueName + "," + index + ")" , context);
+        }
+
         // 以 “" 包围的字面量
         if (value.startsWith("\"") && value.endsWith("\"")) {
             // Type is String, get context as String to create VIN
             return new VarGetterNode(VarGetterNode.InitType.LIT_STRING, value.substring(1, value.length() - 1), context);
         } else if (value.startsWith("'") && value.endsWith("'")) {
             return new VarGetterNode(VarGetterNode.InitType.LIT_CHAR, value.substring(1,2), context);
-        } else if (value.equals("true")) {
-            // if value equals true
-            return new VarGetterNode(VarGetterNode.InitType.LIT_BOOLEAN, "true", context);
-        } else if (value.equals("false")) {
-            // equals false
-            return new VarGetterNode(VarGetterNode.InitType.LIT_BOOLEAN, "false", context);
-        } else if (value.equals("null")) {
-            /// isNull
-            return new VarGetterNode(VarGetterNode.InitType.LIT_NULL, "null", context);
+        } else if (value.equals("true") || value.equals("false") || value.equals("null")) {
+            // if value equals true/false/null
+            return new VarGetterNode(VarGetterNode.InitType.LIT_BOOLEAN, value, context);
         } else if (LiteralValueParser.getNumberType(value) == LiteralValueParser.Type.INT) {
             // get NumberType if it is int
             return new VarGetterNode(VarGetterNode.InitType.LIT_INT, value, context);
@@ -166,7 +201,7 @@ public class StatementManager {
         } else if (detectCodeType(value) == CodeType.METHOD_CALL) {
             // 方法调用，例如Entity.new()
             return new VarGetterNode(VarGetterNode.InitType.METHOD, value, context);
-        } else if (value.matches("[a-zA-Z_][a-zA-Z0-9_]*")) {
+        } else if (value.matches("[a-zA-Z_][a-zA-Z0-9_]*(\\[])?")) {
             // 选自变量
             return new VarGetterNode(VarGetterNode.InitType.VAR, value, context);
         } else {
@@ -187,16 +222,33 @@ public class StatementManager {
         String methodName;
         if(who.contains(".")) {
             methodName = who.substring(0, who.lastIndexOf("."));
+
+            // 判断是否为变量
+            if (defineContext.containsKey(PackageStructure.create(who).getFirst())) {
+                // 判断方法内容
+                String method = who.substring(who.indexOf(".") + 1);
+                String varName = PackageStructure.create(who).getFirst();
+                String args = line.substring(line.indexOf("(") + 1).trim();
+
+                if(!args.substring(0, args.lastIndexOf(")")).trim().isEmpty()) {
+                    args = "," + args;
+                }
+
+                String newLine = "mpy." + defineContext.get(varName).getName() + "." + method + "(" + varName +  args;
+
+                return parserInternalMethods(newLine, ScriptParserLineContext.createWithNewLine(context, newLine));
+            }
         } else {
             methodName = who;
         }
+
 
 
         if(InternalMethods.contains(methodName)) {
             return parserInternalMethods(line, context);
         }
 
-        return new CallMethodNode(who, new ArgumentTypeParser(context).getParameters(), defineContext);
+        return new CallMethodNode(who, new ArgumentParser(context).getArguments(), defineContext);
     }
 
 
@@ -208,7 +260,7 @@ public class StatementManager {
             who = "mpy." + who;
         }
 
-        return InternalMethods.get(who, new ArgumentTypeParser(context).getParameters(), context);
+        return InternalMethods.get(who, new ArgumentParser(context).getArguments(), context);
     }
 
 
@@ -249,7 +301,7 @@ public class StatementManager {
     // 辅助方法：检测变量声明
     private static boolean isVariableDeclaration(String s) {
         // 匹配基本类型 + 变量名 [+ 初始化]
-        String regex = "^(String|int|double|float|byte|boolean|Block|BlockEntity|BlockState|Entity|Player|Text|Item|ItemStack|World|char)\\s+[a-zA-Z_]\\w*\\s*(=\\s*[^;]+)?\\s*$";
+        String regex = "^(String|int|double|float|byte|boolean|Block|BlockEntity|BlockState|Entity|Player|Text|Item|ItemStack|World|char)(\\[])?\\s+[a-zA-Z_]\\w*\\s*(=\\s*[^;]+)?\\s*$";
         return s.matches(regex);
     }
 

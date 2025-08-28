@@ -14,8 +14,8 @@ public class AssignmentNode implements RunnableNode {
 
 
     // 赋值
-    public AssignmentNode(String name, VarGetterNode varGetterNode) {
-        this.name = name;
+    public AssignmentNode(String objectName, VarGetterNode varGetterNode) {
+        this.name = objectName;
         this.varGetterNode = varGetterNode;
     }
 

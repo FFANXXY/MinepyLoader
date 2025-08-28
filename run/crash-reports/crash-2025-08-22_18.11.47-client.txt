@@ -17,7 +17,7 @@ java.lang.RuntimeException: Could not execute entrypoint stage 'main' due to err
 	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86)
 Caused by: java.lang.NullPointerException: Cannot invoke "String.hashCode()" because "<local4>" is null
 	at knot//com.ffanxxy.minepyloader.minepy.loader.Statement.statements.method.LoggerNode.run(LoggerNode.java:34)
-	at knot//com.ffanxxy.minepyloader.minepy.loader.Statement.statements.method.MethodNode.runWithArg(MethodNode.java:79)
+	at knot//com.ffanxxy.minepyloader.minepy.loader.Statement.statements.method.MethodsNode.runWithArg(MethodNode.java:79)
 	at knot//com.ffanxxy.minepyloader.minepy.loader.Loader.Runnable.Statement.run(Statement.java:19)
 	at knot//com.ffanxxy.minepyloader.minepy.loader.Loader.Runnable.Statements.runWithArg(Statements.java:46)
 	at knot//com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy$Method.runStatic(Minepy.java:74)

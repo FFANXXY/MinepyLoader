@@ -3,8 +3,8 @@ package com.ffanxxy.minepyloader.minepy.loader.Loader.Runnable;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.BreakNode;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.ControlNode;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.IfNode;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.control.ControlNode;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.control.IfNode;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.ReturnNode;
 
 import java.util.ArrayList;

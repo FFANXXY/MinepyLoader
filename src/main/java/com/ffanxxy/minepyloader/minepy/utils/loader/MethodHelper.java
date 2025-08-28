@@ -4,6 +4,7 @@ import com.ffanxxy.minepyloader.minepy.loader.Loader.Method;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Parameter;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,10 +16,10 @@ public class MethodHelper {
     /**
      * 自推断方法
      * @param pathAndName 方法完整路径
-     * @param parameters 方法参数
+     * @param dataTypes 输入的参数数据类型
      * @return 方法
      */
-    public static @NotNull Method getMethod(String pathAndName, List<Parameter> parameters) {
+    public static @NotNull Method getMethod(String pathAndName, List<DataType> dataTypes) {
         // 获得变量
         List<Method> methods = Minepy.METHODS.stream().filter(
                 m -> (m.getPath() + "." + m.getName()).equals(pathAndName) //是否为调用的方法
@@ -26,40 +27,43 @@ public class MethodHelper {
 
         if(methods.isEmpty()) throw new RuntimeException("Unknown method:" + pathAndName);
 
-        Method mtd = null;
-
         // 具体方法判断
         // 允许方法同名，模拟重写
         if(methods.size() == 1) {
-            mtd = methods.get(0);
+            return methods.get(0);
         } else {
             // 获得精确列表
 
             List<Method> detailMethods;
-            if(parameters.isEmpty()) {
+            if(dataTypes.isEmpty()) {
                 detailMethods = methods.stream()
                         .filter(
                                 m1 -> m1.getParameters().isEmpty()
                         ).toList();
+                if(!detailMethods.isEmpty()) return detailMethods.get(0);
+                else throw new RuntimeException("There are too many methods, what it really represent: " + pathAndName);
             } else {
                 // 精确判断
                 detailMethods = methods.stream()
                         .filter(
-                                m1 -> m1.getParameters().size() == parameters.size()
-                        ).filter(
-                                m1 -> m1.getParameters().stream().allMatch(
-                                        // 参数不应该相同，因此直接判断
-                                        p -> parameters.get(methods.indexOf(m1)).dataType.isSameTypeAs(p.dataType)
-                                )
+                                m1 -> m1.getParameters().size() == dataTypes.size()
                         ).toList();
+                for(Method method : detailMethods) {
+                    boolean isSameDataType = true;
+                    for (int i = 0; i < method.getParameters().size(); i++) {
+                        Parameter methodParameter = method.getParameters().get(i);
+                        DataType inputDataType = dataTypes.get(i);
+
+                        isSameDataType = isSameDataType && methodParameter.dataType.isSameTypeAs(inputDataType);
+                    }
+                    if(isSameDataType) {
+                       return method;
+                    }
+                }
+                // 循环结束
+                throw new RuntimeException("There are no known methods that meet the parameters: " + pathAndName);
             }
-
-            if(detailMethods.isEmpty()) throw new RuntimeException("There are no known methods that meet the parameters: " + pathAndName);
-            if(detailMethods.size() > 1) throw new RuntimeException("Surprising err: too more methods has same parameters: " + pathAndName);
-
-            mtd = detailMethods.get(0);
         }
-        return mtd;
     }
 
     /**
@@ -67,60 +71,33 @@ public class MethodHelper {
      * @see #saveGetMethod(String, List)
      */
     public static @Nullable Method saveGetMethodFromVar(String pathAndName, List<Variable<?>> variables) {
-        List<Parameter> parameters = new ArrayList<>();
+        List<DataType> datatypes = new ArrayList<>();
         variables.forEach(
-                variable ->  parameters.add(new Parameter(variable.getDataType(), "%TEMP"))
+                variable ->  datatypes.add(variable.getDataType())
         );
-        return saveGetMethod(pathAndName, parameters);
+        return saveGetMethod(pathAndName, datatypes);
+    }
+
+    public static @NotNull Method getMethodFromVar(String pathAndName, List<Variable<?>> variables) {
+        List<DataType> datatypes = new ArrayList<>();
+        variables.forEach(
+                variable ->  datatypes.add(variable.getDataType())
+        );
+        return getMethod(pathAndName, datatypes);
     }
 
     /**
      * 安全地自推断方法，不会有报错，无法找到时会返回nullable
      * @param pathAndName 方法完整路径
-     * @param parameters 方法参数
+     * @param dataTypes 方法参数
      * @return 方法
      */
-    public static @Nullable Method saveGetMethod(String pathAndName, List<Parameter> parameters) {
-        // 获得变量
-        List<Method> methods = Minepy.METHODS.stream().filter(
-                m -> (m.getPath() + "." + m.getName()).equals(pathAndName) //是否为调用的方法
-        ).toList();
-
-        if(methods.isEmpty()) return null;
-
-        Method mtd = null;
-
-        // 具体方法判断
-        // 允许方法同名，模拟重写
-        if(methods.size() == 1) {
-            mtd = methods.get(0);
-        } else {
-            // 获得精确列表
-
-            List<Method> detailMethods;
-            if(parameters.isEmpty()) {
-                detailMethods = methods.stream()
-                        .filter(
-                                m1 -> m1.getParameters().isEmpty()
-                        ).toList();
-            } else {
-                // 精确判断
-                detailMethods = methods.stream()
-                        .filter(
-                                m1 -> m1.getParameters().size() == parameters.size()
-                        ).filter(
-                                m1 -> m1.getParameters().stream().allMatch(
-                                        // 参数不应该相同，因此直接判断
-                                        p -> parameters.get(methods.indexOf(m1)).dataType.isSameTypeAs(p.dataType)
-                                )
-                        ).toList();
-            }
-
-            if(detailMethods.size() != 1) return null;
-
-            mtd = detailMethods.get(0);
+    public static @Nullable Method saveGetMethod(String pathAndName, List<DataType> dataTypes) {
+        try {
+            return getMethod(pathAndName,dataTypes);
+        } catch (RuntimeException e) {
+            return null;
         }
-        return mtd;
     }
 
     /**

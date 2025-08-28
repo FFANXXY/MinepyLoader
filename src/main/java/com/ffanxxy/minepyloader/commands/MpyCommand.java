@@ -20,6 +20,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class MpyCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher,
@@ -68,16 +70,21 @@ public class MpyCommand {
             );
             return 0;
         }
-        Variable<?> variable = method.run(new HashMap<>());
+        CompletableFuture<Variable<?>> future = method.run(new HashMap<>());
 
-        if(!variable.isVoid()) {
-            ctx.getSource().sendFeedback(
-                    () -> Text.literal("方法输出了返回值: " + variable.toString()).formatted(Formatting.GRAY),
-                    true
-            );
+        try {
+            Variable<?> variable = future.get();
+            if(!variable.isVoid()) {
+                ctx.getSource().sendFeedback(
+                        () -> Text.literal("方法输出了返回值: " + variable).formatted(Formatting.GRAY),
+                        true
+                );
+            }
+
+            return 1;
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
         }
-
-        return 1;
     }
 
     public static int runMethodWith(CommandContext<ServerCommandSource> ctx) {
@@ -106,16 +113,21 @@ public class MpyCommand {
             return 0;
         }
 
-        Variable<?> variable = method.run(resultRunArgs);
+        var future = method.run(resultRunArgs);
 
-        if(!variable.isVoid()) {
-            ctx.getSource().sendFeedback(
-                    () -> Text.literal("方法输出了返回值: " + variable.toString()).formatted(Formatting.GRAY),
-                    true
-            );
+        try {
+            Variable<?> variable = future.get();
+
+            if(!variable.isVoid()) {
+                ctx.getSource().sendFeedback(
+                        () -> Text.literal("方法输出了返回值: " + variable.toString()).formatted(Formatting.GRAY),
+                        true
+                );
+            }
+            return 1;
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
         }
-
-        return 1;
     }
 
     private static @Nullable Map<Minepy.ScopeAndName, Variable<?>> getRunArgs(List<Variable<?>> vars, Method method) {

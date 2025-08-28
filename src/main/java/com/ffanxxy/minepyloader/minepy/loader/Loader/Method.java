@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * 方法的存储类，用于查找
@@ -24,6 +25,7 @@ import java.util.Objects;
 public final class Method {
 
     private final ScriptPackage path;
+
     private final AccessModifiers accessModifiers;
     private final List<MethodModifiers> modifiers;
     private final String name;
@@ -68,26 +70,30 @@ public final class Method {
         }
     }
 
-    public Variable<?> run(Map<Minepy.ScopeAndName, Variable<?>> variableMap) {
-        // 获得运行结果
-        Variable<?> backvar = statements.run(variableMap);
-        // 类型判断
-        if (backvar.getDataType().isSameTypeAs(this.type)) {
-            return backvar;
-        } else {
+    public CompletableFuture<Variable<?>> run(Map<Minepy.ScopeAndName, Variable<?>> variableMap) {
+        return CompletableFuture.supplyAsync(
+                () -> {
+                    // 获得运行结果
+                    Variable<?> returnValue = statements.run(variableMap);
+                    // 类型判断
+                    if (returnValue.getDataType().isSameTypeAs(this.type)) {
+                        return returnValue;
+                    } else {
 
-            // 模拟继承关系
-            if (this.type == DataType.OBJECT) {
-                return backvar;
-            } else if ((backvar.isSameDataType(DataType.FLOAT) || backvar.isSameDataType(DataType.INT)) && this.type == DataType.DOUBLE) {
-                return Variable.ofDouble("%TEMP", Double.parseDouble(backvar.toString()));
-            } else if (backvar.isSameDataType(DataType.INT) && this.type == DataType.FLOAT) {
-                return Variable.ofFloat("%TEMP", Float.parseFloat(backvar.toString()));
-            }
+                        // 模拟继承关系
+                        if (this.type == DataType.OBJECT) {
+                            return returnValue;
+                        } else if ((returnValue.isSameDataType(DataType.FLOAT) || returnValue.isSameDataType(DataType.INT)) && this.type == DataType.DOUBLE) {
+                            return Variable.ofDouble("%TEMP", Double.parseDouble(returnValue.toString()));
+                        } else if (returnValue.isSameDataType(DataType.INT) && this.type == DataType.FLOAT) {
+                            return Variable.ofFloat("%TEMP", Float.parseFloat(returnValue.toString()));
+                        }
 
-            throw new RuntimeException("Return Value is not same as its define type: " + MethodHelper.getMethodFullName(this) +
-                    " needs " + this.type + " ,in fact: " + backvar.getDataType());
-        }
+                        throw new RuntimeException("Return Value is not same as its define type: " + MethodHelper.getMethodFullName(this) +
+                                " needs " + this.type + " ,in fact: " + returnValue.getDataType());
+                    }
+                }
+        );
     }
 
     public ScriptPackage getPath() {
@@ -119,11 +125,7 @@ public final class Method {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (Method) obj;
-        return Objects.equals(this.path, that.path) &&
-                Objects.equals(this.accessModifiers, that.accessModifiers) &&
-                Objects.equals(this.name, that.name) &&
-                Objects.equals(this.type, that.type) &&
-                Objects.equals(this.parameters, that.parameters);
+        return that.path.isSamePackage(((Method) obj).path.toString());
     }
 
     @Override

@@ -8,7 +8,7 @@ import com.ffanxxy.minepyloader.minepy.loader.ScriptPackage;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.StatementManager;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Parameter;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.ControlNode;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.control.ControlNode;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.var.VariableDeclarationNode;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.AccessModifiers;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
@@ -145,7 +145,7 @@ public class Minepy {
                  */
                 if(manager.getCodeType() == StatementManager.CodeType.VARIABLE_DECLARATION) {
                     if(manager.get() instanceof VariableDeclarationNode node) {
-                        defineVarContext.put(node.getName(), node.getDataType());
+                        defineVarContext.put(node.getVarName(), node.getDataType());
                     }
                 } else if(manager.getCodeType() == StatementManager.CodeType.CONTROL_STATEMENT) {
                     controlNodesPlans.add((ControlNode) manager.get());

@@ -10,26 +10,26 @@ import java.util.Map;
 public class VariableDeclarationNode implements RunnableNode {
 
     private final DataType dataType;
-    private final String name;
+    private final String varName;
     private final VarGetterNode node;
 
     public DataType getDataType() {
         return this.dataType;
     }
 
-    public String getName() {
-        return this.name;
+    public String getVarName() {
+        return this.varName;
     }
 
-    public VariableDeclarationNode(DataType dataType, String name) {
+    public VariableDeclarationNode(DataType dataType, String varName) {
         this.dataType = dataType;
-        this.name = name;
+        this.varName = varName;
         this.node = null;
     }
 
-    public VariableDeclarationNode(DataType dataType, String name, VarGetterNode value) {
+    public VariableDeclarationNode(DataType dataType, String varName, VarGetterNode value) {
         this.dataType = dataType;
-        this.name = name;
+        this.varName = varName;
         this.node = value;
     }
 
@@ -38,7 +38,7 @@ public class VariableDeclarationNode implements RunnableNode {
         Variable<?> variable;
 
         if(node != null) {
-            variable = Variable.create(this.name, node.runWithArg(variableMap));
+            variable = Variable.create(this.varName, node.runWithArg(variableMap));
             // Double转Float
             // 对象转换处理
             if ((variable.isSameDataType(DataType.DOUBLE) || variable.isSameDataType(DataType.LITERAL_DOUBLE)) &&
@@ -47,7 +47,7 @@ public class VariableDeclarationNode implements RunnableNode {
             }
 
         } else {
-            variable = Variable.create(this.name, dataType);
+            variable = Variable.create(this.varName, dataType);
         }
 
         variableMap.put(new Minepy.ScopeAndName(1, variable.getName()), variable);

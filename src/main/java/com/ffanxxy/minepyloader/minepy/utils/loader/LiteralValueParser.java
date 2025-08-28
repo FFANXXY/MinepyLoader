@@ -26,6 +26,8 @@ public class LiteralValueParser {
             return getNumberType(value);
         } else if(StatementManager.detectCodeType(value) == StatementManager.CodeType.METHOD_CALL) {
             return Type.METHOD_CALL;
+        } else if(value.endsWith("]")) {
+            return Type.LIST;
         } else {
             return Type.ELSE;
         }
@@ -39,6 +41,7 @@ public class LiteralValueParser {
         INT,
         BOOLEAN,
         METHOD_CALL,
+        LIST,
         ELSE;
     }
 

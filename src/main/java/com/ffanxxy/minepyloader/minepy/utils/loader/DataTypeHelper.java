@@ -22,6 +22,11 @@ public class DataTypeHelper {
 
     public static DataType getDataTypeFromDefines(String name, Map<String, DataType> defineContext) {
         // 备选DataType.VAR，防止无法检测到上下文中的变量
+
+        // 列表
+        if(name.endsWith("]")) {
+            return defineContext.get(name.substring(0,name.indexOf("["))).getChild();
+        }
         return defineContext.getOrDefault(name, DataType.VAR);
     }
 }

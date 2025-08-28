@@ -9,7 +9,6 @@ public enum DataType {
     DOUBLE("double"),
     BOOLEAN("boolean"),
     LIST("List"),
-    ARRAY("Array"),
     MAP("Map"),
     BYTE("byte"),
     // 其它数据类型
@@ -50,6 +49,8 @@ public enum DataType {
 
     private final String name;
 
+    private DataType child;
+
     DataType(String name) {
         this.name = name;
     }
@@ -63,6 +64,14 @@ public enum DataType {
         throw new IllegalArgumentException("Invalid data type:" + name);
     }
 
+    public DataType getChild() {
+        return child;
+    }
+
+    public DataType setChild(DataType child) {
+        this.child = child;
+        return this;
+    }
 
     public String getName() {
         return name;

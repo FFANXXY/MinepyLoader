@@ -5,7 +5,8 @@ import java.util.Arrays;
 public enum MethodModifiers {
 
     LOAD("load"),
-    INGAME("ingame");
+    INGAME("ingame"),
+    STATIC("static");
 
     private final String name;
 

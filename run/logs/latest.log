@@ -1,6 +1,6 @@
-[23:10:35] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 1.20.1 with Fabric Loader 0.17.2
-[23:10:36] [ForkJoinPool-1-worker-1/WARN] (FabricLoader/Metadata) Mod minepyloader uses the version ALPHA-0.0.3-all which isn't compatible with Loader's extended semantic version format (Could not parse version number component 'ALPHA'!), SemVer is recommended for reliably evaluating dependencies and prioritizing newer version
-[23:10:37] [main/INFO] (FabricLoader) Loading 59 mods:
+[22:54:31] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 1.20.1 with Fabric Loader 0.17.2
+[22:54:31] [ForkJoinPool-1-worker-1/WARN] (FabricLoader/Metadata) Mod minepyloader uses the version ALPHA-0.0.3.5 which isn't compatible with Loader's extended semantic version format (Could not parse version number component 'ALPHA'!), SemVer is recommended for reliably evaluating dependencies and prioritizing newer version
+[22:54:32] [main/INFO] (FabricLoader) Loading 59 mods:
 	- fabric-api 0.92.6+1.20.1
 	- fabric-api-base 0.4.32+1802ada577
 	- fabric-api-lookup-api-v1 1.6.37+1802ada577
@@ -58,51 +58,18 @@
 	- fabricloader 0.17.2
 	- java 17
 	- minecraft 1.20.1
-	- minepyloader ALPHA-0.0.3-all
+	- minepyloader ALPHA-0.0.3.5
 	- mixinextras 0.5.0
-[23:10:37] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/C:/Users/MMSY/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.16.3+mixin.0.8.7/3e535042688d1265447e52ad86950b7d9678a5fa/sponge-mixin-0.16.3+mixin.0.8.7.jar Service=Knot/Fabric Env=CLIENT
-[23:10:38] [main/INFO] (FabricLoader/Mixin) Loaded Fabric development mappings for mixin remapper!
-[23:10:38] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_16
-[23:10:38] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_17
-[23:10:42] [main/INFO] (FabricLoader/MixinExtras|Service) Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.0).
-[23:11:01] [Datafixer Bootstrap/INFO] (Minecraft) 188 Datafixer optimizations took 2371 milliseconds
-[23:11:07] [Render thread/INFO] (Minecraft) Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
-[23:11:08] [Yggdrasil Key Fetcher/ERROR] (Minecraft) Failed to request yggdrasil public key
-com.mojang.authlib.exceptions.AuthenticationUnavailableException: Cannot contact authentication server
-	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:119) ~[authlib-4.0.43.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:91) ~[authlib-4.0.43.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilServicesKeyInfo.fetch(YggdrasilServicesKeyInfo.java:94) ~[authlib-4.0.43.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilServicesKeyInfo.lambda$get$1(YggdrasilServicesKeyInfo.java:81) ~[authlib-4.0.43.jar:?]
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539) ~[?:?]
-	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:305) ~[?:?]
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305) ~[?:?]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[?:?]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[?:?]
-	at java.lang.Thread.run(Thread.java:840) ~[?:?]
-Caused by: java.net.UnknownHostException: api.minecraftservices.com
-	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:572) ~[?:?]
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327) ~[?:?]
-	at java.net.Socket.connect(Socket.java:633) ~[?:?]
-	at sun.security.ssl.SSLSocketImpl.connect(SSLSocketImpl.java:304) ~[?:?]
-	at sun.net.NetworkClient.doConnect(NetworkClient.java:178) ~[?:?]
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:533) ~[?:?]
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:638) ~[?:?]
-	at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:266) ~[?:?]
-	at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:380) ~[?:?]
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:193) ~[?:?]
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1303) ~[?:?]
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1144) ~[?:?]
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:179) ~[?:?]
-	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1703) ~[?:?]
-	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1627) ~[?:?]
-	at sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:224) ~[?:?]
-	at com.mojang.authlib.HttpAuthenticationService.performGetRequest(HttpAuthenticationService.java:140) ~[authlib-4.0.43.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:96) ~[authlib-4.0.43.jar:?]
-	... 9 more
-[23:11:08] [Render thread/ERROR] (Minecraft) Failed to verify authentication
-com.mojang.authlib.exceptions.AuthenticationException: com.mojang.authlib.exceptions.MinecraftClientException: Failed to read from https://api.minecraftservices.com/player/attributes due to api.minecraftservices.com
-	at com.mojang.authlib.exceptions.MinecraftClientException.toAuthenticationException(MinecraftClientException.java:28) ~[authlib-4.0.43.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilUserApiService.fetchProperties(YggdrasilUserApiService.java:160) ~[authlib-4.0.43.jar:?]
+[22:54:32] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/C:/Users/MMSY/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.16.3+mixin.0.8.7/3e535042688d1265447e52ad86950b7d9678a5fa/sponge-mixin-0.16.3+mixin.0.8.7.jar Service=Knot/Fabric Env=CLIENT
+[22:54:33] [main/INFO] (FabricLoader/Mixin) Loaded Fabric development mappings for mixin remapper!
+[22:54:33] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_17
+[22:54:37] [main/INFO] (FabricLoader/MixinExtras|Service) Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.0).
+[22:54:52] [Datafixer Bootstrap/INFO] (Minecraft) 188 Datafixer optimizations took 2039 milliseconds
+[22:54:55] [Render thread/INFO] (Minecraft) Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[22:54:58] [Render thread/ERROR] (Minecraft) Failed to verify authentication
+com.mojang.authlib.exceptions.InvalidCredentialsException: Status: 401
+	at com.mojang.authlib.exceptions.MinecraftClientHttpException.toAuthenticationException(MinecraftClientHttpException.java:56) ~[authlib-4.0.43.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilUserApiService.fetchProperties(YggdrasilUserApiService.java:156) ~[authlib-4.0.43.jar:?]
 	at com.mojang.authlib.yggdrasil.YggdrasilUserApiService.<init>(YggdrasilUserApiService.java:55) ~[authlib-4.0.43.jar:?]
 	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.createUserApiService(YggdrasilAuthenticationService.java:124) ~[authlib-4.0.43.jar:?]
 	at net.minecraft.client.MinecraftClient.createUserApiService(MinecraftClient.java:733) ~[minecraft-merged-7787b014d4-1.20.1-net.fabricmc.yarn.1_20_1.1.20.1+build.10-v2.jar:?]
@@ -112,282 +79,45 @@ com.mojang.authlib.exceptions.AuthenticationException: com.mojang.authlib.except
 	at net.fabricmc.loader.impl.launch.knot.Knot.launch(Knot.java:72) ~[fabric-loader-0.17.2.jar:?]
 	at net.fabricmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:23) ~[fabric-loader-0.17.2.jar:?]
 	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) ~[dev-launch-injector-0.2.1+build.8.jar:?]
-Caused by: com.mojang.authlib.exceptions.MinecraftClientException: Failed to read from https://api.minecraftservices.com/player/attributes due to api.minecraftservices.com
-	at com.mojang.authlib.minecraft.client.MinecraftClient.readInputStream(MinecraftClient.java:93) ~[authlib-4.0.43.jar:?]
+Caused by: com.mojang.authlib.exceptions.MinecraftClientHttpException: Status: 401
+	at com.mojang.authlib.minecraft.client.MinecraftClient.readInputStream(MinecraftClient.java:85) ~[authlib-4.0.43.jar:?]
 	at com.mojang.authlib.minecraft.client.MinecraftClient.get(MinecraftClient.java:48) ~[authlib-4.0.43.jar:?]
 	at com.mojang.authlib.yggdrasil.YggdrasilUserApiService.fetchProperties(YggdrasilUserApiService.java:129) ~[authlib-4.0.43.jar:?]
 	... 9 more
-Caused by: java.net.UnknownHostException: api.minecraftservices.com
-	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:572) ~[?:?]
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327) ~[?:?]
-	at java.net.Socket.connect(Socket.java:633) ~[?:?]
-	at sun.security.ssl.SSLSocketImpl.connect(SSLSocketImpl.java:304) ~[?:?]
-	at sun.net.NetworkClient.doConnect(NetworkClient.java:178) ~[?:?]
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:533) ~[?:?]
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:638) ~[?:?]
-	at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:266) ~[?:?]
-	at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:380) ~[?:?]
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:193) ~[?:?]
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1303) ~[?:?]
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1144) ~[?:?]
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:179) ~[?:?]
-	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1703) ~[?:?]
-	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1627) ~[?:?]
-	at java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:529) ~[?:?]
-	at sun.net.www.protocol.https.HttpsURLConnectionImpl.getResponseCode(HttpsURLConnectionImpl.java:308) ~[?:?]
-	at com.mojang.authlib.minecraft.client.MinecraftClient.readInputStream(MinecraftClient.java:72) ~[authlib-4.0.43.jar:?]
-	at com.mojang.authlib.minecraft.client.MinecraftClient.get(MinecraftClient.java:48) ~[authlib-4.0.43.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilUserApiService.fetchProperties(YggdrasilUserApiService.java:129) ~[authlib-4.0.43.jar:?]
-	... 9 more
-[23:11:08] [Render thread/INFO] (Minecraft) Setting user: Player287
-[23:11:09] [Render thread/INFO] (MinepyLoader) Minepy Loader Version: Demo-0.0.1
-[23:11:09] [Render thread/INFO] (MinepyLoader) initialize all code:
-[23:11:09] [Render thread/INFO] (text) H
-[23:11:09] [Render thread/INFO] (text) e
-[23:11:09] [Render thread/INFO] (text) l
-[23:11:09] [Render thread/INFO] (text) l
-[23:11:09] [Render thread/INFO] (text) o
-[23:11:09] [Render thread/INFO] (text) W
-[23:11:09] [Render thread/INFO] (text) o
-[23:11:09] [Render thread/INFO] (text) r
-[23:11:09] [Render thread/INFO] (text) l
-[23:11:09] [Render thread/INFO] (text) d
-[23:11:09] [Render thread/INFO] (Test) null
-[23:11:10] [Render thread/INFO] (Indigo) [Indigo] Registering Indigo renderer!
-[23:11:12] [Render thread/INFO] (Minecraft) Backend library: LWJGL version 3.3.2-snapshot
-[23:11:19] [Render thread/INFO] (Minecraft) Reloading ResourceManager: vanilla, fabric (fabric-networking-v0, fabric-command-api-v2, fabric-loot-tables-v1, fabric-loot-api-v2, fabric-convention-tags-v1, fabric-api-base, fabric-events-lifecycle-v0, fabric-message-api-v1, fabric-transfer-api-v1, fabric-dimensions-v1, fabric-game-rule-api-v1, fabric-biome-api-v1, fabric-entity-events-v1, fabric-api-lookup-api-v1, fabric-block-api-v1, fabricloader, fabric-rendering-fluids-v1, fabric-screen-api-v1, fabric-data-generation-api-v1, fabric-key-binding-api-v1, fabric-lifecycle-events-v1, fabric-recipe-api-v1, minepyloader, fabric-block-view-api-v2, fabric-object-builder-api-v1, fabric-blockrenderlayer-v1, fabric-resource-conditions-api-v1, fabric-renderer-indigo, fabric-models-v0, fabric-screen-handler-api-v1, fabric-particles-v1, fabric-gametest-api-v1, fabric-content-registries-v0, fabric-events-interaction-v0, fabric-model-loading-api-v1, fabric-client-tags-api-v1, fabric-transitive-access-wideners-v1, fabric-renderer-api-v1, fabric-networking-api-v1, fabric-rendering-v1, fabric-containers-v0, fabric-item-group-api-v1, fabric-registry-sync-v0, fabric-sound-api-v1, fabric-rendering-data-attachment-v1, fabric-commands-v0, fabric-renderer-registries-v1, fabric-api, fabric-keybindings-v0, fabric-command-api-v1, fabric-crash-report-info-v1, fabric-data-attachment-api-v1, fabric-resource-loader-v0, fabric-mining-level-api-v1, fabric-item-api-v1, fabric-rendering-v0)
-[23:11:20] [Worker-Main-1/INFO] (Minecraft) Found unifont_all_no_pua-15.0.06.hex, loading
-[23:11:33] [Render thread/WARN] (Minecraft) Missing sound for event: minecraft:item.goat_horn.play
-[23:11:33] [Render thread/WARN] (Minecraft) Missing sound for event: minecraft:entity.goat.screaming.horn_break
-[23:11:33] [Render thread/INFO] (Minecraft) OpenAL initialized on device OpenAL Soft on 扬声器 (Realtek(R) Audio)
-[23:11:33] [Render thread/INFO] (Minecraft) Sound engine started
-[23:11:34] [Render thread/INFO] (Minecraft) Created: 1024x512x4 minecraft:textures/atlas/blocks.png-atlas
-[23:11:35] [Render thread/INFO] (Minecraft) Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
-[23:11:35] [Render thread/INFO] (Minecraft) Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
-[23:11:35] [Render thread/INFO] (Minecraft) Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
-[23:11:35] [Render thread/INFO] (Minecraft) Created: 1024x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
-[23:11:35] [Render thread/INFO] (Minecraft) Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
-[23:11:35] [Render thread/INFO] (Minecraft) Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
-[23:11:35] [Render thread/INFO] (Minecraft) Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
-[23:11:35] [Render thread/INFO] (Minecraft) Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
-[23:11:37] [Render thread/WARN] (Minecraft) Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
-[23:11:38] [Render thread/INFO] (Minecraft) Created: 256x256x0 minecraft:textures/atlas/particles.png-atlas
-[23:11:38] [Render thread/INFO] (Minecraft) Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
-[23:11:38] [Render thread/INFO] (Minecraft) Created: 128x128x0 minecraft:textures/atlas/mob_effects.png-atlas
-[23:12:04] [Render thread/INFO] (Minecraft) Loaded 7 recipes
-[23:12:05] [Render thread/INFO] (Minecraft) Loaded 1271 advancements
-[23:12:06] [Render thread/INFO] (BiomeModificationImpl) Applied 0 biome modifications to 0 of 64 new biomes in 3.967 ms
-[23:12:06] [Server thread/INFO] (Minecraft) Starting integrated minecraft server version 1.20.1
-[23:12:06] [Server thread/INFO] (Minecraft) Generating keypair
-[23:12:23] [Server thread/INFO] (Minecraft) Preparing start region for dimension minecraft:overworld
-[23:12:36] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:36] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:36] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:36] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:36] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:37] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:38] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:38] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:39] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:39] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:40] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:40] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:41] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:41] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:42] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:43] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:43] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:43] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:44] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:44] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[23:12:45] [Render thread/INFO] (Minecraft) Preparing spawn area: 1%
-[23:12:45] [Render thread/INFO] (Minecraft) Preparing spawn area: 1%
-[23:12:46] [Render thread/INFO] (Minecraft) Preparing spawn area: 2%
-[23:12:46] [Render thread/INFO] (Minecraft) Preparing spawn area: 4%
-[23:12:47] [Render thread/INFO] (Minecraft) Preparing spawn area: 5%
-[23:12:47] [Render thread/INFO] (Minecraft) Preparing spawn area: 9%
-[23:12:48] [Render thread/INFO] (Minecraft) Preparing spawn area: 10%
-[23:12:48] [Render thread/INFO] (Minecraft) Preparing spawn area: 11%
-[23:12:49] [Render thread/INFO] (Minecraft) Preparing spawn area: 13%
-[23:12:49] [Render thread/INFO] (Minecraft) Preparing spawn area: 13%
-[23:12:50] [Render thread/INFO] (Minecraft) Preparing spawn area: 13%
-[23:12:51] [Render thread/INFO] (Minecraft) Preparing spawn area: 13%
-[23:12:52] [Render thread/INFO] (Minecraft) Preparing spawn area: 13%
-[23:12:52] [Render thread/INFO] (Minecraft) Preparing spawn area: 13%
-[23:12:52] [Render thread/INFO] (Minecraft) Preparing spawn area: 13%
-[23:12:53] [Render thread/INFO] (Minecraft) Preparing spawn area: 18%
-[23:12:53] [Render thread/INFO] (Minecraft) Preparing spawn area: 18%
-[23:12:53] [Render thread/INFO] (Minecraft) Preparing spawn area: 24%
-[23:12:54] [Render thread/INFO] (Minecraft) Preparing spawn area: 48%
-[23:12:54] [Render thread/INFO] (Minecraft) Preparing spawn area: 50%
-[23:12:55] [Render thread/INFO] (Minecraft) Preparing spawn area: 50%
-[23:12:56] [Render thread/INFO] (Minecraft) Preparing spawn area: 50%
-[23:12:56] [Render thread/INFO] (Minecraft) Preparing spawn area: 50%
-[23:12:57] [Render thread/INFO] (Minecraft) Time elapsed: 33571 ms
-[23:12:58] [Server thread/INFO] (Minecraft) Changing view distance to 2, from 10
-[23:12:58] [Server thread/INFO] (Minecraft) Changing simulation distance to 5, from 0
-[23:13:02] [Server thread/INFO] (Minecraft) Player287[local:E:d132b503] logged in with entity id 234 at (2.487955515711373, 71.00133597911214, -37.78492797721749)
-[23:13:02] [Server thread/INFO] (Minecraft) Player287 joined the game
-[23:13:02] [Server thread/WARN] (Minecraft) Can't keep up! Is the server overloaded? Running 2713ms or 54 ticks behind
-[23:13:03] [Render thread/WARN] (Minecraft) Ignoring chat session from Player287 due to missing Services public key
-[23:13:03] [Render thread/INFO] (Minecraft) Loaded 2 advancements
-[23:13:03] [Worker-Main-1/WARN] (Minecraft) Couldn't look up profile properties for com.mojang.authlib.GameProfile@6a16f1c5[id=483a9f6c-d89c-3cd9-9ee4-92f25a76c0c5,name=Player287,properties={},legacy=false]
-com.mojang.authlib.exceptions.AuthenticationUnavailableException: Cannot contact authentication server
-	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:119) ~[authlib-4.0.43.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:91) ~[authlib-4.0.43.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:175) ~[authlib-4.0.43.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:51) ~[authlib-4.0.43.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:48) ~[authlib-4.0.43.jar:?]
-	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3533) ~[guava-31.1-jre.jar:?]
-	at com.google.common.cache.LocalCache$Segment.loadSync(LocalCache.java:2282) ~[guava-31.1-jre.jar:?]
-	at com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(LocalCache.java:2159) ~[guava-31.1-jre.jar:?]
-	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2049) ~[guava-31.1-jre.jar:?]
-	at com.google.common.cache.LocalCache.get(LocalCache.java:3966) ~[guava-31.1-jre.jar:?]
-	at com.google.common.cache.LocalCache.getOrLoad(LocalCache.java:3989) ~[guava-31.1-jre.jar:?]
-	at com.google.common.cache.LocalCache$LocalLoadingCache.get(LocalCache.java:4950) ~[guava-31.1-jre.jar:?]
-	at com.google.common.cache.LocalCache$LocalLoadingCache.getUnchecked(LocalCache.java:4956) ~[guava-31.1-jre.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillProfileProperties(YggdrasilMinecraftSessionService.java:149) ~[authlib-4.0.43.jar:?]
-	at net.minecraft.client.MinecraftClient.getSessionProperties(MinecraftClient.java:2490) ~[minecraft-merged-7787b014d4-1.20.1-net.fabricmc.yarn.1_20_1.1.20.1+build.10-v2.jar:?]
-	at net.minecraft.client.texture.PlayerSkinProvider.method_4653(PlayerSkinProvider.java:101) ~[minecraft-merged-7787b014d4-1.20.1-net.fabricmc.yarn.1_20_1.1.20.1+build.10-v2.jar:?]
-	at java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1395) ~[?:?]
-	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373) ~[?:?]
-	at java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182) ~[?:?]
-	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655) ~[?:?]
-	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622) ~[?:?]
-	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
-Caused by: java.net.UnknownHostException: sessionserver.mojang.com
-	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:572) ~[?:?]
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327) ~[?:?]
-	at java.net.Socket.connect(Socket.java:633) ~[?:?]
-	at sun.security.ssl.SSLSocketImpl.connect(SSLSocketImpl.java:304) ~[?:?]
-	at sun.net.NetworkClient.doConnect(NetworkClient.java:178) ~[?:?]
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:533) ~[?:?]
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:638) ~[?:?]
-	at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:266) ~[?:?]
-	at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:380) ~[?:?]
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:193) ~[?:?]
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1303) ~[?:?]
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1144) ~[?:?]
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:179) ~[?:?]
-	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1703) ~[?:?]
-	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1627) ~[?:?]
-	at sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:224) ~[?:?]
-	at com.mojang.authlib.HttpAuthenticationService.performGetRequest(HttpAuthenticationService.java:140) ~[authlib-4.0.43.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:96) ~[authlib-4.0.43.jar:?]
-	... 21 more
-[23:13:21] [Server thread/INFO] (Minecraft) [Player287: 方法输出了返回值: 3.0]
-[23:13:21] [Render thread/INFO] (Minecraft) [System] [CHAT] 方法输出了返回值: 3.0
-[23:13:29] [Server thread/INFO] (Minecraft) [Player287: 方法输出了返回值: 1164352.0]
-[23:13:29] [Render thread/INFO] (Minecraft) [System] [CHAT] 方法输出了返回值: 1164352.0
-[23:13:37] [Server thread/INFO] (text) H
-[23:13:37] [Server thread/INFO] (text) e
-[23:13:37] [Server thread/INFO] (text) l
-[23:13:37] [Server thread/INFO] (text) l
-[23:13:37] [Server thread/INFO] (text) o
-[23:13:37] [Server thread/INFO] (text) W
-[23:13:37] [Server thread/INFO] (text) o
-[23:13:37] [Server thread/INFO] (text) r
-[23:13:37] [Server thread/INFO] (text) l
-[23:13:37] [Server thread/INFO] (text) d
-[23:13:37] [Server thread/INFO] (Test) null
-[23:13:42] [Server thread/INFO] (Minecraft) [Player287: 找到了方法，可是参数不匹配]
-[23:13:42] [Render thread/INFO] (Minecraft) [System] [CHAT] 找到了方法，可是参数不匹配
-[23:13:46] [Server thread/INFO] (ingame) 123
-[23:13:47] [Server thread/INFO] (Minecraft) Saving and pausing game...
-[23:13:47] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[23:13:48] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[23:13:48] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[23:13:49] [Server thread/INFO] (Minecraft) Saving and pausing game...
-[23:13:49] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[23:13:49] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[23:13:49] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[23:13:49] [Server thread/INFO] (Minecraft) Saving and pausing game...
-[23:13:49] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[23:13:49] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[23:13:49] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[23:13:50] [Server thread/INFO] (Minecraft) Saving and pausing game...
-[23:13:50] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[23:13:50] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[23:13:50] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[23:14:00] [Server thread/INFO] (Minecraft) [Player287: 找到了方法，可是参数不匹配]
-[23:14:00] [Render thread/INFO] (Minecraft) [System] [CHAT] 找到了方法，可是参数不匹配
-[23:14:02] [Server thread/INFO] (Minecraft) [Player287: 找到了方法，可是参数不匹配]
-[23:14:02] [Render thread/INFO] (Minecraft) [System] [CHAT] 找到了方法，可是参数不匹配
-[23:14:02] [Server thread/INFO] (Minecraft) [Player287: 找到了方法，可是参数不匹配]
-[23:14:02] [Render thread/INFO] (Minecraft) [System] [CHAT] 找到了方法，可是参数不匹配
-[23:14:06] [Server thread/INFO] (ingame) 123
-[23:14:11] [Server thread/WARN] (Minecraft) Can't keep up! Is the server overloaded? Running 2174ms or 43 ticks behind
-[23:14:20] [Server thread/INFO] (Minecraft) [Player287: 无法找到方法]
-[23:14:20] [Render thread/INFO] (Minecraft) [System] [CHAT] 无法找到方法
-[23:14:24] [Server thread/INFO] (ingame) null
-[23:14:25] [Server thread/INFO] (ingame) null
-[23:14:26] [Server thread/INFO] (ingame) null
-[23:14:27] [Server thread/INFO] (ingame) null
-[23:14:29] [Render thread/INFO] (Minecraft) [System] [CHAT] An unexpected error occurred trying to execute that command
-[23:14:36] [Render thread/INFO] (Minecraft) [System] [CHAT] An unexpected error occurred trying to execute that command
-[23:14:40] [Server thread/INFO] (ingame) 1234
-[23:14:43] [Server thread/WARN] (Minecraft) Can't keep up! Is the server overloaded? Running 2007ms or 40 ticks behind
-[23:14:50] [Server thread/INFO] (ingame) 1234
-[23:15:03] [Server thread/INFO] (Minecraft) [Player287: 方法输出了返回值: 99.0]
-[23:15:03] [Render thread/INFO] (Minecraft) [System] [CHAT] 方法输出了返回值: 99.0
-[23:15:09] [Server thread/INFO] (Minecraft) [Player287: 方法输出了返回值: 0.0]
-[23:15:09] [Render thread/INFO] (Minecraft) [System] [CHAT] 方法输出了返回值: 0.0
-[23:15:32] [Render thread/INFO] (Minecraft) Loaded 30 advancements
-[23:15:32] [Render thread/INFO] (Minecraft) Loaded 33 advancements
-[23:15:34] [Render thread/INFO] (Minecraft) Loaded 50 advancements
-[23:15:45] [Render thread/INFO] (Minecraft) Loaded 53 advancements
-[23:15:47] [Render thread/INFO] (Minecraft) Loaded 53 advancements
-[23:15:59] [Server thread/INFO] (Minecraft) [Player287: 方法输出了返回值: 99.0]
-[23:15:59] [Render thread/INFO] (Minecraft) [System] [CHAT] 方法输出了返回值: 99.0
-[23:16:02] [Server thread/INFO] (Minecraft) [Player287: 方法输出了返回值: -14414.0]
-[23:16:02] [Render thread/INFO] (Minecraft) [System] [CHAT] 方法输出了返回值: -14414.0
-[23:16:16] [Render thread/INFO] (Minecraft) [System] [CHAT] An unexpected error occurred trying to execute that command
-[23:16:17] [Render thread/INFO] (Minecraft) [System] [CHAT] An unexpected error occurred trying to execute that command
-[23:16:22] [Server thread/INFO] (Minecraft) [Player287: 方法输出了返回值: 123123.0]
-[23:16:22] [Render thread/INFO] (Minecraft) [System] [CHAT] 方法输出了返回值: 123123.0
-[23:16:26] [Render thread/INFO] (Minecraft) [System] [CHAT] An unexpected error occurred trying to execute that command
-[23:16:32] [Server thread/INFO] (Minecraft) [Player287: 方法输出了返回值: 1.2312345E7]
-[23:16:32] [Render thread/INFO] (Minecraft) [System] [CHAT] 方法输出了返回值: 1.2312345E7
-[23:16:52] [Server thread/INFO] (Minecraft) [Player287: 方法输出了返回值: 1.14514191981E12]
-[23:16:52] [Render thread/INFO] (Minecraft) [System] [CHAT] 方法输出了返回值: 1.14514191981E12
-[23:17:09] [Server thread/INFO] (Minecraft) Saving and pausing game...
-[23:17:09] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[23:17:09] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[23:17:09] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[23:17:09] [Server thread/INFO] (Minecraft) Player287 lost connection: Disconnected
-[23:17:09] [Server thread/INFO] (Minecraft) Player287 left the game
-[23:17:09] [Server thread/INFO] (Minecraft) Stopping singleplayer server as player logged out
-[23:17:10] [Server thread/INFO] (Minecraft) Stopping server
-[23:17:10] [Server thread/INFO] (Minecraft) Saving players
-[23:17:10] [Server thread/INFO] (Minecraft) Saving worlds
-[23:17:12] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[23:17:13] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[23:17:13] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[23:17:13] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (New World): All chunks are saved
-[23:17:13] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
-[23:17:13] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM1): All chunks are saved
-[23:17:13] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage: All dimensions are saved
-[23:17:14] [Render thread/INFO] (Minecraft) Stopping!
+[22:54:58] [Render thread/INFO] (Minecraft) Setting user: Player299
+[22:54:58] [Render thread/INFO] (MinepyLoader) Minepy Loader Version: Demo-0.0.1
+[22:54:58] [Render thread/INFO] (MinepyLoader) initialize all code:
+[22:54:58] [Render thread/INFO] (text) H
+[22:54:58] [Render thread/INFO] (text) e
+[22:54:58] [Render thread/INFO] (text) l
+[22:54:58] [Render thread/INFO] (text) l
+[22:54:58] [Render thread/INFO] (text) o
+[22:54:58] [Render thread/INFO] (text) W
+[22:54:58] [Render thread/INFO] (text) o
+[22:54:58] [Render thread/INFO] (text) r
+[22:54:58] [Render thread/INFO] (text) l
+[22:54:58] [Render thread/INFO] (text) d
+[22:54:58] [Render thread/INFO] (Test) null
+[22:54:58] [Render thread/INFO] (Indigo) [Indigo] Registering Indigo renderer!
+[22:55:00] [Render thread/INFO] (Minecraft) Backend library: LWJGL version 3.3.2-snapshot
+[22:55:04] [Render thread/INFO] (Minecraft) Reloading ResourceManager: vanilla, fabric (fabric-data-attachment-api-v1, fabric-block-view-api-v2, fabric-containers-v0, fabric-rendering-fluids-v1, fabric-screen-handler-api-v1, fabric-content-registries-v0, fabric-client-tags-api-v1, fabric-item-group-api-v1, fabric-registry-sync-v0, fabric-api-base, fabric-biome-api-v1, fabric-networking-api-v1, fabric-events-interaction-v0, fabric-renderer-indigo, fabric-rendering-v1, fabric-rendering-v0, fabric-data-generation-api-v1, fabric-lifecycle-events-v1, fabric-commands-v0, fabric-blockrenderlayer-v1, minepyloader, fabric-loot-tables-v1, fabric-transitive-access-wideners-v1, fabric-message-api-v1, fabric-resource-loader-v0, fabric-particles-v1, fabric-loot-api-v2, fabric-command-api-v2, fabric-resource-conditions-api-v1, fabric-networking-v0, fabric-object-builder-api-v1, fabric-screen-api-v1, fabric-entity-events-v1, fabric-crash-report-info-v1, fabric-models-v0, fabric-dimensions-v1, fabric-api-lookup-api-v1, fabric-rendering-data-attachment-v1, fabric-item-api-v1, fabric-key-binding-api-v1, fabric-mining-level-api-v1, fabric-events-lifecycle-v0, fabric-api, fabric-sound-api-v1, fabric-keybindings-v0, fabric-renderer-registries-v1, fabric-model-loading-api-v1, fabric-convention-tags-v1, fabricloader, fabric-block-api-v1, fabric-recipe-api-v1, fabric-game-rule-api-v1, fabric-transfer-api-v1, fabric-gametest-api-v1, fabric-renderer-api-v1, fabric-command-api-v1)
+[22:55:04] [Worker-Main-3/INFO] (Minecraft) Found unifont_all_no_pua-15.0.06.hex, loading
+[22:55:05] [Realms Notification Availability checker #1/INFO] (Minecraft) Could not authorize you against Realms server: java.lang.RuntimeException: Failed to parse into SignedJWT: FabricMC
+[22:55:13] [Render thread/WARN] (Minecraft) Missing sound for event: minecraft:item.goat_horn.play
+[22:55:13] [Render thread/WARN] (Minecraft) Missing sound for event: minecraft:entity.goat.screaming.horn_break
+[22:55:14] [Render thread/INFO] (Minecraft) OpenAL initialized on device OpenAL Soft on 扬声器 (Realtek(R) Audio)
+[22:55:14] [Render thread/INFO] (Minecraft) Sound engine started
+[22:55:14] [Render thread/INFO] (Minecraft) Created: 1024x512x4 minecraft:textures/atlas/blocks.png-atlas
+[22:55:15] [Render thread/INFO] (Minecraft) Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
+[22:55:15] [Render thread/INFO] (Minecraft) Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[22:55:15] [Render thread/INFO] (Minecraft) Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[22:55:15] [Render thread/INFO] (Minecraft) Created: 1024x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
+[22:55:16] [Render thread/INFO] (Minecraft) Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
+[22:55:16] [Render thread/INFO] (Minecraft) Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[22:55:16] [Render thread/INFO] (Minecraft) Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[22:55:16] [Render thread/INFO] (Minecraft) Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[22:55:17] [Render thread/WARN] (Minecraft) Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
+[22:55:19] [Render thread/INFO] (Minecraft) Created: 256x256x0 minecraft:textures/atlas/particles.png-atlas
+[22:55:19] [Render thread/INFO] (Minecraft) Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[22:55:19] [Render thread/INFO] (Minecraft) Created: 128x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[22:55:47] [Render thread/INFO] (Minecraft) Stopping!

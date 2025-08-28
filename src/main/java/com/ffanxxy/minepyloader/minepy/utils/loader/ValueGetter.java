@@ -1,20 +1,17 @@
 package com.ffanxxy.minepyloader.minepy.utils.loader;
 
-import com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.ScriptParserLineContext;
-import com.ffanxxy.minepyloader.minepy.loader.Parser.ArgumentTypeParser;
+import com.ffanxxy.minepyloader.minepy.loader.Parser.ArgumentParser;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.StatementManager;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Parameter;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.var.VarGetterNode;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static com.ffanxxy.minepyloader.minepy.loader.Parser.ArgumentTypeParser.processQuotedStrings;
+import static com.ffanxxy.minepyloader.minepy.loader.Parser.ArgumentParser.processQuotedStrings;
 
 public class ValueGetter {
     public static VarGetterNode getWhenReading(String var, ScriptParserLineContext context) {
@@ -22,7 +19,7 @@ public class ValueGetter {
     }
 
     public static List<Variable<?>> getArguments(String args) {
-        ArgumentTypeParser.ProcessResult result = processQuotedStrings(args);
+        ArgumentParser.ProcessResult result = processQuotedStrings(args);
         Map<Integer, String> map = result.extractedMap();
         String str = result.replacedString();
 

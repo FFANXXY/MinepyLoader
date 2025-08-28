@@ -14,8 +14,8 @@ public class VarOperationNode implements RunnableNode {
     private String var;
     private Expression expression;
 
-    public VarOperationNode(String var, ScriptParserLineContext context) {
-        this.var = var;
+    public VarOperationNode(String input, ScriptParserLineContext context) {
+        this.var = input.trim();
         if(var.startsWith("!")) return;
 
         for(Expression.Operation operation : Expression.Operation.values()) {
@@ -47,6 +47,12 @@ public class VarOperationNode implements RunnableNode {
             String[] vars = var.split(operation.getSymbol());
             left = ValueGetter.getWhenReading(vars[0].trim(), context);
             right = ValueGetter.getWhenReading(vars[1].trim(), context);
+            this.operation = operation;
+        }
+
+        public Expression(String left, String right, Operation operation, ScriptParserLineContext context) {
+            this.left = ValueGetter.getWhenReading(left, context);
+            this.right = ValueGetter.getWhenReading(right.trim(), context);
             this.operation = operation;
         }
 

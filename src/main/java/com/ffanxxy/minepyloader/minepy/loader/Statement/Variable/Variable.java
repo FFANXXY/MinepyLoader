@@ -1,6 +1,8 @@
 package com.ffanxxy.minepyloader.minepy.loader.Statement.Variable;
 
+import com.ffanxxy.minepyloader.GameInterface.World.MpyWorld;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.type.MpyList;
 import com.ffanxxy.minepyloader.minepy.utils.exception.UnexpectedDataTypeException;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
@@ -150,14 +152,27 @@ public class Variable<T> {
     }
 
     // World
-    public static Variable<World> ofWorld(String name) {
+    public static Variable<MpyWorld> ofWorld(String name) {
         return new Variable<>(name, DataType.WORLD);
     }
-    public static Variable<World> ofWorld(String name, World  val) {
+    public static Variable<MpyWorld> ofWorld(String name, MpyWorld  val) {
         return new Variable<>(name,DataType.WORLD,val);
     }
-    public Variable<World> getAsWorld() {
-        if(this.dataType == DataType.WORLD) return (Variable<World>) this;
+    public Variable<MpyWorld> getAsWorld() {
+        if(this.dataType == DataType.WORLD) return (Variable<MpyWorld>) this;
+        throw new UnexpectedDataTypeException();
+    }
+
+    // List
+    // List的无参构建，
+//    public static Variable<MpyList> ofList(String name) {
+//        return new Variable<>(name, DataType.LIST);
+//    }
+    public static Variable<MpyList> ofList(String name, MpyList  val) {
+        return new Variable<>(name,DataType.LIST.setChild(val.getDataType()),val);
+    }
+    public Variable<MpyList> getAsList() {
+        if(this.dataType == DataType.LIST) return (Variable<MpyList>) this;
         throw new UnexpectedDataTypeException();
     }
 

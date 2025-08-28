@@ -1,17 +1,36 @@
 #package test
 
 public load void load():
-    String a = "Hello World"
-    int index = 0
-    char nowChar
 
-    while(index < String.lengthOf(a) ):
-        nowChar = String.charAt(a, index)
+    String a = "Hello World"
+
+    char nowChar
+    int[] ints = [0,1,2,3,4,5,6]
+    int[] is = [0,2,4,6]
+    is.set(0,1)
+    char[] chars = ['一','二']
+
+    // 嵌套测试
+    char c = chars[ints[is[0]]]
+
+    // 新版for实现
+    for (int i = 0; i < String.lengthOf(a); i ++):
+        nowChar = a.charAt(i)
         if(nowChar != ' '):
             Logger.log("text",nowChar)
-        index = index + 1
 
-    Logger.log("Test",c)
+    // 旧版while 实现
+    // while(index < String.lengthOf(a)):
+    //     nowChar = a.charAt(index)
+    //     if(nowChar != ' '):
+    //         Logger.log("text",nowChar)
+    //     index ++
+
+    Logger.log("Test",i)
+
+public void forTest():
+    for(int i = 0; i < 5; i++):
+        Logger.log("test", i)
 
 public ingame void test(String a):
     Logger.log("ingame", a)
