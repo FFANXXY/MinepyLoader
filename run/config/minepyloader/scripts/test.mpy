@@ -28,7 +28,8 @@ public load void load():
 
     Logger.log("Test",i)
 
-public void forTest():
+// 报错
+public void loadtest():
     for(int i = 0; i < 5; i++):
         Logger.log("test", i)
 

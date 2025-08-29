@@ -1,7 +1,9 @@
 package com.ffanxxy.minepyloader.minepy.loader.Loader;
 
+import com.ffanxxy.minepyloader.Minepyloader;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Runnable.Statement;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Runnable.Statements;
+import com.ffanxxy.minepyloader.minepy.loader.PackageStructure;
 import com.ffanxxy.minepyloader.minepy.loader.ScriptPackage;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Parameter;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
@@ -65,12 +67,24 @@ public final class Method {
     }
 
     public void runStatic() {
-        if (parameters.isEmpty()) {
+        if (parameters.isEmpty() && modifiers.contains(MethodModifiers.LOAD)) {
             this.statements.run(new HashMap<>());
         }
     }
 
-    public CompletableFuture<Variable<?>> run(Map<Minepy.ScopeAndName, Variable<?>> variableMap) {
+    public CompletableFuture<Variable<?>> run(Map<Minepy.ScopeAndName, Variable<?>> variableMap, MethodExecutor executor) {
+        if(executor.getType() == MethodExecutor.ExecutorType.STATEMENT && this.accessModifiers != AccessModifiers.PUBLIC) {
+            boolean canInvoke = switch (accessModifiers) {
+                case PRIVATE -> new PackageStructure(executor.getMsg()).isSameAs(this.path);
+                //.....
+                default -> throw new IllegalStateException("SUP: Unexpected value: " + accessModifiers);
+            };
+        }
+
+        if(this.modifiers.contains(MethodModifiers.INGAME) && Minepyloader.serverInstance == null) {
+            throw new NullPointerException("Server is null , but run INGAME method: " + this.name);
+        }
+
         return CompletableFuture.supplyAsync(
                 () -> {
                     // 获得运行结果

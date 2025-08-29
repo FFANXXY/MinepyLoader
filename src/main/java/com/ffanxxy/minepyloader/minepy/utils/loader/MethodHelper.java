@@ -86,6 +86,14 @@ public class MethodHelper {
         return getMethod(pathAndName, datatypes);
     }
 
+    public static @Nullable Method saveGetMethodFromParas(String pathAndName, List<Parameter> parameters) {
+        List<DataType> datatypes = new ArrayList<>();
+        parameters.forEach(
+                p ->  datatypes.add(p.dataType)
+        );
+        return saveGetMethod(pathAndName, datatypes);
+    }
+
     /**
      * 安全地自推断方法，不会有报错，无法找到时会返回nullable
      * @param pathAndName 方法完整路径

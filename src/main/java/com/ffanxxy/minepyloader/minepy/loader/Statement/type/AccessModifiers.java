@@ -5,7 +5,6 @@ import java.util.Arrays;
 public enum AccessModifiers {
     PUBLIC("public"),
     PRIVATE("private"),
-    PROTECTED("protected"),
     DEFAULT("default");
 
     private final String name;

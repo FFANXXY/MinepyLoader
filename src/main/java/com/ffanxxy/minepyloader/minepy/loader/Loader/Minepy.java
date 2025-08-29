@@ -3,6 +3,7 @@ package com.ffanxxy.minepyloader.minepy.loader.Loader;
 import com.ffanxxy.minepyloader.Minepyloader;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Runnable.Statement;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Runnable.Statements;
+import com.ffanxxy.minepyloader.minepy.loader.PackageStructure;
 import com.ffanxxy.minepyloader.minepy.loader.Parser.MethodParser;
 import com.ffanxxy.minepyloader.minepy.loader.ScriptPackage;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.StatementManager;
@@ -15,6 +16,7 @@ import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.MethodModifiers;
 import com.ffanxxy.minepyloader.minepy.loader.scriptObject.Script;
 import com.ffanxxy.minepyloader.minepy.utils.exception.UnexpectedStatementException;
+import com.ffanxxy.minepyloader.minepy.utils.loader.MethodHelper;
 
 import java.util.*;
 
@@ -103,7 +105,7 @@ public class Minepy {
             // 行为空，则继续
             if(line.line.isEmpty()) continue;
 
-            // 如果没有缩进，则视为您一个方法
+            // 如果没有缩进，则视为另一个方法
             if( ( line.retraction == 0 ) && isInMethod) {
                 isInMethod = false;
                 METHODS.add(DemoMethod);
@@ -115,6 +117,12 @@ public class Minepy {
             if(line.retraction == 0) {
                 MethodParser methodParser = new MethodParser(line.line);
                     DemoMethod = methodParser.method.toMethod(path);
+
+                    if(MethodHelper.saveGetMethodFromParas(
+                            DemoMethod.getPath().join(DemoMethod.getName()).toString(),
+                            DemoMethod.getParameters()) == null)
+                        throw new RuntimeException("Repeat method: " + MethodHelper.getMethodFullName(DemoMethod));
+
                     isInMethod = true;
                     // 创建定义上下文
                     for(Parameter p : methodParser.getParameterParser().getParameters()) {
@@ -134,7 +142,8 @@ public class Minepy {
                 ScriptParserLineContext ctx = new ScriptParserLineContext(
                         line.line,
                         defineVarContext,
-                        imports
+                        imports,
+                        new PackageStructure(path.toString())
                 );
 
                 StatementManager manager = new StatementManager(ctx);

@@ -248,7 +248,7 @@ public class StatementManager {
             return parserInternalMethods(line, context);
         }
 
-        return new CallMethodNode(who, new ArgumentParser(context).getArguments(), defineContext);
+        return new CallMethodNode(who, new ArgumentParser(context).getArguments(), defineContext, context.structure());
     }
 
 

@@ -8,7 +8,7 @@ import java.util.List;
  * 通过列表构建层级型的包结构，例如{@code ["java", "util", "List"]} 与 {@code java.util.List} 之间的转化
  */
 public class PackageStructure {
-    private List<String> structure;
+    private final List<String> structure;
 
     public PackageStructure(List<String> structure) {
         this.structure = new ArrayList<>(structure.stream().map(String::trim).filter(s->!s.isEmpty()).toList());
@@ -45,5 +45,13 @@ public class PackageStructure {
 
     public String get(int index) {
         return structure.get(index);
+    }
+
+    public boolean isSameAs(PackageStructure packageStructure) {
+        return this.toPackage().isSamePackage(packageStructure.toPackage());
+    }
+
+    public boolean isSameAs(ScriptPackage package_) {
+        return this.toPackage().isSamePackage(package_);
     }
 }

@@ -1,8 +1,8 @@
 package com.ffanxxy.minepyloader.commands;
 
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Method;
+import com.ffanxxy.minepyloader.minepy.loader.Loader.MethodExecutor;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy;
-import com.ffanxxy.minepyloader.minepy.loader.Parser.ParameterParser;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
 import com.ffanxxy.minepyloader.minepy.utils.loader.MethodHelper;
 import com.ffanxxy.minepyloader.minepy.utils.loader.ValueGetter;
@@ -14,7 +14,6 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -70,7 +69,7 @@ public class MpyCommand {
             );
             return 0;
         }
-        CompletableFuture<Variable<?>> future = method.run(new HashMap<>());
+        CompletableFuture<Variable<?>> future = method.run(new HashMap<>(), new MethodExecutor(MethodExecutor.ExecutorType.COMMAND));
 
         try {
             Variable<?> variable = future.get();
@@ -113,14 +112,14 @@ public class MpyCommand {
             return 0;
         }
 
-        var future = method.run(resultRunArgs);
+        var future = method.run(resultRunArgs , new MethodExecutor(MethodExecutor.ExecutorType.COMMAND));
 
         try {
             Variable<?> variable = future.get();
 
             if(!variable.isVoid()) {
                 ctx.getSource().sendFeedback(
-                        () -> Text.literal("方法输出了返回值: " + variable.toString()).formatted(Formatting.GRAY),
+                        () -> Text.literal("方法输出了返回值: " + variable).formatted(Formatting.GRAY),
                         true
                 );
             }

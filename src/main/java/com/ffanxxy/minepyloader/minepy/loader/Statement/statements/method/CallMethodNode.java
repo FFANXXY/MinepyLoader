@@ -1,7 +1,9 @@
 package com.ffanxxy.minepyloader.minepy.loader.Statement.statements.method;
 
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Method;
+import com.ffanxxy.minepyloader.minepy.loader.Loader.MethodExecutor;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy;
+import com.ffanxxy.minepyloader.minepy.loader.PackageStructure;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Parameter;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.RunnableNode;
@@ -23,9 +25,12 @@ public class CallMethodNode implements RunnableNode {
     private final String method;
     private final List<VarGetterNode> Vars;
 
-    public CallMethodNode(String method, List<VarGetterNode> Vars, Map<String, DataType> defineContext) {
+    private final PackageStructure executor;
+
+    public CallMethodNode(String method, List<VarGetterNode> Vars, Map<String, DataType> defineContext, PackageStructure executor) {
         this.method = method;
         this.Vars = Vars;
+        this.executor = executor;
     }
 
 
@@ -47,7 +52,7 @@ public class CallMethodNode implements RunnableNode {
             throw new RuntimeException("The number of parameters is wrong: " + method);
         if (parameters.isEmpty()) {
             try {
-                var future = mtd.run(new HashMap<>());
+                var future = mtd.run(new HashMap<>(), new MethodExecutor(MethodExecutor.ExecutorType.STATEMENT, executor.toString()));
                 return future.get();
             } catch (ExecutionException | InterruptedException e) {
                 throw new RuntimeException(e);
@@ -67,7 +72,7 @@ public class CallMethodNode implements RunnableNode {
         }
 
         try {
-            var future = mtd.run(resultRunArgs);
+            var future = mtd.run(resultRunArgs,  new MethodExecutor(MethodExecutor.ExecutorType.STATEMENT, executor.toString()));
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
