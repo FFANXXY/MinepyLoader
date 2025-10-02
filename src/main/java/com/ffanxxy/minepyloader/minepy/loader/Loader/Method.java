@@ -7,9 +7,11 @@ import com.ffanxxy.minepyloader.minepy.loader.PackageStructure;
 import com.ffanxxy.minepyloader.minepy.loader.ScriptPackage;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Parameter;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.type.AccessModifiers;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.type.MethodModifiers;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.type.accessModifiers.MethodModifier;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.type.accessModifiers.MethodModifiers;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.type.accessModifiers.context.ModifierInputContext;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.type.accessModifiers.context.ModifierOutput;
 import com.ffanxxy.minepyloader.minepy.utils.loader.MethodHelper;
 
 import java.util.HashMap;
@@ -28,11 +30,11 @@ public final class Method {
 
     private final ScriptPackage path;
 
-    private final AccessModifiers accessModifiers;
-    private final List<MethodModifiers> modifiers;
+    private final List<MethodModifier> modifiers;
     private final String name;
     private final DataType type;
     private final List<Parameter> parameters;
+    private final List<Parameter> factParameters;
 
     private final Statements statements = new Statements();
 
@@ -44,18 +46,18 @@ public final class Method {
      */
     public Method(
             ScriptPackage path,
-            AccessModifiers accessModifiers,
-            List<MethodModifiers> modifiers,
+            List<MethodModifier> modifiers,
             String name,
             DataType type,
-            List<Parameter> parameters
+            List<Parameter> parameters,
+            List<Parameter> factParameters
     ) {
         this.path = path;
-        this.accessModifiers = accessModifiers;
         this.modifiers = modifiers;
         this.name = name;
         this.type = type;
         this.parameters = parameters;
+        this.factParameters = factParameters;
     }
 
     public void addStatements(Statements statements) {
@@ -73,16 +75,17 @@ public final class Method {
     }
 
     public CompletableFuture<Variable<?>> run(Map<Minepy.ScopeAndName, Variable<?>> variableMap, MethodExecutor executor) {
-        if(executor.getType() == MethodExecutor.ExecutorType.STATEMENT && this.accessModifiers != AccessModifiers.PUBLIC) {
-            boolean canInvoke = switch (accessModifiers) {
-                case PRIVATE -> new PackageStructure(executor.getMsg()).isSameAs(this.path);
-                //.....
-                default -> throw new IllegalStateException("SUP: Unexpected value: " + accessModifiers);
-            };
-        }
 
-        if(this.modifiers.contains(MethodModifiers.INGAME) && Minepyloader.serverInstance == null) {
-            throw new NullPointerException("Server is null , but run INGAME method: " + this.name);
+        // 执行修饰符逻辑
+        for(MethodModifier modifier : this.modifiers) {
+
+            ModifierOutput output = modifier.modify(new ModifierInputContext(executor, PackageStructure.create(path)));
+
+            if(output == null ) continue;
+
+            if(output.skip()) {
+                return CompletableFuture.completedFuture(Variable.VOID());
+            }
         }
 
         return CompletableFuture.supplyAsync(
@@ -114,8 +117,12 @@ public final class Method {
         return path;
     }
 
-    public AccessModifiers getAccessModifiers() {
-        return accessModifiers;
+    public MethodModifier getAccessModifiers() {
+        if(this.modifiers.get(0).getType().isAccessModifier()) {
+            return this.modifiers.get(0);
+        } else {
+            return MethodModifiers.DEFAULT;
+        }
     }
 
     public String getName() {
@@ -130,7 +137,7 @@ public final class Method {
         return parameters;
     }
 
-    public List<MethodModifiers> getModifiers() {
+    public List<MethodModifier> getModifiers() {
         return modifiers;
     }
 
@@ -142,19 +149,7 @@ public final class Method {
         return that.path.isSamePackage(((Method) obj).path.toString());
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(path, accessModifiers, name, type, parameters);
+    public List<Parameter> getFactParameters() {
+        return factParameters;
     }
-
-    @Override
-    public String toString() {
-        return "Method[" +
-                "path=" + path + ", " +
-                "accessModifiers=" + accessModifiers + ", " +
-                "name=" + name + ", " +
-                "type=" + type + ", " +
-                "parameters=" + parameters + ']';
-    }
-
 }

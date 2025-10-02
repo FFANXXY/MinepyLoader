@@ -32,8 +32,10 @@ public enum DataType {
     ITEMSTACK("ItemStack"),
 
     TEXT("Text"),
+    STYLE("Style"),
 
     WORLD("World"),
+    DIMENSION("Dimension"),
 
     CLASS("Class"),
 

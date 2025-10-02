@@ -22,9 +22,6 @@ public class Script {
         this.scriptPackage = script.getPackage();
     }
 
-    public void runStatic() {
-        script.runStatic();
-    }
 
     public List<String> getLines() {
         return lines;

@@ -1,5 +1,8 @@
 package com.ffanxxy.minepyloader.minepy.loader.Statement.Variable;
 
+import com.ffanxxy.minepyloader.GameInterface.Text.MpyStyle;
+import com.ffanxxy.minepyloader.GameInterface.Text.MpyText;
+import com.ffanxxy.minepyloader.GameInterface.World.MpyDimension;
 import com.ffanxxy.minepyloader.GameInterface.World.MpyWorld;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.MpyList;
@@ -49,6 +52,24 @@ public class Variable<T> {
         return new Variable<>(name, dataType);
     }
 
+    // 泛型工厂
+
+    public static <T> Variable<T> of(String name, DataType dataType) {
+        return new Variable<>(name, dataType);
+    }
+
+    public static <T> Variable<T> of(String name, DataType dataType, T val) {
+        return new Variable<>(name, dataType, val);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <U> Variable<U> getAs(DataType expectedType) {
+        if (this.dataType == expectedType) {
+            return (Variable<U>) this;
+        }
+        throw new UnexpectedDataTypeException();
+    }
+
     // Void
     public static Variable<Object> VOID() {
         return new Variable<>("void", DataType.VOID);
@@ -68,114 +89,66 @@ public class Variable<T> {
     public boolean isNull() { return this.dataType == DataType.NULL; }
 
     //String
-    public static Variable<String> ofString(String name) {
-        return new Variable<>(name, DataType.STRING);
-    }
-    public static Variable<String> ofString(String name, String val) {
-        return new Variable<>(name,DataType.STRING, val);
-    }
-    public Variable<String> getAsString() {
-        if(this.dataType == DataType.STRING) return (Variable<String>) this;
-        throw new UnexpectedDataTypeException();
-    }
+    public static Variable<String> ofString(String name) { return of(name, DataType.STRING);}
+    public static Variable<String> ofString(String name, String val) { return of(name,DataType.STRING,val); }
+    public Variable<String> getAsString() { return getAs(DataType.STRING); }
 
     //Char
-    public static Variable<Character> ofChar(String name) {
-        return new Variable<>(name, DataType.CHAR);
-    }
-    public static Variable<Character> ofChar(String name, Character val) {
-        return new Variable<>(name,DataType.CHAR, val);
-    }
-    public Variable<Character> getAsChar() {
-        if(this.dataType == DataType.CHAR) return (Variable<Character>) this;
-        throw new UnexpectedDataTypeException();
-    }
+    public static Variable<Character> ofChar(String name) { return of(name, DataType.CHAR); }
+    public static Variable<Character> ofChar(String name, Character val) { return of(name, DataType.CHAR, val); }
+    public Variable<Character> getAsChar() { return getAs(DataType.CHAR); }
 
     //Integer
-    public static Variable<Integer> ofInteger(String name) {
-        return new Variable<>(name, DataType.INT);
-    }
-    public static Variable<Integer> ofInteger(String name,Integer  val) {
-        return new Variable<>(name,DataType.INT,val);
-    }
-    public Variable<Integer> getAsInt() {
-        if(this.dataType == DataType.INT) return (Variable<Integer>) this;
-        throw new UnexpectedDataTypeException();
-    }
+    public static Variable<Integer> ofInteger(String name) { return of(name, DataType.INT); }
+    public static Variable<Integer> ofInteger(String name, Integer val) { return of(name, DataType.INT, val); }
+    public Variable<Integer> getAsInt() { return getAs(DataType.INT); }
 
     //Float
-    public static Variable<Float> ofFloat(String name) {
-        return new Variable<>(name, DataType.FLOAT);
-    }
-    public static Variable<Float> ofFloat(String name,Float  val) {
-        return new Variable<>(name,DataType.FLOAT,val);
-    }
-    public Variable<Float> getAsFloat() {
-        if(this.dataType == DataType.FLOAT) return (Variable<Float>) this;
-        throw new UnexpectedDataTypeException();
-    }
+    public static Variable<Float> ofFloat(String name) { return of(name, DataType.FLOAT); }
+    public static Variable<Float> ofFloat(String name, Float val) { return of(name, DataType.FLOAT, val); }
+    public Variable<Float> getAsFloat() { return getAs(DataType.FLOAT); }
 
     //Double
-    public static Variable<Double> ofDouble(String name) {
-        return new Variable<>(name, DataType.DOUBLE);
-    }
-    public static Variable<Double> ofDouble(String name,Double  val) {
-        return new Variable<>(name,DataType.DOUBLE,val);
-    }
-    public Variable<Double> getAsDouble() {
-        if(this.dataType == DataType.DOUBLE) return (Variable<Double>) this;
-        throw new UnexpectedDataTypeException();
-    }
+    public static Variable<Double> ofDouble(String name) { return of(name, DataType.DOUBLE); }
+    public static Variable<Double> ofDouble(String name, Double val) { return of(name, DataType.DOUBLE, val); }
+    public Variable<Double> getAsDouble() { return getAs(DataType.DOUBLE); }
 
     //Boolean
-    public static Variable<Boolean> ofBoolean(String name) {
-        return new Variable<>(name, DataType.BOOLEAN);
-    }
-    public static Variable<Boolean> ofBoolean(String name,Boolean  val) {
-        return new Variable<>(name,DataType.BOOLEAN,val);
-    }
-    public Variable<Boolean> getAsBoolean() {
-        if(this.dataType == DataType.BOOLEAN) return (Variable<Boolean>) this;
-        throw new UnexpectedDataTypeException();
-    }
+    public static Variable<Boolean> ofBoolean(String name) { return of(name, DataType.BOOLEAN); }
+    public static Variable<Boolean> ofBoolean(String name, Boolean val) { return of(name, DataType.BOOLEAN, val); }
+    public Variable<Boolean> getAsBoolean() { return getAs(DataType.BOOLEAN); }
 
     // Player
-    public static Variable<PlayerEntity> ofPlayer(String name) {
-        return new Variable<>(name, DataType.PLAYER);
-    }
-    public static Variable<PlayerEntity> ofPlayer(String name,PlayerEntity  val) {
-        return new Variable<>(name,DataType.PLAYER,val);
-    }
-    public Variable<PlayerEntity> getAsPlayer() {
-        if(this.dataType == DataType.PLAYER) return (Variable<PlayerEntity>) this;
-        throw new UnexpectedDataTypeException();
-    }
+    public static Variable<PlayerEntity> ofPlayer(String name) { return of(name, DataType.PLAYER); }
+    public static Variable<PlayerEntity> ofPlayer(String name, PlayerEntity val) { return of(name, DataType.PLAYER, val); }
+    public Variable<PlayerEntity> getAsPlayer() { return getAs(DataType.PLAYER); }
 
     // World
-    public static Variable<MpyWorld> ofWorld(String name) {
-        return new Variable<>(name, DataType.WORLD);
-    }
-    public static Variable<MpyWorld> ofWorld(String name, MpyWorld  val) {
-        return new Variable<>(name,DataType.WORLD,val);
-    }
-    public Variable<MpyWorld> getAsWorld() {
-        if(this.dataType == DataType.WORLD) return (Variable<MpyWorld>) this;
-        throw new UnexpectedDataTypeException();
-    }
+    public static Variable<MpyWorld> ofWorld(String name) { return of(name, DataType.WORLD); }
+    public static Variable<MpyWorld> ofWorld(String name, MpyWorld val) { return of(name, DataType.WORLD, val); }
+    public Variable<MpyWorld> getAsWorld() { return getAs(DataType.WORLD); }
+
+    // Dimension
+    public static Variable<MpyDimension> ofDimension(String name) {return of(name,DataType.DIMENSION);}
+    public static Variable<MpyDimension> ofDimension(String name, MpyDimension val) {return of(name, DataType.DIMENSION, val);}
+    public Variable<MpyDimension> getAsDimension() { return getAs(DataType.DIMENSION); }
+
+    // Text
+    public static Variable<MpyText> ofText(String name) {return of(name,DataType.TEXT);}
+    public static Variable<MpyText> ofText(String name, MpyText val) {return of(name, DataType.TEXT, val);}
+    public Variable<MpyText> getAsText() { return getAs(DataType.TEXT); }
+
+    public static Variable<MpyStyle> ofStyle(String name) {return of(name,DataType.STYLE);}
+    public static Variable<MpyStyle> ofStyle(String name, MpyStyle val) {return of(name, DataType.STYLE, val);}
+    public Variable<MpyStyle> getAsStyle() { return getAs(DataType.STYLE); }
 
     // List
     // List的无参构建，
-//    public static Variable<MpyList> ofList(String name) {
-//        return new Variable<>(name, DataType.LIST);
-//    }
-    public static Variable<MpyList> ofList(String name, MpyList  val) {
-        return new Variable<>(name,DataType.LIST.setChild(val.getDataType()),val);
+    //    public static Variable<MpyList> ofList(String name) { return of(name, DataType.LIST); }
+    public static Variable<MpyList> ofList(String name, MpyList val) {
+        return new Variable<>(name, DataType.LIST.setChild(val.getDataType()), val);
     }
-    public Variable<MpyList> getAsList() {
-        if(this.dataType == DataType.LIST) return (Variable<MpyList>) this;
-        throw new UnexpectedDataTypeException();
-    }
-
+    public Variable<MpyList> getAsList() { return getAs(DataType.LIST); }
 
 
     public DataType getDataType() {

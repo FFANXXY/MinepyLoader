@@ -39,7 +39,10 @@ public abstract class ControlNode implements RunnableNode {
     public abstract boolean getRepeating();
 
     public void beforeRunning(Map<Minepy.ScopeAndName, Variable<?>> variableMap) {}
-    public void afterCycling(Map<Minepy.ScopeAndName, Variable<?>> variableMap) {}
+    public void afterCycling(Map<Minepy.ScopeAndName, Variable<?>> variableMap) {
+        callback = false;
+        cyclingCount = 0;
+    }
     public void beforeReturn(Map<Minepy.ScopeAndName, Variable<?>> variableMap) {}
 
     public boolean shouldCallBack() {

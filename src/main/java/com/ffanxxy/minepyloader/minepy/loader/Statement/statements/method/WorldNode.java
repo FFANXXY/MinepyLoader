@@ -19,7 +19,7 @@ public class WorldNode extends MethodsNode {
 
     @Override
     public @NotNull MethodBuilder getPlansBuilder(MethodBuilder builder) {
-        builder.add("new", 0, DataType.STRING);
+        builder.add("new", 0);
         return builder;
     }
 

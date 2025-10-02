@@ -3,6 +3,7 @@ package com.ffanxxy.minepyloader;
 import com.ffanxxy.minepyloader.commands.MpyCommand;
 import com.ffanxxy.minepyloader.io.Mpyio;
 import com.ffanxxy.minepyloader.minepy.config.LoaderConfig;
+import com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy;
 import com.ffanxxy.minepyloader.minepy.loader.scriptObject.Scripts;
 import com.ffanxxy.minepyloader.minepy.utils.MpyVersion;
 import net.fabricmc.api.ModInitializer;
@@ -70,7 +71,7 @@ public class Minepyloader implements ModInitializer {
          */
         if(run_when_initialization) {
             LOGGER.info("initialize all code:");
-            scripts.runAllStatic();
+            Minepy.runStatic();
         }
 
         // 注册命令

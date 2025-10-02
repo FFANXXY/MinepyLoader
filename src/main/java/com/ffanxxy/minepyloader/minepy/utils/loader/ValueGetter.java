@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static com.ffanxxy.minepyloader.minepy.loader.Parser.ArgumentParser.processQuotedStrings;
 
 public class ValueGetter {
     public static VarGetterNode getWhenReading(String var, ScriptParserLineContext context) {
@@ -19,7 +18,7 @@ public class ValueGetter {
     }
 
     public static List<Variable<?>> getArguments(String args) {
-        ArgumentParser.ProcessResult result = processQuotedStrings(args);
+        ArgumentParser.ProcessResult result = ArgumentParser.processNestedStrings(args);
         Map<Integer, String> map = result.extractedMap();
         String str = result.replacedString();
 

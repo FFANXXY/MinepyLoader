@@ -17,8 +17,4 @@ public class Scripts {
             );
         }
     }
-
-    public void runAllStatic() {
-        scripts.forEach(Script::runStatic);
-    }
 }

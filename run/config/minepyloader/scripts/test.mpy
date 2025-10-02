@@ -1,37 +1,29 @@
 #package test
 
-public load void load():
+#import util.math.opera.*
+#import mpy.public
+#import mpy.load
+#import mpy.ingame
+#import mpy.executable
 
-    String a = "Hello World"
+public load void testText():
+    String[] str = ["123"]
 
-    char nowChar
-    int[] ints = [0,1,2,3,4,5,6]
-    int[] is = [0,2,4,6]
-    is.set(0,1)
-    char[] chars = ['一','二']
+    for (int i = 0; i < str.size(); i ++):
+        Logger.log(str[0], boldText("text") )
 
-    // 嵌套测试
-    char c = chars[ints[is[0]]]
+public Text boldText(String msg):
+    Text text = Text.new(msg)
+    text.styled(getBold())
+    return text
 
-    // 新版for实现
-    for (int i = 0; i < String.lengthOf(a); i ++):
-        nowChar = a.charAt(i)
-        if(nowChar != ' '):
-            Logger.log("text",nowChar)
+public Style getBold():
+    Style style = Style.new()
+    style.setBold(true)
+    style.setColor("red")
+    return style
 
-    // 旧版while 实现
-    // while(index < String.lengthOf(a)):
-    //     nowChar = a.charAt(index)
-    //     if(nowChar != ' '):
-    //         Logger.log("text",nowChar)
-    //     index ++
-
-    Logger.log("Test",i)
-
-// 报错
-public void loadtest():
-    for(int i = 0; i < 5; i++):
-        Logger.log("test", i)
-
-public ingame void test(String a):
-    Logger.log("ingame", a)
+public executable void run(Player p, String text):
+    p.run(text)
+    String msg = "已执行: " + text
+    p.send(boldText(msg))

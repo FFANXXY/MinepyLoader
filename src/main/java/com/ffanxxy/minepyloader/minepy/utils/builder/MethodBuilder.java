@@ -1,7 +1,6 @@
 package com.ffanxxy.minepyloader.minepy.utils.builder;
 
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.type.MethodModifiers;
 
 import java.lang.reflect.Modifier;
 import java.util.Arrays;

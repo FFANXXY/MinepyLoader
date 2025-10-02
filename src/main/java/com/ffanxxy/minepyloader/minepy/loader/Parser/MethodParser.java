@@ -1,9 +1,12 @@
 package com.ffanxxy.minepyloader.minepy.loader.Parser;
 
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.type.AccessModifiers;
+import com.ffanxxy.minepyloader.minepy.loader.PackageStructure;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.type.MethodModifiers;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.type.accessModifiers.MethodModifier;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.type.accessModifiers.MethodModifiers;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.type.accessModifiers.ParserModifier;
+import com.ffanxxy.minepyloader.minepy.utils.loader.PackageGetter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,7 +21,8 @@ public class MethodParser implements Parser<Minepy.MethodDefiner> {
     public final Minepy.MethodDefiner method;
     private final ParameterParser parameterParser;
 
-    public MethodParser(String string) {
+
+    public MethodParser(String string, List<String> imports) {
 
         parameterParser = new ParameterParser(string.substring(
                 string.indexOf("(") + 1,
@@ -32,39 +36,47 @@ public class MethodParser implements Parser<Minepy.MethodDefiner> {
 
         Collections.reverse(words);
 
-
         if (words.size() < 2)
             throw new RuntimeException("There are too few middle keywords in the method definition: " + string);
         String name = words.get(0);
         DataType returnDatatype = DataType.fromName(words.get(1));
-        AccessModifiers accessModifiers;
-        // 是否有访问修饰符
-        boolean hasAccessModifier = AccessModifiers.isModifier(words.get(words.size() - 1));
-        if (hasAccessModifier) {
-            accessModifiers = AccessModifiers.fromName(words.get(words.size() - 1));
-        } else {
-            accessModifiers = AccessModifiers.DEFAULT;
+
+        // 处理修饰符
+        List<MethodModifier> modifiers = new ArrayList<>();
+        for (int i = 0; i < words.size(); i++) {
+            if(i < 2) continue;
+            var fullName = PackageGetter.getNameInImport(words.get(i),imports);
+
+            modifiers.add(MethodModifiers.get(fullName));
+
         }
-
-        // 判断方法修饰符
-        words.remove(0);
-        words.remove(0);
-        words.remove(words.size() - 1);
-        List<MethodModifiers> modifiers = new ArrayList<>();
-
-        if (!words.isEmpty()) {
-            for (String word : words) {
-                modifiers.add(MethodModifiers.fromName(word));
-            }
+        if(modifiers.isEmpty()) {
+            modifiers.add(MethodModifiers.DEFAULT);
         }
 
         method = new Minepy.MethodDefiner(
-                accessModifiers,
                 modifiers,
                 name,
                 returnDatatype,
-                parameterParser.getParameters()
+                new ArrayList<>(parameterParser.getParameters()),
+                new ArrayList<>(parameterParser.getParameters())
         );
+
+        List<ParserModifier> parserModifiers = new ArrayList<>();
+
+        // 修饰符检测
+        modifiers.forEach(methodModifier -> {
+            if(methodModifier instanceof ParserModifier parserModifier) {
+                parserModifiers.add(parserModifier);
+            }
+        });
+
+        if(parserModifiers.isEmpty()) return;
+
+        for (int i = 0; i < parserModifiers.size(); i++) {
+            parserModifiers.get(i).modify(method, i);
+            this.method.parameters().remove(0);
+        }
     }
 
     /**

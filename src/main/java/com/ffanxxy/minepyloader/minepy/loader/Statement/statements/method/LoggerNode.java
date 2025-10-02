@@ -33,7 +33,11 @@ public class LoggerNode extends MethodsNode {
 
         switch (index) {
             case 0:
-                logger.info(args.getString(1));
+                if(args.getVariable(1).isSameDataType(DataType.TEXT)) {
+                    logger.info(args.getText(1).getText() + "  ::  " + args.getText(1).build().getStyle().toString());
+                } else {
+                    logger.info(args.getString(1));
+                }
                 break;
             case 1:
                 logger.warn(args.getString(1));
