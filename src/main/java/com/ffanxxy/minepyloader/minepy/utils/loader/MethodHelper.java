@@ -78,7 +78,7 @@ public class MethodHelper {
         return saveGetMethod(pathAndName, datatypes);
     }
 
-    public static @NotNull Method getMethodFromVar(String pathAndName, List<Variable<?>> variables) {
+    public static @NotNull Method getMethodFromVars(String pathAndName, List<Variable<?>> variables) {
         List<DataType> datatypes = new ArrayList<>();
         variables.forEach(
                 variable ->  datatypes.add(variable.getDataType())

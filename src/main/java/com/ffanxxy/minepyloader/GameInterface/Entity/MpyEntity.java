@@ -2,12 +2,9 @@ package com.ffanxxy.minepyloader.GameInterface.Entity;
 
 import com.ffanxxy.minepyloader.GameInterface.World.MpyDimension;
 import com.ffanxxy.minepyloader.GameInterface.World.MpyWorld;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 public class MpyEntity {
     private final EntityType<?> entityType;
@@ -19,6 +16,6 @@ public class MpyEntity {
     }
 
     public void spawn(MpyDimension.Dimension dimension, BlockPos pos) {
-        entityType.spawn(world.getDimension(dimension).getWorld(), pos, SpawnReason.TRIGGERED);
+        entityType.spawn(world.getDimension(dimension).world(), pos, SpawnReason.TRIGGERED);
     }
 }

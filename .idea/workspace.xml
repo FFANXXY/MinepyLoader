@@ -4,28 +4,287 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57f5ea7d-a34f-4860-a829-8a8076f2192d" name="更改" comment="ALPHA-0.0.4-before-fixed">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Loader/MethodExecutor.java" afterDir="false" />
+    <list default="true" id="57f5ea7d-a34f-4860-a829-8a8076f2192d" name="更改" comment="0.4.0-alpha.1+build.20250829-fixed">
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/GameInterface/Text/MpyStyle.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/GameInterface/Text/MpyText$TextIndexStyle.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/GameInterface/Text/MpyText.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/MethodExecutor$ExecutorType.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/MethodExecutor.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/InternalMethods$MethodsNodeFactory.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/StyleNode.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/TextNode.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/AccessModifier.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/MethodModifier$ModifierType.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/MethodModifier.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/MethodModifiers$PrivateModifier.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/MethodModifiers$PublicModifier.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/MethodModifiers.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/ModifiersRegister.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/SignalMethodModifier.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/context/ModifierInputContext.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/context/ModifierOutput.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/exception/UndefineException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/loader/PackageGetter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/datagen/config/fabric/indigo-renderer.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/datagen/config/minepyloader/loader.cfg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/datagen/data/fabricDefaultResourcePacks.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/datagen/logs/debug.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/datagen/logs/latest.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/resources/main/.cache/72cef17d552a3c5ea94ba4a8fcf06468d9d1f1e5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/resources/main/.cache/8466a6000d68fea54728afdc8a69859142d6f2c0" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/resources/main/assets/minepyloader/lang/en_us.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/resources/main/assets/minepyloader/lang/zh_cn.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-09-07_20.03.08-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-09-07_20.06.06-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-09-07_20.06.44-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-09-07_20.10.05-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-09-07_21.03.30-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-09-07_21.07.26-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-09-07_21.10.20-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-09-07_21.45.00-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-09-07_21.53.08-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-09-07_22.39.29-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-09-07_22.44.15-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-09-07_22.45.22-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-09-07_22.46.50-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-09-07_22.53.01-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-09-21_20.15.53-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-09-21_20.21.06-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-01_21.46.40-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-01_21.49.19-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-01_22.04.12-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-01_22.07.18-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-01_22.12.34-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-01_22.14.38-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-01_23.24.42-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_00.02.34-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_11.02.56-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_12.00.49-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_14.17.56-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_14.20.14-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_14.23.44-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_14.24.49-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_14.33.13-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_15.23.53-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_15.59.11-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_16.47.52-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_16.59.14-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_17.01.23-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_17.02.36-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_17.04.41-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_17.09.54-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_17.20.37-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_17.22.14-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_17.33.15-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_17.35.03-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_17.36.06-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_17.37.43-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_18.46.33-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/crash-reports/crash-2025-10-02_18.49.08-client.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-08-29-4.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-09-07-1.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-09-07-2.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-09-07-3.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-09-07-4.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-09-07-5.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-09-07-6.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-09-21-1.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-09-21-2.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-09-21-3.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-09-21-4.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-10-01-1.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-10-01-2.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-10-01-3.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-10-01-4.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-10-01-5.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-10-01-6.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-10-01-7.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-10-02-1.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-10-02-2.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-10-02-3.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-10-02-4.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-10-02-5.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-10-02-6.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2025-10-02-7.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/02c2b441-e501-39de-91db-ef2392b0ea91.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/09444461-95e8-3d4c-b4c8-61c0297ca18f.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/09667321-9873-3aba-80be-1829d546aeb1.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/0c375742-c902-3e90-aa08-6f9c607b7881.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/130bfefb-ac8d-3a05-b27c-6205f9d12a06.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/15e32ee2-096b-3f4e-a175-32675a0e4e9c.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/15ed0ee5-be80-3fc7-a560-57720b198cde.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/2a17dfd1-129d-330b-9eb4-f363ef062eed.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/37fb5f1a-f986-3b16-8135-e7bdb177538f.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/3d66a28d-6934-3ed5-8300-c1ada16fe77b.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/4ed99654-4a5a-39dd-9f7c-459b50aa79a5.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/613fffc1-d252-35dc-8bd1-c9c1b7febbb1.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/6e05ecd8-b367-3929-8021-d89bbb1d2225.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/7e352200-5a1b-37ca-9d08-8fe764041962.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/7e94e5c9-1ae4-352e-9cf6-8305e5b127c7.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/88b1442b-3f7c-34cb-9b8b-19f2bae6b8af.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/955d257f-8897-3d8b-b175-e59818b1c178.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/98baa43b-a62e-3d66-8ee8-0933f53e227d.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/9a0ac3e8-2a19-3175-bbea-119d15dbea78.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/b40915cd-d3a7-3e3d-9a52-6fc5334ba2e3.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/b6529468-5313-3ea4-bc60-3e6ea6cabccd.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/baf009ad-51b3-3461-8544-778cef1ada08.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/d37346cb-6397-30a1-9ba8-85e1aa0153dd.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/d6021e41-7343-3bee-bb0e-33bf78c6e47d.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/d978d670-4b07-3a90-bfb6-b4e7c70fe7fc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/advancements/fa57a584-be0c-37cc-aa91-b7d78367c493.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/02c2b441-e501-39de-91db-ef2392b0ea91.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/02c2b441-e501-39de-91db-ef2392b0ea91.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/09444461-95e8-3d4c-b4c8-61c0297ca18f.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/09444461-95e8-3d4c-b4c8-61c0297ca18f.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/09667321-9873-3aba-80be-1829d546aeb1.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/09667321-9873-3aba-80be-1829d546aeb1.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/0c375742-c902-3e90-aa08-6f9c607b7881.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/0c375742-c902-3e90-aa08-6f9c607b7881.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/130bfefb-ac8d-3a05-b27c-6205f9d12a06.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/130bfefb-ac8d-3a05-b27c-6205f9d12a06.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/15e32ee2-096b-3f4e-a175-32675a0e4e9c.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/15e32ee2-096b-3f4e-a175-32675a0e4e9c.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/15ed0ee5-be80-3fc7-a560-57720b198cde.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/15ed0ee5-be80-3fc7-a560-57720b198cde.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/2a17dfd1-129d-330b-9eb4-f363ef062eed.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/2a17dfd1-129d-330b-9eb4-f363ef062eed.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/37fb5f1a-f986-3b16-8135-e7bdb177538f.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/3d66a28d-6934-3ed5-8300-c1ada16fe77b.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/4ed99654-4a5a-39dd-9f7c-459b50aa79a5.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/613fffc1-d252-35dc-8bd1-c9c1b7febbb1.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/613fffc1-d252-35dc-8bd1-c9c1b7febbb1.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/6e05ecd8-b367-3929-8021-d89bbb1d2225.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/6e05ecd8-b367-3929-8021-d89bbb1d2225.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/7e352200-5a1b-37ca-9d08-8fe764041962.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/7e352200-5a1b-37ca-9d08-8fe764041962.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/7e94e5c9-1ae4-352e-9cf6-8305e5b127c7.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/7e94e5c9-1ae4-352e-9cf6-8305e5b127c7.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/88b1442b-3f7c-34cb-9b8b-19f2bae6b8af.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/88b1442b-3f7c-34cb-9b8b-19f2bae6b8af.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/955d257f-8897-3d8b-b175-e59818b1c178.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/955d257f-8897-3d8b-b175-e59818b1c178.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/98baa43b-a62e-3d66-8ee8-0933f53e227d.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/9a0ac3e8-2a19-3175-bbea-119d15dbea78.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/b40915cd-d3a7-3e3d-9a52-6fc5334ba2e3.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/b40915cd-d3a7-3e3d-9a52-6fc5334ba2e3.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/b6529468-5313-3ea4-bc60-3e6ea6cabccd.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/b6529468-5313-3ea4-bc60-3e6ea6cabccd.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/baf009ad-51b3-3461-8544-778cef1ada08.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/baf009ad-51b3-3461-8544-778cef1ada08.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/d37346cb-6397-30a1-9ba8-85e1aa0153dd.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/d6021e41-7343-3bee-bb0e-33bf78c6e47d.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/d6021e41-7343-3bee-bb0e-33bf78c6e47d.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/d978d670-4b07-3a90-bfb6-b4e7c70fe7fc.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/fa57a584-be0c-37cc-aa91-b7d78367c493.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/playerdata/fa57a584-be0c-37cc-aa91-b7d78367c493.dat_old" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/02c2b441-e501-39de-91db-ef2392b0ea91.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/09444461-95e8-3d4c-b4c8-61c0297ca18f.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/09667321-9873-3aba-80be-1829d546aeb1.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/0c375742-c902-3e90-aa08-6f9c607b7881.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/130bfefb-ac8d-3a05-b27c-6205f9d12a06.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/15e32ee2-096b-3f4e-a175-32675a0e4e9c.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/15ed0ee5-be80-3fc7-a560-57720b198cde.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/2a17dfd1-129d-330b-9eb4-f363ef062eed.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/37fb5f1a-f986-3b16-8135-e7bdb177538f.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/3d66a28d-6934-3ed5-8300-c1ada16fe77b.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/4ed99654-4a5a-39dd-9f7c-459b50aa79a5.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/613fffc1-d252-35dc-8bd1-c9c1b7febbb1.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/6e05ecd8-b367-3929-8021-d89bbb1d2225.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/7e352200-5a1b-37ca-9d08-8fe764041962.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/7e94e5c9-1ae4-352e-9cf6-8305e5b127c7.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/88b1442b-3f7c-34cb-9b8b-19f2bae6b8af.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/955d257f-8897-3d8b-b175-e59818b1c178.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/98baa43b-a62e-3d66-8ee8-0933f53e227d.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/9a0ac3e8-2a19-3175-bbea-119d15dbea78.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/b40915cd-d3a7-3e3d-9a52-6fc5334ba2e3.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/b6529468-5313-3ea4-bc60-3e6ea6cabccd.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/baf009ad-51b3-3461-8544-778cef1ada08.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/d37346cb-6397-30a1-9ba8-85e1aa0153dd.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/d6021e41-7343-3bee-bb0e-33bf78c6e47d.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/d978d670-4b07-3a90-bfb6-b4e7c70fe7fc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/saves/New World/stats/fa57a584-be0c-37cc-aa91-b7d78367c493.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/generated/.cache/72cef17d552a3c5ea94ba4a8fcf06468d9d1f1e5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/generated/.cache/8466a6000d68fea54728afdc8a69859142d6f2c0" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/generated/assets/minepyloader/lang/en_us.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/generated/assets/minepyloader/lang/zh_cn.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/GameInterface/Text/MpyStyle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/GameInterface/Text/MpyText.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/StyleNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/TextNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/AccessModifier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/MethodModifier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/MethodModifiers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/ModifiersRegister.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/ParserModifier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/SignalMethodModifier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/context/ModifierInputContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/context/ModifierOutput.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/utils/exception/ModifierException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/utils/exception/UndefineException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/utils/loader/PackageGetter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/GameInterface/Entity/MpyEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/GameInterface/Entity/MpyEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/GameInterface/Entity/MpyPlayer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/GameInterface/World/MpyDimension$Dimension.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/GameInterface/World/MpyDimension$Dimension.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/GameInterface/World/MpyDimension.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/GameInterface/World/MpyDimension.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/Minepyloader.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/Minepyloader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/client/MinepyloaderDataGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/client/MinepyloaderDataGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/client/Provider/ModLanguageProvider$ChineseProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/client/Provider/ModLanguageProvider$ChineseProvider.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/client/Provider/ModLanguageProvider$EnglishProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/client/Provider/ModLanguageProvider$EnglishProvider.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/commands/MpyCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/commands/MpyCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Method.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Method.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy$Line.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy$Line.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy$MethodDefiner.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy$MethodDefiner.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy$ScopeAndName.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy$ScopeAndName.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/ScriptParserLineContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Loader/ScriptParserLineContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/PackageStructure.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/PackageStructure.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Parser/ArgumentParser$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Parser/ArgumentParser$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Parser/ArgumentParser$ProcessResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Parser/ArgumentParser$ProcessResult.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Parser/ArgumentParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Parser/ArgumentParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Parser/MethodParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Parser/MethodParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/ScriptPackage.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/ScriptPackage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/StatementManager$CodeType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/StatementManager$CodeType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/StatementManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/StatementManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/Variable/AccessAndIndex.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/Variable/AccessAndIndex.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/Variable/Variable$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/Variable/Variable$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/Variable/Variable.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/Variable/Variable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/InternalMethods.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/InternalMethods.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/control/ControlNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/control/ControlNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/CallMethodNode$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/CallMethodNode$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/CallMethodNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/CallMethodNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/LoggerNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/LoggerNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/MethodsNode$InputArgument.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/MethodsNode$InputArgument.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/MethodsNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/MethodsNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/PlayerNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/PlayerNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/WorldNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/WorldNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/AccessModifiers.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/DataType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/DataType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/Statement/type/MethodModifiers.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/scriptObject/Script.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/scriptObject/Script.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/scriptObject/Scripts.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/loader/scriptObject/Scripts.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/builder/MethodBuilder$MethodIndex.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/builder/MethodBuilder$MethodIndex.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/builder/MethodBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/builder/MethodBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/loader/MethodHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/loader/MethodHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/loader/ValueGetter$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/loader/ValueGetter$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/loader/ValueGetter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ffanxxy/minepyloader/minepy/utils/loader/ValueGetter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/fabric.mod.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/fabric.mod.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/StatementManager.class.uniqueId0" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/StatementManager.class.uniqueId0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/config/fabric/indigo-renderer.properties" beforeDir="false" afterPath="$PROJECT_DIR$/run/config/fabric/indigo-renderer.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/config/minepyloader/scripts/test.mpy" beforeDir="false" afterPath="$PROJECT_DIR$/run/config/minepyloader/scripts/test.mpy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2025-08-28-1.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/2025-08-28-1.log.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2025-08-28-2.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/2025-08-28-2.log.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2025-08-28-3.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/2025-08-28-3.log.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2025-08-28-4.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/2025-08-28-4.log.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2025-08-28-5.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/2025-08-28-5.log.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2025-08-28-6.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/2025-08-28-6.log.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2025-08-28-7.log.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/config/minepyloader/scripts/util/util.mpy" beforeDir="false" afterPath="$PROJECT_DIR$/run/config/minepyloader/scripts/util/util.mpy" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug-1.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-1.log.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug-2.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-2.log.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug-3.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-3.log.gz" afterDir="false" />
@@ -33,16 +292,52 @@
       <change beforePath="$PROJECT_DIR$/run/logs/debug-5.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-5.log.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/latest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/options.txt" beforeDir="false" afterPath="$PROJECT_DIR$/run/options.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/DIM-1/data/raids.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/DIM-1/data/raids.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/DIM1/data/raids_end.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/DIM1/data/raids_end.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/data/raids.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/data/raids.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/data/random_sequences.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/data/random_sequences.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/entities/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/entities/r.-1.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/entities/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/entities/r.-1.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/entities/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/entities/r.0.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/entities/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/entities/r.0.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/level.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/level.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/level.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/level.dat_old" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-1.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.-1.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.-1.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.-1.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.0.-1.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.0.0.mca" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/usercache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usercache.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/GameInterface/Entity/MpyEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/GameInterface/Entity/MpyEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/GameInterface/Entity/MpyPlayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/GameInterface/World/MpyDimension.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/GameInterface/World/MpyDimension.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/Minepyloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/Minepyloader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/client/MinepyloaderDataGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/client/MinepyloaderDataGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/client/Provider/ModLanguageProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/client/Provider/ModLanguageProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/commands/MpyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/commands/MpyCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Loader/Method.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Loader/Method.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Loader/Minepy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Loader/ScriptParserLineContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Loader/ScriptParserLineContext.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/PackageStructure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/PackageStructure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/ScriptPackage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/ScriptPackage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Parser/ArgumentParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Parser/ArgumentParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Parser/MethodParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Parser/MethodParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/StatementManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/StatementManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/Variable/AccessAndIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/Variable/AccessAndIndex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/Variable/Variable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/Variable/Variable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/InternalMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/InternalMethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/control/ControlNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/control/ControlNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/CallMethodNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/CallMethodNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/type/AccessModifiers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/type/AccessModifiers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/LoggerNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/LoggerNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/MethodsNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/MethodsNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/PlayerNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/PlayerNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/WorldNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/WorldNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/type/AccessModifiers.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/type/DataType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/type/DataType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/type/MethodModifiers.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/scriptObject/Script.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/scriptObject/Script.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/scriptObject/Scripts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/scriptObject/Scripts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/utils/builder/MethodBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/utils/builder/MethodBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/utils/loader/MethodHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/utils/loader/MethodHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/utils/loader/ValueGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/utils/loader/ValueGetter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +383,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
+        <option value="Exception" />
       </list>
     </option>
   </component>
@@ -120,24 +418,25 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.MinepyLoader [:net.fabricmc.devlaunchinjector.Main.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.MinepyLoader [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.下载源代码.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Fabric1.20.1&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.MinepyLoader [:net.fabricmc.devlaunchinjector.Main.main()].executor": "Run",
+    "Gradle.MinepyLoader [build].executor": "Run",
+    "Gradle.下载源代码.executor": "Run",
+    "Gradle.构建 MinepyLoader.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Fabric1.20.1"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveInnerDialog.RECENTS_KEY">
       <recent name="com.ffanxxy.minepyloader.minepy.loader.Loader" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.MinepyLoader [build]">
+  <component name="RunManager" selected="应用程序.Minecraft Client">
     <configuration name="MinepyLoader [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -198,7 +497,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756393237204</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="0.4.0-alpha.1+build.20250829-fixed">
+      <option name="closed" value="true" />
+      <created>1756437316759</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1756437316759</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -231,40 +538,102 @@
     <MESSAGE value="ALPHA-0.0.3.3 指令支持" />
     <MESSAGE value="ALPHA-0.0.3.5 指令支持&amp;逻辑优化" />
     <MESSAGE value="ALPHA-0.0.4-before-fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="ALPHA-0.0.4-before-fixed" />
+    <MESSAGE value="0.4.0-alpha.1+build.20250829-fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.4.0-alpha.1+build.20250829-fixed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/utils/loader/DataTypeHelper.java</url>
           <line>27</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/StatementManager.java</url>
-          <line>238</line>
-          <option name="timeStamp" value="37" />
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/GameInterface/Text/MpyText.java</url>
+          <option name="group" value="TextKeyPlace" />
+          <line>22</line>
+          <properties>
+            <option name="lambda-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="49" />
+          <group>TextKeyPlace</group>
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/TextNode.java</url>
+          <option name="group" value="TextKeyPlace" />
+          <line>32</line>
+          <option name="timeStamp" value="69" />
+          <group>TextKeyPlace</group>
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <condition expression="this instanceof TextNode &amp;&amp; methodIndex.name.equals(&quot;new&quot;)" language="JAVA" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/MethodsNode.java</url>
+          <option name="group" value="TextKeyPlace" />
+          <line>51</line>
+          <option name="timeStamp" value="77" />
+          <group>TextKeyPlace</group>
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/var/VarGetterNode.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/StatementManager.java</url>
-          <line>262</line>
-          <option name="timeStamp" value="38" />
+          <line>180</line>
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/StatementManager.java</url>
+          <line>200</line>
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Parser/ArgumentParser.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="87" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <condition expression="i == 12" language="JAVA" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Parser/ArgumentParser.java</url>
+          <line>96</line>
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
+        <line-breakpoint type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/type/accessModifiers/context/ModifierOutput.java</url>
+          <line>13</line>
+          <properties class="com.ffanxxy.minepyloader.minepy.loader.Statement.type.accessModifiers.context.ModifierOutput" method="&lt;init&gt;">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="62" />
+        </line-breakpoint>
+        <line-breakpoint type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/commands/MpyCommand.java</url>
+          <line>65</line>
+          <properties class="com.ffanxxy.minepyloader.commands.MpyCommand" method="runWith">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/ffanxxy/minepyloader/minepy/loader/Statement/statements/method/MethodsNode.java</url>
-          <line>40</line>
+          <line>42</line>
           <properties class="com.ffanxxy.minepyloader.minepy.loader.Statement.statements.method.MethodsNode" method="runWithArg">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="32" />
+          <option name="timeStamp" value="91" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy$Line" memberName="retraction" />
+        <PinnedItemInfo parentTag="com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable" memberName="value" />
+        <PinnedItemInfo parentTag="java.util.concurrent.CompletableFuture" memberName="stack" />
       </pinned-members>
     </pin-to-top-manager>
     <watches-manager>

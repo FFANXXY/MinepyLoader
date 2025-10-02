@@ -1,0 +1,5 @@
+{
+  "mpy.command.no_exist": "Couldn't find the method",
+  "mpy.command.no_match": "Found some methods, but no one matches the parameters",
+  "mpy.command.return": "Method outputs the return value: %s"
+}

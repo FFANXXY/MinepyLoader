@@ -1,4 +1,8 @@
-#package util
+#package util.math.opera
+
+#import mpy.public
 
 public double add(Object a, Object b)
     return a + b
+public double sub(Object a, Object b)
+    return a - b

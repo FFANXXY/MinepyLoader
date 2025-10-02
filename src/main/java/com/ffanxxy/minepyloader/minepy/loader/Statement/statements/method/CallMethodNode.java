@@ -3,13 +3,14 @@ package com.ffanxxy.minepyloader.minepy.loader.Statement.statements.method;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Method;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.MethodExecutor;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy;
+import com.ffanxxy.minepyloader.minepy.loader.Loader.ScriptParserLineContext;
 import com.ffanxxy.minepyloader.minepy.loader.PackageStructure;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Parameter;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.RunnableNode;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.var.VarGetterNode;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
 import com.ffanxxy.minepyloader.minepy.utils.loader.MethodHelper;
+import com.ffanxxy.minepyloader.minepy.utils.loader.PackageGetter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -22,15 +23,18 @@ import java.util.concurrent.ExecutionException;
  * 方法语句调用存储
  */
 public class CallMethodNode implements RunnableNode {
-    private final String method;
+    private PackageStructure methodPackage;
     private final List<VarGetterNode> Vars;
 
     private final PackageStructure executor;
 
-    public CallMethodNode(String method, List<VarGetterNode> Vars, Map<String, DataType> defineContext, PackageStructure executor) {
-        this.method = method;
+    public CallMethodNode(String methodName, List<VarGetterNode> Vars, ScriptParserLineContext context) {
+        List<String> imports = context.imports();
+
+        methodPackage = PackageGetter.getNameInImport(methodName,imports);
+
         this.Vars = Vars;
-        this.executor = executor;
+        this.executor = context.structure();
     }
 
 
@@ -43,13 +47,13 @@ public class CallMethodNode implements RunnableNode {
         );
 
         // 获得方法
-        Method mtd = MethodHelper.getMethodFromVar(this.method, variables);
+        Method mtd = MethodHelper.getMethodFromVars(this.methodPackage.toString(), variables);
 
         // 获得形参
         List<Parameter> parameters = mtd.getParameters();
 
         if (parameters.size() != variables.size())
-            throw new RuntimeException("The number of parameters is wrong: " + method);
+            throw new RuntimeException("The number of parameters is wrong: " + methodPackage);
         if (parameters.isEmpty()) {
             try {
                 var future = mtd.run(new HashMap<>(), new MethodExecutor(MethodExecutor.ExecutorType.STATEMENT, executor.toString()));

@@ -27,8 +27,6 @@ public class StatementManager {
 
     public StatementManager(ScriptParserLineContext context) {
         String line = context.line();
-        Map<String, DataType> defineContext = context.defineVarContext();
-        List<String> imports = context.imports();
 
         if(line.startsWith("return")) {
 
@@ -242,19 +240,16 @@ public class StatementManager {
             methodName = who;
         }
 
-
-
         if(InternalMethods.contains(methodName)) {
             return parserInternalMethods(line, context);
         }
 
-        return new CallMethodNode(who, new ArgumentParser(context).getArguments(), defineContext, context.structure());
+        return new CallMethodNode(who, new ArgumentParser(context).getArguments(), context);
     }
 
 
     public static RunnableNode parserInternalMethods(String line, ScriptParserLineContext context) {
         String who = line.substring(0, line.indexOf("("));
-
 
         if(!PackageStructure.create(who).getFirst().equals("mpy")) {
             who = "mpy." + who;
@@ -301,7 +296,7 @@ public class StatementManager {
     // 辅助方法：检测变量声明
     private static boolean isVariableDeclaration(String s) {
         // 匹配基本类型 + 变量名 [+ 初始化]
-        String regex = "^(String|int|double|float|byte|boolean|Block|BlockEntity|BlockState|Entity|Player|Text|Item|ItemStack|World|char)(\\[])?\\s+[a-zA-Z_]\\w*\\s*(=\\s*[^;]+)?\\s*$";
+        String regex = "^(String|int|double|float|byte|boolean|Block|BlockEntity|BlockState|Entity|Player|Text|Item|ItemStack|World|char|Style)(\\[])?\\s+[a-zA-Z_]\\w*\\s*(=\\s*[^;]+)?\\s*$";
         return s.matches(regex);
     }
 

@@ -1,9 +1,12 @@
 package com.ffanxxy.minepyloader.commands;
 
+import com.ffanxxy.minepyloader.Minepyloader;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Method;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.MethodExecutor;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.type.accessModifiers.MethodModifier;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.type.accessModifiers.ParserModifier;
 import com.ffanxxy.minepyloader.minepy.utils.loader.MethodHelper;
 import com.ffanxxy.minepyloader.minepy.utils.loader.ValueGetter;
 import com.mojang.brigadier.CommandDispatcher;
@@ -16,6 +19,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,11 +54,22 @@ public class MpyCommand {
     }
 
     public static int run(CommandContext<ServerCommandSource> ctx) {
-        return runMethod(ctx);
+        try {
+            return runMethod(ctx);
+        }catch (Exception e){
+            Minepyloader.LOGGER.error(e.getMessage());
+            return 1;
+        }
+
     }
 
     public static int runWith(CommandContext<ServerCommandSource> ctx) {
-        return runMethodWith(ctx);
+        try {
+            return runMethodWith(ctx);
+        }catch (Exception e){
+            Minepyloader.LOGGER.error(e.getMessage());
+            return 1;
+        }
     }
 
     public static int runMethod(CommandContext<ServerCommandSource> ctx) {
@@ -64,18 +79,35 @@ public class MpyCommand {
 
         if (method == null) {
             ctx.getSource().sendFeedback(
-                    () -> Text.literal("无法找到方法").formatted(Formatting.RED),
+                    () -> Text.translatable("mpy.command.no_exist").formatted(Formatting.RED),
                     true
             );
             return 0;
         }
-        CompletableFuture<Variable<?>> future = method.run(new HashMap<>(), new MethodExecutor(MethodExecutor.ExecutorType.COMMAND));
+
+        HashMap<Minepy.ScopeAndName, Variable<?>> variableHashMap = new HashMap<>();
+
+        List<ParserModifier> parserModifiers = new ArrayList<>();
+
+        // 修饰符检测
+        method.getModifiers().forEach(methodModifier -> {
+            if(methodModifier instanceof ParserModifier parserModifier) {
+                parserModifiers.add(parserModifier);
+            }
+        });
+
+        for (int i = 0; i < parserModifiers.size(); i++) {
+            variableHashMap.put(new Minepy.ScopeAndName(0, method.getFactParameters().get(i).name),
+                    parserModifiers.get(i).prepareVariable(ctx));
+        }
+
+        CompletableFuture<Variable<?>> future = method.run(variableHashMap, new MethodExecutor(MethodExecutor.ExecutorType.COMMAND));
 
         try {
             Variable<?> variable = future.get();
             if(!variable.isVoid()) {
                 ctx.getSource().sendFeedback(
-                        () -> Text.literal("方法输出了返回值: " + variable).formatted(Formatting.GRAY),
+                        () -> Text.translatable("mpy.command.return", variable).formatted(Formatting.GRAY),
                         true
                 );
             }
@@ -96,21 +128,40 @@ public class MpyCommand {
 
         if (method == null) {
             ctx.getSource().sendFeedback(
-                    () -> Text.literal("无法找到方法").formatted(Formatting.RED),
+                    () -> Text.translatable("mpy.command.no_exist").formatted(Formatting.RED),
                     true
             );
             return 0;
         }
 
-        Map<Minepy.ScopeAndName, Variable<?>> resultRunArgs = getRunArgs(vars, method);
+        Map<Minepy.ScopeAndName, Variable<?>> resultRunArgs = new HashMap<>();
 
-        if(resultRunArgs == null) {
+        List<ParserModifier> parserModifiers = new ArrayList<>();
+
+        // 修饰符检测
+        method.getModifiers().forEach(methodModifier -> {
+            if(methodModifier instanceof ParserModifier parserModifier) {
+                parserModifiers.add(parserModifier);
+            }
+        });
+
+        for (int i = 0; i < parserModifiers.size(); i++) {
+            resultRunArgs.put(new Minepy.ScopeAndName(0, method.getFactParameters().get(i).name),
+                    parserModifiers.get(i).prepareVariable(ctx));
+        }
+
+        var tempMap = getRunArgs(vars, method);
+
+        if(tempMap == null) {
             ctx.getSource().sendFeedback(
-                    () -> Text.literal("找到了方法，可是参数不匹配").formatted(Formatting.RED),
+                    () -> Text.translatable("mpy.command.no_match").formatted(Formatting.RED),
                     true
             );
             return 0;
         }
+
+        resultRunArgs.putAll(tempMap);
+
 
         var future = method.run(resultRunArgs , new MethodExecutor(MethodExecutor.ExecutorType.COMMAND));
 
@@ -119,7 +170,7 @@ public class MpyCommand {
 
             if(!variable.isVoid()) {
                 ctx.getSource().sendFeedback(
-                        () -> Text.literal("方法输出了返回值: " + variable).formatted(Formatting.GRAY),
+                        () -> Text.translatable("mpy.command.return", variable).formatted(Formatting.GRAY),
                         true
                 );
             }

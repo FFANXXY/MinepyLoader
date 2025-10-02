@@ -11,10 +11,10 @@ import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Parameter;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.Variable.Variable;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.control.ControlNode;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.statements.var.VariableDeclarationNode;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.type.AccessModifiers;
 import com.ffanxxy.minepyloader.minepy.loader.Statement.type.DataType;
-import com.ffanxxy.minepyloader.minepy.loader.Statement.type.MethodModifiers;
+import com.ffanxxy.minepyloader.minepy.loader.Statement.type.accessModifiers.MethodModifier;
 import com.ffanxxy.minepyloader.minepy.loader.scriptObject.Script;
+import com.ffanxxy.minepyloader.minepy.utils.exception.UndefineException;
 import com.ffanxxy.minepyloader.minepy.utils.exception.UnexpectedStatementException;
 import com.ffanxxy.minepyloader.minepy.utils.loader.MethodHelper;
 
@@ -24,6 +24,10 @@ public class Minepy {
 
     public static List<Method> METHODS = new ArrayList<>();
 
+    public Script getScript() {
+        return script;
+    }
+
     /**
      * 方法定义类
      * @param name 方法名称
@@ -31,20 +35,30 @@ public class Minepy {
      * @param parameters 参数列表
      */
     public record MethodDefiner(
-            AccessModifiers accessModifiers,
-            List<MethodModifiers> modifiers,
+            List<MethodModifier> modifiers,
             String name,
             DataType type,
-            List<Parameter> parameters
+            List<Parameter> parameters,
+            List<Parameter> factParameters
     ) {
       public Method toMethod(ScriptPackage path) {
           return new Method(
                   path,
-                  accessModifiers,
                   modifiers,
                   name,
                   type,
-                  parameters
+                  parameters,
+                  factParameters
+          );
+      }
+
+      public MethodDefiner copy() {
+          return new MethodDefiner(
+                  new ArrayList<>(modifiers),
+                  name,
+                  type,
+                  new ArrayList<>(parameters),
+                  new ArrayList<>(factParameters)
           );
       }
     };
@@ -56,7 +70,6 @@ public class Minepy {
     private final Script script;
 
     private ScriptPackage path = null;
-    private List<String> imports = new ArrayList<>();
 
     public Minepy(Script script) {
 
@@ -78,10 +91,11 @@ public class Minepy {
 
         List<ControlNode> controlNodesPlans = new ArrayList<>();
 
-        // 变为Method
+        List<String> imports = new ArrayList<>();
+
+        // 预检测方法
         for(Line line : readLines) {
-            // 注释的优先级最高
-            if(line.line.startsWith("//")) continue;
+            if(line.line.trim().isEmpty()) continue;
 
             if(line.line.startsWith("#")) {
                 // 获得头声明
@@ -102,6 +116,22 @@ public class Minepy {
                 continue;
             }
 
+            if(line.retraction == 0 && !line.line.startsWith("#")) {
+                MethodParser methodParser = new MethodParser(line.line, imports);
+                if(this.path == null) throw new UndefineException("Package", "in method: " + this.script.getPath());
+                imports.add(new PackageStructure(this.path.toString()).join(methodParser.method.name).toString());
+            }
+        }
+
+        // 变为Method
+        for(Line line : readLines) {
+            // 注释的优先级最高
+            if(line.line.startsWith("//")) continue;
+
+            if(line.line.startsWith("#")) {
+                continue;
+            }
+
             // 行为空，则继续
             if(line.line.isEmpty()) continue;
 
@@ -115,19 +145,18 @@ public class Minepy {
 
             // 若没有缩进，则视为方法
             if(line.retraction == 0) {
-                MethodParser methodParser = new MethodParser(line.line);
-                    DemoMethod = methodParser.method.toMethod(path);
+                MethodParser methodParser = new MethodParser(line.line, imports);
+                DemoMethod = methodParser.method.toMethod(path);
 
-                    if(MethodHelper.saveGetMethodFromParas(
-                            DemoMethod.getPath().join(DemoMethod.getName()).toString(),
-                            DemoMethod.getParameters()) == null)
-                        throw new RuntimeException("Repeat method: " + MethodHelper.getMethodFullName(DemoMethod));
+                if(MethodHelper.saveGetMethodFromParas(
+                        DemoMethod.getPath().join(DemoMethod.getName()).toString(),
+                        DemoMethod.getParameters()) != null) throw new RuntimeException("Repeat method: " + MethodHelper.getMethodFullName(DemoMethod));
 
-                    isInMethod = true;
-                    // 创建定义上下文
-                    for(Parameter p : methodParser.getParameterParser().getParameters()) {
-                        defineVarContext.put(p.name, p.dataType);
-                    }
+                isInMethod = true;
+                // 创建定义上下文
+                for(Parameter p : methodParser.getParameterParser().getParameters()) {
+                    defineVarContext.put(p.name, p.dataType);
+                }
             } else {
 
                 int retraction = line.retraction;
@@ -219,10 +248,8 @@ public class Minepy {
      * @see Method#runStatic()
      * @see Minepyloader#onInitialize()
      */
-    public void runStatic() {
-        METHODS.stream().filter(
-                method -> method.getPath().isPack(this.path) && method.getModifiers().contains(MethodModifiers.LOAD)
-        ).forEach(Method::runStatic);
+    public static void runStatic() {
+        METHODS.forEach(Method::runStatic);
     }
 
 

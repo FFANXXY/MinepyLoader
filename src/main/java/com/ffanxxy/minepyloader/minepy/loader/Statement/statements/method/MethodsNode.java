@@ -1,5 +1,7 @@
 package com.ffanxxy.minepyloader.minepy.loader.Statement.statements.method;
 
+import com.ffanxxy.minepyloader.GameInterface.Text.MpyStyle;
+import com.ffanxxy.minepyloader.GameInterface.Text.MpyText;
 import com.ffanxxy.minepyloader.GameInterface.World.MpyWorld;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.Minepy;
 import com.ffanxxy.minepyloader.minepy.loader.Loader.ScriptParserLineContext;
@@ -22,7 +24,6 @@ public abstract class MethodsNode implements RunnableNode {
 
     protected MethodBuilder builder;
 
-    protected String methodName;
     protected int chosenIndex;
     protected String method;
 
@@ -67,11 +68,11 @@ public abstract class MethodsNode implements RunnableNode {
                 this.chosenIndex = builder.plans.get(methodIndex);
                 return run(this.chosenIndex, new InputArgument(Args));
             } else {
-                throw new RuntimeException("There was no plan in method! Please check:" + this.method);
+                continue;
             }
         }
 
-        throw new RuntimeException("Unknow method: " + this.method);
+        throw new RuntimeException("Unknow method: " + this.getClass().getName() + " : " + this.method);
     }
 
     public static class InputArgument {
@@ -114,9 +115,15 @@ public abstract class MethodsNode implements RunnableNode {
             return variables.get(index).getValue();
         }
 
+        public Boolean getBoolean(int index) {return variables.get(index).getAsBoolean().getValue();}
+
+        public MpyText getText(int index) {return variables.get(index).getAsText().getValue();}
+
         public MpyList getList(int index) {
             return variables.get(index).getAsList().getValue();
         }
+
+        public MpyStyle getStyle(int index) {return variables.get(index).getAsStyle().getValue();}
 
         public Variable<?> getVariable(int index) {
             return variables.get(index);

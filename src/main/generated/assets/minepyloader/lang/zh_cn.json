@@ -1,0 +1,5 @@
+{
+  "mpy.command.no_exist": "找不到方法",
+  "mpy.command.no_match": "找到了方法，可是参数不匹配",
+  "mpy.command.return": "方法输出了返回值: %s"
+}
